@@ -1,0 +1,35 @@
+# === Sistemas operativos ===
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# === Editores / IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+
+# === Herramientas del entorno ===
+.claude/
+
+# === Archivos temporales de ofimática ===
+~$*.docx
+~$*.xlsx
+~$*.pptx
+*.tmp
+*.bak
+
+# === Exportaciones generadas (se regeneran desde el Markdown fuente) ===
+# Descomentar si se versiona solo el Markdown y no los binarios exportados:
+# *.pdf
+# *.docx
+
+# === Logs ===
+*.log
