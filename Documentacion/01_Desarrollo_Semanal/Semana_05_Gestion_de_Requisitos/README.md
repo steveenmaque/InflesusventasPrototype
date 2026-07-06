@@ -47,8 +47,8 @@ define el MVP:
 
 | Nivel | Funcionalidades (RF) | Justificación |
 |---|---|---|
-| **Must** | Validar RUC + autocompletar (RF-01..06); catálogo con lógica de medidas (RF-08..16); precio + IGV automático (RF-17..21); numeración y fecha (RF-23..25); exportar PDF/Word (RF-26,27); enviar por correo (RF-28); sidebar + historial (RF-30..33, 35, 36) | Núcleo del negocio: sin esto no hay cotización |
-| **Should** | Cotización Rápida (RF-39..42); IGV configurable (RF-22); estado de envío (RF-29); filtros de historial (RF-34); reutilizar cliente (RF-07); reabrir cotización (RF-37) | Aportan agilidad y control, no bloquean el core |
+| **Must** | **Autenticación del gerente (RF-46,47)**; validar RUC + autocompletar (RF-01..06); catálogo con lógica de medidas (RF-08..16); **descuento máx 10 % (RF-44,45)**; precio + IGV automático (RF-17..21); numeración y fecha (RF-23..25); exportar PDF/Word (RF-26,27); enviar por correo (RF-28); sidebar + historial (RF-30..33, 35, 36) | Núcleo del negocio: sin esto no hay cotización ni acceso seguro |
+| **Should** | Cotización Rápida (RF-39..42); **seguimiento: estados, recordatorios y registro (RF-48..50)**; IGV configurable (RF-22); estado de envío (RF-29); filtros de historial (RF-34); reutilizar cliente (RF-07); reabrir cotización (RF-37) | Aportan agilidad, control y cierre de ventas, no bloquean el core |
 | **Could** | Duplicar cotización (RF-38); convertir rápida->estándar (RF-43); bitácora (RNF-10) | Mejoras deseables |
 | **Won't** | Captura automática WhatsApp/Yahoo/web; facturación; inventario; pagos; multi-rol | Fuera del alcance de esta versión |
 
@@ -63,6 +63,9 @@ define el MVP:
 | Exportar a PDF/Word | Desempeño | A más formatos/rapidez, más satisfacción |
 | Enviar por correo desde la plataforma | Desempeño | Mejora la experiencia frente al envío manual |
 | Buscar/filtrar historial | Desempeño | Cuanto mejor, más útil |
+| Inicio de sesión del gerente | Básico | Esperado: sin acceso seguro no se opera |
+| Descuento (máx 10 % por cantidad) | Desempeño | Ayuda a cerrar ventas; a mejor manejo, más conversión |
+| Seguimiento (estados y recordatorios) | Encantamiento | Recupera ventas que se enfriarían; supera lo esperado |
 | Cotización Rápida | Encantamiento | Extra que agiliza casos ágiles, sorprende positivamente |
 | Duplicar / convertir cotización | Encantamiento | Comodidad no esperada |
 
@@ -76,7 +79,10 @@ define el MVP:
 | Numeración + fecha automáticas | Alto | Bajo | Prioridad 1 |
 | Exportar PDF/Word + enviar correo | Alto | Medio | Prioridad 1 |
 | Sidebar + historial + clientes | Alto | Bajo | Prioridad 1 |
+| Autenticación del gerente | Alto | Bajo | Prioridad 1 |
+| Descuento (máx 10 % por cantidad) | Alto | Bajo | Prioridad 1 |
 | Cotización Rápida | Medio-Alto | Medio | Prioridad 2 |
+| Seguimiento (estados, recordatorios, registro) | Alto | Medio | Prioridad 2 |
 | Filtros / estado de envío / reutilizar cliente | Medio | Bajo | Prioridad 2 |
 | Duplicar / convertir cotización | Medio | Medio | Prioridad 3 |
 | Bitácora | Bajo | Medio | Prioridad 3 |
@@ -87,7 +93,9 @@ Cruce de las tres técnicas para asignar cada funcionalidad a una entrega del ro
 
 | Funcionalidad (RF) | MoSCoW | Kano | Valor | Costo | Prioridad sugerida |
 |---|:--:|:--:|:--:|:--:|:--:|
+| Autenticación del gerente (RF-46,47) | Must | Básico | Alto | Bajo | **MVP 1** |
 | Validar RUC + autocompletar (RF-01..05) | Must | Básico | Alto | Medio | **MVP 1** |
+| Descuento máx 10 % por cantidad (RF-44,45) | Must | Desempeño | Alto | Bajo | **MVP 1** |
 | Registrar/listar clientes (RF-06) | Must | Básico | Alto | Bajo | **MVP 1** |
 | Catálogo + lógica de medidas (RF-08..16) | Must | Básico | Alto | Medio | **MVP 1** |
 | Precio base + IGV automático (RF-17..21) | Must | Básico | Alto | Medio | **MVP 1** |
@@ -101,6 +109,7 @@ Cruce de las tres técnicas para asignar cada funcionalidad a una entrega del ro
 | Filtrar historial (RF-34) | Should | Desempeño | Medio | Medio | **MVP 2** |
 | Reutilizar cliente (RF-07) | Should | Desempeño | Medio | Bajo | **MVP 2** |
 | Reabrir cotización (RF-37) | Should | Desempeño | Medio | Bajo | **MVP 2** |
+| Seguimiento: estados, recordatorios, registro (RF-48..50) | Should | Encantamiento | Alto | Medio | **MVP 2** |
 | Duplicar cotización (RF-38) | Could | Encantamiento | Medio | Medio | **MVP 3** |
 | Convertir rápida->estándar (RF-43) | Could | Encantamiento | Medio | Medio | **MVP 3** |
 | Bitácora de acciones (RNF-10) | Could | Encantamiento | Bajo | Medio | **MVP 3** |
@@ -114,15 +123,17 @@ Cruce de las tres técnicas para asignar cada funcionalidad a una entrega del ro
 ## 3. Roadmap de MVP
 
 ### MVP 1 — Producto Mínimo Viable (núcleo entregable)
-> **Cotización estándar de extremo a extremo:** cliente con **RUC validado**, ítems con **medidas y
-> descripción automática**, **cálculo de precio e IGV**, **numeración y fecha automáticas**,
-> **exportación a PDF/Word**, **envío por correo** e **historial** consultable.
+> **Acceso autenticado del gerente** + **cotización estándar de extremo a extremo:** cliente con
+> **RUC validado**, ítems con **medidas y descripción automática**, **descuento (máx 10 % por
+> cantidad)**, **cálculo de precio e IGV**, **numeración y fecha automáticas**, **exportación a
+> PDF/Word**, **envío por correo** e **historial** consultable.
 
-Entrega el valor esencial: reemplaza el proceso manual de cotización.
+Entrega el valor esencial: reemplaza el proceso manual de cotización con acceso seguro de usuario único.
 
-### MVP 2 — Agilidad y control
-Cotización Rápida, IGV configurable, estado de envío, filtros de historial, reutilización de cliente
-y reapertura de cotizaciones.
+### MVP 2 — Agilidad, control y cierre de ventas
+Cotización Rápida, **seguimiento (estados, recordatorios y registro de negociación para cerrar
+ventas)**, IGV configurable, estado de envío, filtros de historial, reutilización de cliente y
+reapertura de cotizaciones.
 
 ### MVP 3 — Comodidad y trazabilidad avanzada
 Duplicar y convertir cotizaciones, bitácora de acciones sensibles.

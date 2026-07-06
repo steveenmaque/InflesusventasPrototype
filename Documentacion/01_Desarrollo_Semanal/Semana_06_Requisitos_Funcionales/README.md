@@ -45,9 +45,11 @@ necesidades del Gerente (necesidad → requisito).
 |---|:--:|---|
 | RF-17 | M | Calcular el **precio base** de cada ítem según **tipo y tamaño**. |
 | RF-18 | M | Arquitectura de precios **parametrizable** (tarifas configurables). |
-| RF-19 | M | **Sumar los precios base (sin IGV)** de todos los ítems (subtotal). |
-| RF-20 | M | **Aplicar el IGV automáticamente** sobre el subtotal. |
-| RF-21 | M | **Desglosar** Subtotal, IGV y **Total** en la cotización. |
+| RF-44 | M | Ofrecer un **botón/acción de descuento** sobre el precio base de la cotización. |
+| RF-45 | M | Validar que el **descuento no supere el 10 %**, **según la cantidad** (a mayor cantidad, mayor descuento permitido, hasta el tope del 10 %). |
+| RF-19 | M | **Sumar los precios base** de todos los ítems y **aplicar el descuento** para obtener el **subtotal**. |
+| RF-20 | M | **Aplicar el IGV automáticamente** sobre el **subtotal ya con descuento**. |
+| RF-21 | M | **Desglosar** en la cotización: Precio base, **Descuento**, Subtotal, IGV y **Total**. |
 | RF-22 | S | El porcentaje de IGV debe ser **configurable**. |
 
 ## 6.4 Numeración, Fechas y Generación
@@ -91,6 +93,19 @@ necesidades del Gerente (necesidad → requisito).
 | RF-42 | S | Las cotizaciones rápidas se **almacenan por separado** (apartado distinto). |
 | RF-43 | C | Permitir **convertir** una Cotización Rápida en estándar. |
 
+## 6.9 Seguridad y acceso (usuario único)
+| ID | Prio. | Requisito |
+|---|:--:|---|
+| RF-46 | M | El sistema debe requerir **inicio de sesión** (usuario y contraseña) del **gerente/trabajador encargado**. |
+| RF-47 | M | El sistema es de **uso exclusivo** del usuario autorizado: toda operación exige **sesión validada** y debe permitir **cerrar sesión**. |
+
+## 6.10 Seguimiento de cotizaciones
+| ID | Prio. | Requisito |
+|---|:--:|---|
+| RF-48 | S | Registrar y actualizar el **estado** de cada cotización: **Enviada / En seguimiento / Aceptada / Rechazada**. |
+| RF-49 | S | Generar un **recordatorio de seguimiento** cuando una cotización enviada **no recibe respuesta** en un plazo configurable. |
+| RF-50 | S | Registrar las **interacciones y negociaciones** (descuento aplicado, reenvíos, notas) asociadas a la cotización. |
+
 ---
 
 ## Necesidad → Requisito (trazabilidad de origen)
@@ -98,11 +113,14 @@ necesidades del Gerente (necesidad → requisito).
 |---|---|
 | RN-01 Agilizar generación | RF-08..RF-25 |
 | RN-02 Precio e IGV automáticos | RF-17..RF-22 |
+| RN-02b Descuento (máx 10 % por cantidad) | RF-44, RF-45 |
 | RN-03 Numerar y fechar | RF-23..RF-25 |
 | RN-04 Historial único | RF-06, RF-30..RF-37 |
 | RN-05 Validar RUC | RF-01..RF-05 |
 | RN-06 Exportar y enviar | RF-26..RF-29 |
 | RN-07 Cotización rápida | RF-39..RF-43 |
+| RN-08 Seguimiento para cerrar ventas | RF-48..RF-50 |
+| Uso exclusivo del gerente (RNF-08) | RF-46, RF-47 |
 
 ## Checklist de cierre
 - [ ] Cada RF con actor, regla y criterio de aceptación (ver plantilla del Documento_SRS §6.1)

@@ -9,8 +9,8 @@ Nombrar los archivos en minúsculas y sin espacios.
 |---|---|---|
 | `cronograma_gantt.png` | Semana 1 — Cronograma de implementación (4 meses) | Pendiente |
 | `diagrama_contexto.png` | Semana 1 — Contexto del negocio | Pendiente |
-| `bpmn_asis.png` | Semana 1 — Flujo de trabajo actual (AS-IS) | Pendiente |
-| `bpmn_tobe.png` | Semana 1 — Flujo de negocio propuesto (TO-BE) | Pendiente |
+| `bpmn_asis.png` | Semana 1 — Flujo de trabajo actual (AS-IS) — export de `../diagramas/bpmn_asis.bpmn` | Pendiente |
+| `bpmn_tobe.png` | Semana 1 — Flujo de negocio propuesto (TO-BE) — export de `../diagramas/bpmn_tobe.bpmn` | Pendiente |
 | `casos_de_uso.png` | Semana 3 — Análisis y modelado | Pendiente |
 | `actividad_cotizacion.png` | Semana 3 — Diagrama de actividad | Pendiente |
 | `secuencia_cotizar.png` | Semana 3 — Diagrama de secuencia | Pendiente |

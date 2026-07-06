@@ -105,9 +105,10 @@ historial comercial.
 
 ### 3.5 Flujo de trabajo actual en BPMN (AS-IS)
 
-Modelo del proceso **manual** actual. Fuente en Mermaid (GitHub la renderiza); la versión con
-notación BPMN de diseño (Bizagi / draw.io / Camunda) se exportará a
-[`../../04_Recursos/imagenes/bpmn_asis.png`](../../04_Recursos/imagenes/).
+Modelo del proceso **manual** actual. Archivo BPMN 2.0 editable (importable en **Bizagi Modeler**):
+[`../../04_Recursos/diagramas/bpmn_asis.bpmn`](../../04_Recursos/diagramas/bpmn_asis.bpmn); su
+exportación como imagen irá en [`../../04_Recursos/imagenes/bpmn_asis.png`](../../04_Recursos/imagenes/).
+Vista rápida en Mermaid (GitHub la renderiza):
 
 ```mermaid
 flowchart TD
@@ -127,7 +128,7 @@ flowchart TD
         G[Envia el PDF por correo o WhatsApp]
         H[Espera respuesta]
         S[Da seguimiento manual: reitera por WhatsApp e insiste]
-        K[Negocia: ofrece descuento o ajusta condiciones]
+        K[Negocia: ofrece descuento max 10% o ajusta condiciones]
     end
     B --> C --> D --> E --> F --> G --> L
     L --> M
@@ -147,9 +148,11 @@ memoria del Gerente, por lo que **muchas cotizaciones se enfrían y se pierden v
 
 ### 3.6 Flujo de negocio propuesto en BPMN (TO-BE)
 
-Modelo del proceso **con el sistema**. Versión de diseño en
-[`../../04_Recursos/imagenes/bpmn_tobe.png`](../../04_Recursos/imagenes/). Se refinará en el
-modelado de la [Semana 3](../Semana_03_Analisis_y_Modelado/README.md).
+Modelo del proceso **con el sistema**. Archivo BPMN 2.0 editable (importable en **Bizagi Modeler**):
+[`../../04_Recursos/diagramas/bpmn_tobe.bpmn`](../../04_Recursos/diagramas/bpmn_tobe.bpmn); su
+exportación como imagen irá en [`../../04_Recursos/imagenes/bpmn_tobe.png`](../../04_Recursos/imagenes/).
+Incluye el **inicio de sesión** del gerente y el **botón de descuento (máx 10%)**. Se refinará en el
+modelado de la [Semana 3](../Semana_03_Analisis_y_Modelado/README.md). Vista rápida en Mermaid:
 
 ```mermaid
 flowchart TD
@@ -162,16 +165,18 @@ flowchart TD
         X((Venta perdida))
     end
     subgraph Gerente
+        L0[Inicia sesion: usuario autorizado]
         C[Crea Nueva Cotizacion en el sistema]
         D[Ingresa el RUC del cliente]
         E[Agrega items: tipo + medidas]
+        E2[Aplica descuento max 10% segun cantidad]
         H[Exporta y envia por correo desde la plataforma]
         S[Atiende el recordatorio y da seguimiento]
-        K[Aplica descuento o ajusta condiciones]
+        K[Negocia: descuento max 10% o ajusta condiciones]
     end
     subgraph Sistema
         F[Valida RUC y autocompleta razon social]
-        G[Calcula precio + IGV, numero y fecha]
+        G[Calcula precio, descuento, IGV, numero y fecha]
         J[Guarda en historial y marca estado Enviada]
         T[Genera recordatorio y registra el seguimiento]
     end
@@ -179,9 +184,9 @@ flowchart TD
         SR[(Servicio de RUC)]
         SC[(Servicio de Correo)]
     end
-    B --> C --> D --> F
+    B --> L0 --> C --> D --> F
     F <--> SR
-    F --> E --> G --> H
+    F --> E --> E2 --> G --> H
     H <--> SC
     H --> J --> P --> Q
     J --> T --> S

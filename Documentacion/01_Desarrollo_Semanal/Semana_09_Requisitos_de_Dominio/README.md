@@ -18,22 +18,28 @@ de datos del dominio.
 | ID | Regla de negocio | Entidad(es) |
 |---|---|---|
 | RD-01 | El número de cotización es **único, correlativo e irrepetible** (inicia en 1001). | Cotización |
-| RD-02 | El **IGV (18 %, configurable)** se calcula sobre la **suma de precios base** (subtotal). | Cotización |
+| RD-02 | El **IGV (18 %, configurable)** se calcula sobre el **subtotal ya con descuento** (precios base menos descuento). | Cotización |
 | RD-03 | Las **medidas obligatorias dependen de la categoría** del ítem (ver 9.3). | Ítem |
 | RD-04 | La descripción de los ítems estándar es **automática**; la de "Otros" queda **vacía** por defecto. | Ítem |
 | RD-05 | En una **Cotización Rápida** la fecha almacena **solo mes y año** y **no** se valida RUC. | Cotización Rápida |
 | RD-06 | En **globos**, el **diámetro se deriva de la altura** por un factor de proporción `[definir]`. | Ítem (globo) |
 | RD-07 | Las **tarifas** dependen de **tipo de inflable + tamaño** y son **parametrizables**. | Tarifa |
+| RD-08 | El **descuento no puede superar el 10 %** del precio base y **depende de la cantidad** (escalonado: a mayor cantidad, mayor descuento permitido, hasta 10 %). | Cotización / Descuento |
+| RD-09 | El sistema es de **uso exclusivo** del **gerente/trabajador autorizado**: toda operación requiere **usuario autenticado**. | Usuario |
+| RD-10 | Una cotización sin respuesta pasa a **En seguimiento** y genera **recordatorios** hasta ser Aceptada o Rechazada. | Cotización / Seguimiento |
 
 ## 9.2 Modelo de datos del dominio (entidades)
 | Entidad | Atributos clave |
 |---|---|
+| **Usuario** | id, usuario, contraseña (hash), nombre, rol (gerente/trabajador), activo |
 | **Cliente** | id, RUC, razón social, correo, teléfono, fecha de registro |
-| **Cotización** | número (≥1001), fecha de emisión, cliente, tipo (estándar/rápida), subtotal, IGV, total, estado de envío |
-| **Ítem de Cotización** | id, cotización, categoría, subtipo (carpa cuadrangular/circular), medidas (alto, ancho, largo, diámetro, altura), descripción, precio base |
+| **Cotización** | número (≥1001), fecha de emisión, cliente, tipo (estándar/rápida), precio base total, **descuento %**, subtotal, IGV, total, **estado** (Borrador/Emitida/Enviada/En seguimiento/Aceptada/Rechazada), estado de envío |
+| **Ítem de Cotización** | id, cotización, categoría, subtipo (carpa cuadrangular/circular), medidas (alto, ancho, largo, diámetro, altura), cantidad, descripción, precio base |
+| **Descuento** | id, cotización, cantidad, porcentaje aplicado (≤ 10 %), monto |
+| **Seguimiento / Interacción** | id, cotización, fecha, tipo (recordatorio/reenvío/negociación), nota, descuento propuesto |
 | **Tarifa** | categoría, rango de tamaño, precio unitario (parametrizable) |
 | **Cotización Rápida** | número, mes/año, cliente (sin validación RUC), ítems, montos — **almacenamiento separado** |
-| **Configuración** | % IGV, número inicial de correlativo, credenciales de servicios |
+| **Configuración** | % IGV, número inicial de correlativo, **tope de descuento (10 %)**, plazo de recordatorio, credenciales de servicios |
 
 > Sugerido: diagrama Entidad-Relación y de clases en `04_Recursos/imagenes/`.
 
@@ -49,7 +55,10 @@ de datos del dominio.
 | **Otros** | **Alto, ancho, largo** (3 factores) | **No** (campo en blanco) |
 
 ## 9.4 Estados de una cotización (ciclo de vida)
-`Borrador → Emitida (numerada + fechada) → Enviada → [Aceptada / Rechazada]`
+`Borrador → Emitida (numerada + fechada) → Enviada → En seguimiento → [Aceptada / Rechazada]`
+
+- **En seguimiento:** se activa cuando no hay respuesta; el sistema genera recordatorios (RD-10) y el
+  gerente registra negociaciones (incluido el descuento máx 10 %, RD-08) para intentar **cerrar la venta**.
 
 ---
 

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  id="Defs_TOBE" targetNamespace="http://inflesusventas/bpmn">
+  <bpmn:collaboration id="Collab_TOBE">
+    <bpmn:participant id="Part_TOBE" name="InfleSusVentas - Cotizacion con Sistema (TO-BE)" processRef="Proc_TOBE"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_TOBE" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_TOBE">
+      <bpmn:lane id="Lane_Cliente2" name="Cliente">
+        <bpmn:flowNodeRef>Start_2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Recibe_2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gw_Resp2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gw_Acep2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Win2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Gerente2" name="Gerente (usuario autenticado)">
+        <bpmn:flowNodeRef>T_Login</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Crea</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_RUC</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Items</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Desc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Exporta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_SegG</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_NegG</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Lose2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sistema" name="Sistema">
+        <bpmn:flowNodeRef>T_ValRUC</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Calc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Guarda</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_Record</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_2" name="Solicitud del cliente">
+      <bpmn:outgoing>G1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="T_Login" name="Inicia sesion (usuario autorizado)">
+      <bpmn:incoming>G1</bpmn:incoming>
+      <bpmn:outgoing>G2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_Crea" name="Crea Nueva Cotizacion">
+      <bpmn:incoming>G2</bpmn:incoming>
+      <bpmn:outgoing>G3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_RUC" name="Ingresa el RUC del cliente">
+      <bpmn:incoming>G3</bpmn:incoming>
+      <bpmn:outgoing>G4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_ValRUC" name="Valida RUC y autocompleta razon social">
+      <bpmn:incoming>G4</bpmn:incoming>
+      <bpmn:outgoing>G5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_Items" name="Agrega items: tipo y medidas">
+      <bpmn:incoming>G5</bpmn:incoming>
+      <bpmn:outgoing>G6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_Desc" name="Aplica descuento (max 10% segun cantidad)">
+      <bpmn:incoming>G6</bpmn:incoming>
+      <bpmn:outgoing>G7</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_Calc" name="Calcula precio, descuento, IGV, numero y fecha">
+      <bpmn:incoming>G7</bpmn:incoming>
+      <bpmn:outgoing>G8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_Exporta" name="Exporta y envia por correo desde la plataforma">
+      <bpmn:incoming>G8</bpmn:incoming>
+      <bpmn:incoming>G14</bpmn:incoming>
+      <bpmn:incoming>G18</bpmn:incoming>
+      <bpmn:outgoing>G9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_Guarda" name="Guarda en historial y marca estado Enviada">
+      <bpmn:incoming>G9</bpmn:incoming>
+      <bpmn:outgoing>G10</bpmn:outgoing>
+      <bpmn:outgoing>G11</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Recibe_2" name="Recibe la cotizacion por correo">
+      <bpmn:incoming>G10</bpmn:incoming>
+      <bpmn:outgoing>G12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="T_Record" name="Genera recordatorio y registra el seguimiento">
+      <bpmn:incoming>G11</bpmn:incoming>
+      <bpmn:incoming>G13</bpmn:incoming>
+      <bpmn:outgoing>G15</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gw_Resp2" name="Responde?">
+      <bpmn:incoming>G12</bpmn:incoming>
+      <bpmn:outgoing>G13</bpmn:outgoing>
+      <bpmn:outgoing>G16</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="T_SegG" name="Atiende el recordatorio y da seguimiento">
+      <bpmn:incoming>G15</bpmn:incoming>
+      <bpmn:outgoing>G14</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gw_Acep2" name="Acepta?">
+      <bpmn:incoming>G16</bpmn:incoming>
+      <bpmn:outgoing>G17</bpmn:outgoing>
+      <bpmn:outgoing>G19</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="End_Win2" name="Venta cerrada">
+      <bpmn:incoming>G17</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="T_NegG" name="Negocia: aplica descuento (max 10%) o ajusta">
+      <bpmn:incoming>G19</bpmn:incoming>
+      <bpmn:outgoing>G18</bpmn:outgoing>
+      <bpmn:outgoing>G20</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End_Lose2" name="Venta perdida">
+      <bpmn:incoming>G20</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="G1" sourceRef="Start_2" targetRef="T_Login"/>
+    <bpmn:sequenceFlow id="G2" sourceRef="T_Login" targetRef="T_Crea"/>
+    <bpmn:sequenceFlow id="G3" sourceRef="T_Crea" targetRef="T_RUC"/>
+    <bpmn:sequenceFlow id="G4" sourceRef="T_RUC" targetRef="T_ValRUC"/>
+    <bpmn:sequenceFlow id="G5" sourceRef="T_ValRUC" targetRef="T_Items"/>
+    <bpmn:sequenceFlow id="G6" sourceRef="T_Items" targetRef="T_Desc"/>
+    <bpmn:sequenceFlow id="G7" sourceRef="T_Desc" targetRef="T_Calc"/>
+    <bpmn:sequenceFlow id="G8" sourceRef="T_Calc" targetRef="T_Exporta"/>
+    <bpmn:sequenceFlow id="G9" sourceRef="T_Exporta" targetRef="T_Guarda"/>
+    <bpmn:sequenceFlow id="G10" sourceRef="T_Guarda" targetRef="Recibe_2"/>
+    <bpmn:sequenceFlow id="G11" sourceRef="T_Guarda" targetRef="T_Record"/>
+    <bpmn:sequenceFlow id="G12" sourceRef="Recibe_2" targetRef="Gw_Resp2"/>
+    <bpmn:sequenceFlow id="G13" name="No" sourceRef="Gw_Resp2" targetRef="T_Record"/>
+    <bpmn:sequenceFlow id="G15" sourceRef="T_Record" targetRef="T_SegG"/>
+    <bpmn:sequenceFlow id="G14" name="recuerda / reenvia" sourceRef="T_SegG" targetRef="T_Exporta"/>
+    <bpmn:sequenceFlow id="G16" name="Si" sourceRef="Gw_Resp2" targetRef="Gw_Acep2"/>
+    <bpmn:sequenceFlow id="G17" name="Acepta" sourceRef="Gw_Acep2" targetRef="End_Win2"/>
+    <bpmn:sequenceFlow id="G19" name="No acepta" sourceRef="Gw_Acep2" targetRef="T_NegG"/>
+    <bpmn:sequenceFlow id="G18" name="reenvia propuesta" sourceRef="T_NegG" targetRef="T_Exporta"/>
+    <bpmn:sequenceFlow id="G20" name="sin acuerdo" sourceRef="T_NegG" targetRef="End_Lose2"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Di_TOBE">
+    <bpmndi:BPMNPlane id="Plane_TOBE" bpmnElement="Collab_TOBE">
+      <bpmndi:BPMNShape id="Sh_Part2" bpmnElement="Part_TOBE" isHorizontal="true">
+        <dc:Bounds x="150" y="80" width="2200" height="460"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_LaneCliente2" bpmnElement="Lane_Cliente2" isHorizontal="true">
+        <dc:Bounds x="180" y="80" width="2170" height="120"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_LaneGerente2" bpmnElement="Lane_Gerente2" isHorizontal="true">
+        <dc:Bounds x="180" y="200" width="2170" height="180"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_LaneSistema" bpmnElement="Lane_Sistema" isHorizontal="true">
+        <dc:Bounds x="180" y="380" width="2170" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_Start_2" bpmnElement="Start_2">
+        <dc:Bounds x="210" y="122" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Login" bpmnElement="T_Login">
+        <dc:Bounds x="200" y="250" width="120" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Crea" bpmnElement="T_Crea">
+        <dc:Bounds x="350" y="250" width="120" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_RUC" bpmnElement="T_RUC">
+        <dc:Bounds x="500" y="250" width="120" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_ValRUC" bpmnElement="T_ValRUC">
+        <dc:Bounds x="500" y="430" width="120" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Items" bpmnElement="T_Items">
+        <dc:Bounds x="660" y="250" width="120" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Desc" bpmnElement="T_Desc">
+        <dc:Bounds x="820" y="250" width="140" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Calc" bpmnElement="T_Calc">
+        <dc:Bounds x="820" y="430" width="150" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Exporta" bpmnElement="T_Exporta">
+        <dc:Bounds x="1010" y="250" width="150" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Guarda" bpmnElement="T_Guarda">
+        <dc:Bounds x="1210" y="430" width="150" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_Recibe_2" bpmnElement="Recibe_2">
+        <dc:Bounds x="1410" y="110" width="140" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_Record" bpmnElement="T_Record">
+        <dc:Bounds x="1410" y="430" width="160" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_Gw_Resp2" bpmnElement="Gw_Resp2" isMarkerVisible="true">
+        <dc:Bounds x="1600" y="115" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_SegG" bpmnElement="T_SegG">
+        <dc:Bounds x="1580" y="250" width="150" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_Gw_Acep2" bpmnElement="Gw_Acep2" isMarkerVisible="true">
+        <dc:Bounds x="1780" y="115" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_End_Win2" bpmnElement="End_Win2">
+        <dc:Bounds x="1980" y="122" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_T_NegG" bpmnElement="T_NegG">
+        <dc:Bounds x="1900" y="250" width="160" height="60"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sh_End_Lose2" bpmnElement="End_Lose2">
+        <dc:Bounds x="2120" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="E_G1" bpmnElement="G1"><di:waypoint x="228" y="158"/><di:waypoint x="260" y="250"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G2" bpmnElement="G2"><di:waypoint x="320" y="280"/><di:waypoint x="350" y="280"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G3" bpmnElement="G3"><di:waypoint x="470" y="280"/><di:waypoint x="500" y="280"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G4" bpmnElement="G4"><di:waypoint x="560" y="310"/><di:waypoint x="560" y="430"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G5" bpmnElement="G5"><di:waypoint x="620" y="460"/><di:waypoint x="720" y="310"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G6" bpmnElement="G6"><di:waypoint x="780" y="280"/><di:waypoint x="820" y="280"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G7" bpmnElement="G7"><di:waypoint x="890" y="310"/><di:waypoint x="895" y="430"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G8" bpmnElement="G8"><di:waypoint x="970" y="460"/><di:waypoint x="1085" y="310"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G9" bpmnElement="G9"><di:waypoint x="1120" y="310"/><di:waypoint x="1285" y="430"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G10" bpmnElement="G10"><di:waypoint x="1360" y="450"/><di:waypoint x="1480" y="170"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G11" bpmnElement="G11"><di:waypoint x="1360" y="460"/><di:waypoint x="1490" y="460"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G12" bpmnElement="G12"><di:waypoint x="1550" y="140"/><di:waypoint x="1600" y="140"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G13" bpmnElement="G13"><di:waypoint x="1625" y="165"/><di:waypoint x="1550" y="450"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G15" bpmnElement="G15"><di:waypoint x="1490" y="430"/><di:waypoint x="1620" y="310"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G14" bpmnElement="G14"><di:waypoint x="1655" y="250"/><di:waypoint x="1120" y="290"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G16" bpmnElement="G16"><di:waypoint x="1650" y="140"/><di:waypoint x="1780" y="140"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G17" bpmnElement="G17"><di:waypoint x="1830" y="140"/><di:waypoint x="1980" y="140"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G19" bpmnElement="G19"><di:waypoint x="1805" y="165"/><di:waypoint x="1960" y="250"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G18" bpmnElement="G18"><di:waypoint x="1980" y="250"/><di:waypoint x="1120" y="270"/></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="E_G20" bpmnElement="G20"><di:waypoint x="2060" y="280"/><di:waypoint x="2120" y="278"/></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
