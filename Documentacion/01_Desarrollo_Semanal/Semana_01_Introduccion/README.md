@@ -18,8 +18,9 @@
 5. [Objetivos](#5-objetivos)
 6. [Alcance del proyecto](#6-alcance-del-proyecto)
 7. [Limitaciones y restricciones](#7-limitaciones-y-restricciones)
-8. [Metodología y justificación](#8-metodología-y-justificación)
-9. [Ficha resumen del proyecto](#9-ficha-resumen-del-proyecto)
+8. [Metodología y modelo de proceso de software](#8-metodología-y-modelo-de-proceso-de-software)
+9. [Cronograma de implementación (4 meses)](#9-cronograma-de-implementación-4-meses)
+10. [Ficha resumen del proyecto](#10-ficha-resumen-del-proyecto)
 
 > **Nota:** el **glosario de términos** (IGV, RUC, skydancer, tótem, etc.) se consolidará al final del
 > documento entregable como **Anexo D**, no en este bloque.
@@ -100,6 +101,79 @@ para un inflable con ciertas medidas, y la conversión de esa solicitud en una v
 Si el proyecto **no** se realiza, la empresa mantiene un proceso que **no escala** con el volumen de
 solicitudes, **pierde oportunidades de venta** por lentitud y **carece de datos** para analizar su
 historial comercial.
+
+### 3.5 Flujo de trabajo actual en BPMN (AS-IS)
+
+Modelo del proceso **manual** actual. Fuente en Mermaid (GitHub la renderiza); la versión con
+notación BPMN de diseño (Bizagi / draw.io / Camunda) se exportará a
+[`../../04_Recursos/imagenes/bpmn_asis.png`](../../04_Recursos/imagenes/).
+
+```mermaid
+flowchart TD
+    subgraph Cliente
+        A((Inicio)) --> B[Envia solicitud por WhatsApp / Yahoo Mail / formulario web]
+        L[Recibe cotizacion en PDF]
+        M{Acepta la cotizacion?}
+        N((Fin))
+    end
+    subgraph Gerente
+        C[Revisa la solicitud manualmente]
+        D[Cotiza usando una plantilla]
+        E[Calcula precio e IGV a mano]
+        F[Genera el PDF]
+        G[Envia el PDF por correo o WhatsApp]
+        H[Espera la confirmacion]
+    end
+    B --> C --> D --> E --> F --> G --> L
+    L --> M
+    M -- Si --> H --> N
+    M -- No --> N
+```
+
+**Puntos de dolor sobre el flujo:** los pasos D, E, F y G son **manuales** (dolores D1, D2, D6) y no
+hay numeración, fecha ni historial automáticos (D3, D4).
+
+### 3.6 Flujo de negocio propuesto en BPMN (TO-BE)
+
+Modelo del proceso **con el sistema**. Versión de diseño en
+[`../../04_Recursos/imagenes/bpmn_tobe.png`](../../04_Recursos/imagenes/). Se refinará en el
+modelado de la [Semana 3](../Semana_03_Analisis_y_Modelado/README.md).
+
+```mermaid
+flowchart TD
+    subgraph Cliente
+        A((Inicio)) --> B[Envia solicitud]
+        P[Recibe la cotizacion por correo]
+        Q{Acepta la cotizacion?}
+        R((Fin))
+    end
+    subgraph Gerente
+        C[Crea Nueva Cotizacion en el sistema]
+        D[Ingresa el RUC del cliente]
+        E[Agrega items: tipo + medidas]
+        H[Exporta a PDF / Word]
+        I[Envia por correo desde la plataforma]
+    end
+    subgraph Sistema
+        F[Valida RUC y autocompleta razon social]
+        G[Genera descripcion, calcula precio + IGV, numero y fecha]
+        J[Registra en historial y estado de envio]
+    end
+    subgraph Servicios_externos[Servicios externos]
+        SR[(Servicio de RUC)]
+        SC[(Servicio de Correo)]
+    end
+    B --> C --> D --> F
+    F <--> SR
+    F --> E --> G --> H --> I
+    I <--> SC
+    I --> J --> P --> Q
+    Q -- Si --> R
+    Q -- No --> R
+```
+
+**Mejora esperada:** el sistema automatiza la validación de RUC, el cálculo de precio/IGV, la
+numeración, la fecha, la exportación, el envío y el historial, eliminando los dolores D1–D6.
 
 ---
 
@@ -186,7 +260,7 @@ historial comercial.
 
 ---
 
-## 8. Metodología y justificación
+## 8. Metodología y modelo de proceso de software
 
 ### 8.1 Naturaleza del dominio
 
@@ -199,21 +273,91 @@ tarifas por definir.
 
 Se adopta un enfoque **estructurado por fases del proceso de IR** (elicitación → análisis →
 especificación → gestión → validación), **alineado a la secuencia semanal del curso** y a los
-estándares **IEEE 830 / ISO-IEC-IEEE 29148**. La priorización de requisitos se hará con **MoSCoW**
-(Must / Should / Could / Won't).
+estándares **IEEE 830 / ISO-IEC-IEEE 29148**. La priorización de requisitos combina **MoSCoW**,
+**Kano** y **Valor vs Costo** (ver Semana 5).
 
-**Justificación:** al ser un dominio de baja criticidad pero con reglas de negocio explícitas, un
-proceso **iterativo y documentado** permite capturar bien las reglas (medidas, IGV, RUC) y validar
-tempranamente con prototipos, sin la ceremonia pesada de dominios regulados.
+### 8.3 Modelo de proceso de software elegido
 
-### 8.3 Herramientas del bloque
+Entre los modelos vistos en clase (Sesión 1) se evaluó el ajuste de cada uno al proyecto:
+
+| Modelo (Sesión 1) | Característica | Ajuste a InfleSusVentas |
+|---|---|---|
+| **Cascada** | Secuencial; cada fase espera a la anterior | Rígido: no permite refinar tarifas/proporción ni entregar por partes. |
+| **Ágil (Scrum)** | Iterativo/incremental, adaptable, entrega temprana | Útil por los cambios, pero el dominio ya está bastante definido. |
+| **Espiral (Boehm)** | Iteraciones guiadas por riesgos | Pensado para proyectos grandes/alto riesgo; excede este alcance. |
+| **RUP** | Iterativo e incremental por fases (Inicio, Elaboración, Construcción, Transición); documentado | Encaja: fases claras + incrementos + trazabilidad. |
+| **Prototipos** | Versiones iniciales para retroalimentación | Se usa como **técnica** de validación (Semana 14), no como modelo base. |
+
+> **Decisión: Modelo Incremental basado en RUP** (iterativo e incremental), operado con
+> **ceremonias ágiles ligeras** (Scrum: sprint semanal, review, retro, planning).
+
+**Justificación:**
+1. Los requisitos están **mayormente claros**, lo que permite planificarlos por **fases** (fortaleza de RUP).
+2. Los **MVP 1/2/3** ya definidos (Semana 5) son **incrementos naturales** de entrega.
+3. Las **tarifas** y el **factor de proporción del globo** están por definir → las **iteraciones**
+   permiten refinarlos sin rehacer todo.
+4. RUP prioriza **documentación y trazabilidad**, esenciales en Ingeniería de Requisitos y en la rúbrica.
+5. Es el modelo **enfatizado por el docente** en la Sesión 1.
+
+### 8.4 Herramientas del bloque
 
 - **Documento de visión** (este documento) y **diagrama de contexto** (draw.io / PlantUML) — a
   elaborar como artefacto de apoyo.
 
 ---
 
-## 9. Ficha resumen del proyecto
+## 9. Cronograma de implementación (4 meses)
+
+El proyecto se implementa en **4 meses**, mapeando las **fases de RUP** con los **incrementos (MVP)**
+priorizados en la Semana 5. Cada mes cierra con un **hito** verificable.
+
+| Mes | Fase RUP | Foco / Incremento | Entregable / Hito |
+|:--:|---|---|---|
+| **1** | Inicio + Elaboración | Elicitación, análisis, modelado UML, arquitectura y **SRS** | Línea base del SRS aprobada |
+| **2** | Construcción — Iteración 1 | **MVP 1**: cotización estándar (cliente+RUC, catálogo+medidas, precio+IGV, numeración, export/envío, historial) | **MVP 1** funcional |
+| **3** | Construcción — Iteración 2 | **MVP 2**: cotización rápida, filtros, estado de envío, IGV configurable | **MVP 2** funcional |
+| **4** | Construcción + Transición | **MVP 3**: duplicar/convertir, bitácora; **pruebas/UAT**, despliegue y capacitación | **Go-live** (sistema entregado) |
+
+### 9.1 Diagrama de Gantt
+
+> Diagrama fuente en Mermaid (GitHub lo renderiza). La versión de diseño para presentación se
+> exportará a [`../../04_Recursos/imagenes/cronograma_gantt.png`](../../04_Recursos/imagenes/).
+> Las fechas son **referenciales** (inicio ajustable por el equipo).
+
+```mermaid
+gantt
+    title Cronograma de Implementación - InfleSusVentas (4 meses)
+    dateFormat  YYYY-MM-DD
+    axisFormat  %d-%b
+
+    section Mes 1 - Inicio y Elaboracion (RUP)
+    Elicitacion y analisis            :e1, 2026-08-03, 2w
+    Modelado UML y arquitectura       :e2, after e1, 1w
+    Especificacion SRS y linea base   :e3, after e2, 1w
+    Linea base SRS aprobada           :milestone, m0, after e3, 0d
+
+    section Mes 2 - Construccion: Iteracion 1 (MVP 1)
+    Cliente + validacion de RUC       :c1, after e3, 1w
+    Catalogo + logica de medidas      :c2, after c1, 1w
+    Precio + IGV + numeracion          :c3, after c2, 1w
+    Exportar PDF/Word + envio + historial :c4, after c3, 1w
+    MVP 1 - cotizacion estandar       :milestone, m1, after c4, 0d
+
+    section Mes 3 - Construccion: Iteracion 2 (MVP 2)
+    Cotizacion rapida                 :d1, after c4, 2w
+    Filtros, estado de envio, IGV configurable :d2, after d1, 2w
+    MVP 2 - agilidad y control        :milestone, m2, after d2, 0d
+
+    section Mes 4 - Construccion/Transicion: Iteracion 3 (MVP 3)
+    Duplicar/convertir + bitacora     :f1, after d2, 1w
+    Pruebas y validacion (UAT)        :f2, after f1, 2w
+    Despliegue y capacitacion         :f3, after f2, 1w
+    MVP 3 / Go-live                   :milestone, m3, after f3, 0d
+```
+
+---
+
+## 10. Ficha resumen del proyecto
 
 | Campo | Detalle |
 |---|---|
@@ -223,9 +367,11 @@ tempranamente con prototipos, sin la ceremonia pesada de dominios regulados.
 | **Objetivo (negocio)** | Agilizar y centralizar la cotización, reducir errores de precio/IGV |
 | **Usuario principal** | Gerente |
 | **Tipo de sistema** | Aplicación web de gestión de cotizaciones |
+| **Modelo de proceso** | Incremental basado en RUP (iterativo e incremental) + Scrum ligero |
+| **Cronograma** | 4 meses (Mes 1: SRS · Mes 2: MVP 1 · Mes 3: MVP 2 · Mes 4: MVP 3 / Go-live) |
 | **Alcance in** | Clientes+RUC, catálogo+medidas, precio+IGV, numeración, export PDF/Word, envío, historial, cotización rápida |
 | **Alcance out** | Captura automática de canales, facturación, inventario, pagos, multi-rol |
-| **Estándar** | IEEE 830 / ISO-IEC-IEEE 29148 · Priorización MoSCoW |
+| **Estándar** | IEEE 830 / ISO-IEC-IEEE 29148 · Priorización MoSCoW + Kano + Valor/Costo |
 | **Criterio de rúbrica** | 1 (encuadre, objetivos, alcance) |
 
 ---

@@ -1,0 +1,22 @@
+# Recursos gráficos — Diagramas y capturas
+
+Carpeta para los diagramas e imágenes referenciados desde la documentación.
+Nombrar los archivos en minúsculas y sin espacios.
+
+## Diagramas esperados
+
+| Archivo | Referenciado en | Estado |
+|---|---|---|
+| `cronograma_gantt.png` | Semana 1 — Cronograma de implementación (4 meses) | Pendiente |
+| `diagrama_contexto.png` | Semana 1 — Contexto del negocio | Pendiente |
+| `bpmn_asis.png` | Semana 1 — Flujo de trabajo actual (AS-IS) | Pendiente |
+| `bpmn_tobe.png` | Semana 1 — Flujo de negocio propuesto (TO-BE) | Pendiente |
+| `casos_de_uso.png` | Semana 3 — Análisis y modelado | Pendiente |
+| `actividad_cotizacion.png` | Semana 3 — Diagrama de actividad | Pendiente |
+| `secuencia_cotizar.png` | Semana 3 — Diagrama de secuencia | Pendiente |
+| `clases_dominio.png` | Semana 3 / Semana 9 — Modelo de dominio | Pendiente |
+| `entidad_relacion.png` | Semana 9 — Modelo de datos | Pendiente |
+| `wireframes_*.png` | Semana 14 — Prototipos | Pendiente |
+
+> El Gantt tiene su fuente en Mermaid dentro de la Semana 1 (GitHub lo renderiza); aquí va la
+> versión exportada para la presentación.
