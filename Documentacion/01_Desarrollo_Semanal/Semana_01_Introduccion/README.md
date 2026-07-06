@@ -105,10 +105,13 @@ historial comercial.
 
 ### 3.5 Flujo de trabajo actual en BPMN (AS-IS)
 
-Modelo del proceso **manual** actual. Archivo BPMN 2.0 editable (importable en **Bizagi Modeler**):
-[`../../04_Recursos/diagramas/bpmn_asis.bpmn`](../../04_Recursos/diagramas/bpmn_asis.bpmn); su
-exportación como imagen irá en [`../../04_Recursos/imagenes/bpmn_asis.png`](../../04_Recursos/imagenes/).
-Vista rápida en Mermaid (GitHub la renderiza):
+Modelo del proceso **manual** actual.
+
+![BPMN AS-IS - Cotización manual de InfleSusVentas](../../04_Recursos/imagenes/bpmn_asis.png)
+
+Archivo BPMN 2.0 **editable** (importable en **Bizagi Modeler** / Camunda / bpmn.io):
+[`../../04_Recursos/diagramas/bpmn_asis.bpmn`](../../04_Recursos/diagramas/bpmn_asis.bpmn).
+Vista alternativa en Mermaid (GitHub la renderiza):
 
 ```mermaid
 flowchart TD
@@ -148,11 +151,15 @@ memoria del Gerente, por lo que **muchas cotizaciones se enfrían y se pierden v
 
 ### 3.6 Flujo de negocio propuesto en BPMN (TO-BE)
 
-Modelo del proceso **con el sistema**. Archivo BPMN 2.0 editable (importable en **Bizagi Modeler**):
-[`../../04_Recursos/diagramas/bpmn_tobe.bpmn`](../../04_Recursos/diagramas/bpmn_tobe.bpmn); su
-exportación como imagen irá en [`../../04_Recursos/imagenes/bpmn_tobe.png`](../../04_Recursos/imagenes/).
-Incluye el **inicio de sesión** del gerente y el **botón de descuento (máx 10%)**. Se refinará en el
-modelado de la [Semana 3](../Semana_03_Analisis_y_Modelado/README.md). Vista rápida en Mermaid:
+Modelo del proceso **con el sistema**. Incluye el **inicio de sesión** del gerente y el **botón de
+descuento (máx 10%)**.
+
+![BPMN TO-BE - Cotización con el sistema InfleSusVentas](../../04_Recursos/imagenes/bpmn_tobe.png)
+
+Archivo BPMN 2.0 **editable** (importable en **Bizagi Modeler** / Camunda / bpmn.io):
+[`../../04_Recursos/diagramas/bpmn_tobe.bpmn`](../../04_Recursos/diagramas/bpmn_tobe.bpmn).
+Se refinará en el modelado de la [Semana 3](../Semana_03_Analisis_y_Modelado/README.md).
+Vista alternativa en Mermaid:
 
 ```mermaid
 flowchart TD
@@ -355,9 +362,10 @@ priorizados en la Semana 5. Cada mes cierra con un **hito** verificable.
 
 ### 9.1 Diagrama de Gantt
 
-> Diagrama fuente en Mermaid (GitHub lo renderiza). La versión de diseño para presentación se
-> exportará a [`../../04_Recursos/imagenes/cronograma_gantt.png`](../../04_Recursos/imagenes/).
-> Las fechas son **referenciales** (inicio ajustable por el equipo).
+![Cronograma de implementación - InfleSusVentas (4 meses)](../../04_Recursos/imagenes/cronograma_gantt.png)
+
+> Imagen generada desde la fuente **Mermaid** de abajo (GitHub también la renderiza en vivo). Las
+> fechas son **referenciales** (inicio ajustable por el equipo).
 
 ```mermaid
 gantt
