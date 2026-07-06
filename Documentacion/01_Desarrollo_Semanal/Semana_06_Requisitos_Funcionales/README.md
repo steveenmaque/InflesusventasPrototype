@@ -3,12 +3,12 @@
 
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
 > **Aporta al entregable:** Cap. 5.1 (catálogo RF, necesidad→requisito) · **Rúbrica:** 1
-> **Estado:** 🟢 Con contenido base (derivado del brief del negocio)
-> **Navegación:** [◀ Semana 5](../Semana_05_Gestion_de_Requisitos/README.md) · [Índice](../../README.md) · [Semana 7 ▶](../Semana_07_Requisitos_No_Funcionales/README.md)
+> **Estado:**  Con contenido base (derivado del brief del negocio)
+> **Navegación:** [ Semana 5](../Semana_05_Gestion_de_Requisitos/README.md) · [Índice](../../README.md) · [Semana 7 ](../Semana_07_Requisitos_No_Funcionales/README.md)
 
 ---
 
-## 🎯 Objetivo del bloque
+## Objetivo del bloque
 Derivar el **catálogo de Requisitos Funcionales** del sistema de cotizaciones a partir de las
 necesidades del Gerente (necesidad → requisito).
 
@@ -104,10 +104,10 @@ necesidades del Gerente (necesidad → requisito).
 | RN-06 Exportar y enviar | RF-26..RF-29 |
 | RN-07 Cotización rápida | RF-39..RF-43 |
 
-## ✅ Checklist de cierre
+## Checklist de cierre
 - [ ] Cada RF con actor, regla y criterio de aceptación (ver plantilla del Documento_SRS §6.1)
 - [ ] Cada RF principal vinculado a un caso de uso (S3/S4)
 - [ ] Prioridad MoSCoW asignada
 
-## 🔗 Referencias
+## Referencias
 Guía General de IR §11, §3 (necesidad vs requisito). Origen del brief: [Semana 1](../Semana_01_Introduccion/README.md).

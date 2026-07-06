@@ -9,19 +9,19 @@ numeración automática, exportación a **PDF/Word**, envío por correo y un flu
 
 ---
 
-## 📌 Problema
+## Problema
 La gestión de cotizaciones es **100 % manual** (WhatsApp / Yahoo Mail / formulario web → plantilla →
 PDF), lo que genera lentitud, errores de cálculo de precio/IGV, falta de numeración y **sin historial
 centralizado**.
 
-## 🎯 Objetivo (curso)
+## Objetivo (curso)
 Elaborar la **Especificación de Requisitos de Software (SRS)** completa aplicando el proceso de
 Ingeniería de Requisitos (elicitación → análisis → especificación → gestión → trazabilidad →
 validación), bajo los estándares **IEEE 830 / ISO-IEC-IEEE 29148**.
 
 ---
 
-## 📂 Estructura del repositorio
+## Estructura del repositorio
 
 ```
 InflesusventasPrototype/
@@ -35,17 +35,17 @@ InflesusventasPrototype/
     └── 04_Recursos/imagenes/     → diagramas y capturas
 ```
 
-👉 **Punto de entrada:** [`Documentacion/README.md`](Documentacion/README.md)
+ **Punto de entrada:** [`Documentacion/README.md`](Documentacion/README.md)
 
 ---
 
-## 🗺️ Avance por semanas
+## Avance por semanas
 El desarrollo sigue las 13 sesiones del curso (S1–S7, S9–S14). El estado de cada bloque se ve en el
 [índice de documentación](Documentacion/README.md#-desarrollo-semanal).
 
-## 👥 Equipo
+## Equipo
 4 integrantes con roles complementarios (Líder, Analista de Elicitación/Dominio, Arquitecto/Modelador,
 QA/Trazabilidad). Ver [Plan de Trabajo](Documentacion/00_Planificacion/Plan_de_Trabajo_y_Metodologia.md).
 
-## 🛠️ Estándares y método
+## Estándares y método
 IEEE 830 / ISO-29148 · Priorización **MoSCoW** · ISO/IEC 25010 (calidad) · RUP + Scrum ligero.

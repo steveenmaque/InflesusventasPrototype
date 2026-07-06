@@ -3,15 +3,15 @@
 
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
 > **Aporta al entregable:** Cap. 5.2 (catálogo RNF medibles) · **Rúbrica:** 1, 2
-> **Estado:** 🟢 Con contenido base (derivado del brief del negocio)
-> **Navegación:** [◀ Semana 6](../Semana_06_Requisitos_Funcionales/README.md) · [Índice](../../README.md) · [Semana 9 ▶](../Semana_09_Requisitos_de_Dominio/README.md)
+> **Estado:**  Con contenido base (derivado del brief del negocio)
+> **Navegación:** [ Semana 6](../Semana_06_Requisitos_Funcionales/README.md) · [Índice](../../README.md) · [Semana 9 ](../Semana_09_Requisitos_de_Dominio/README.md)
 
 ---
 
-## 🎯 Objetivo del bloque
+## Objetivo del bloque
 Definir los Requisitos No Funcionales **medibles** por categoría.
 
-> ⚠️ **Regla del profesor:** nada de "rápido/seguro/amigable". Siempre **métrica + valor + condición**.
+>  **Regla del profesor:** nada de "rápido/seguro/amigable". Siempre **métrica + valor + condición**.
 > Los valores marcados `[objetivo]` deben afinarse con el Gerente.
 
 ---
@@ -56,10 +56,10 @@ Definir los Requisitos No Funcionales **medibles** por categoría.
 
 ---
 
-## ✅ Checklist de cierre
+## Checklist de cierre
 - [ ] Todo RNF con métrica + valor + condición + método de verificación
 - [ ] Valores `[objetivo]` confirmados con el Gerente
 - [ ] Sin adjetivos vagos sin número
 
-## 🔗 Referencias
+## Referencias
 Guía General de IR §12. Los RNF de calidad se formalizan en ISO 25010 en la [Semana 11](../Semana_11_Requisitos_de_Calidad/README.md).

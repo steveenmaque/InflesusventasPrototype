@@ -3,16 +3,16 @@
 
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
 > **Aporta al entregable:** Cap. 3–4 (stakeholders, instrumentos, necesidad→requisito) · **Rúbrica:** 1
-> **Estado:** 🟡 Pendiente de completar
-> **Navegación:** [◀ Semana 1](../Semana_01_Introduccion/README.md) · [Índice](../../README.md) · [Semana 3 ▶](../Semana_03_Analisis_y_Modelado/README.md)
+> **Estado:**  Pendiente de completar
+> **Navegación:** [ Semana 1](../Semana_01_Introduccion/README.md) · [Índice](../../README.md) · [Semana 3 ](../Semana_03_Analisis_y_Modelado/README.md)
 
 ---
 
-## 🎯 Objetivo del bloque
+## Objetivo del bloque
 Recoger las necesidades reales del negocio InfleSusVentas con **≥ 3 técnicas de elicitación** y
 traducirlas a requisitos trazables (necesidad → requisito → caso de uso).
 
-## 📦 Artefactos a producir
+## Artefactos a producir
 - Plan de elicitación (técnica por stakeholder).
 - Guion de entrevista (`Pregunta | Objetivo | Tipo`).
 - Cuestionario (≥ 5 preguntas) + tabulación de resultados.
@@ -73,7 +73,7 @@ necesidad de exportar PDF/Word y enviar por correo; deseo de una "cotización r�
 
 ---
 
-## ❓ Preguntas de elicitación (guion mixto)
+## Preguntas de elicitación (guion mixto)
 | Pregunta | Objetivo | Tipo |
 |---|---|---|
 | ¿Cómo cotiza hoy, paso a paso? | Flujo as-is | Abierta |
@@ -82,14 +82,14 @@ necesidad de exportar PDF/Word y enviar por correo; deseo de una "cotización r�
 | ¿Qué es lo que más le molesta del proceso actual? | Dolor | Abierta |
 | Si pudiera automatizar una sola cosa, ¿cuál sería? | Prioridad | Abierta |
 
-## 🛠️ Herramientas
+## Herramientas
 Google Forms (cuestionario), Docs (transcripción), grabadora con permiso.
 
-## ✅ Checklist de cierre
+## Checklist de cierre
 - [ ] ≥ 3 técnicas aplicadas y justificadas
 - [ ] ≥ 1 entrevista transcrita con ideas clave
 - [ ] Cuestionario tabulado
 - [ ] Tabla necesidad → requisito completa
 
-## 🔗 Referencias
+## Referencias
 Guía General de IR §7 · Formato de casos del Prof. Ciro (SIGOE/Hospital/VozMatric).

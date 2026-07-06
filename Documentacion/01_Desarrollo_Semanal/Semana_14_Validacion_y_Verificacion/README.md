@@ -3,16 +3,16 @@
 
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
 > **Aporta al entregable:** Cap. 9 (walkthrough, UAT, prototipos) · **Rúbrica:** 3
-> **Estado:** 🟡 Pendiente de completar
-> **Navegación:** [◀ Semana 13](../Semana_13_Trazabilidad/README.md) · [Índice](../../README.md) · [Entregable Final ▶](../../02_Entregable_Final/Documento_SRS.md)
+> **Estado:**  Pendiente de completar
+> **Navegación:** [ Semana 13](../Semana_13_Trazabilidad/README.md) · [Índice](../../README.md) · [Entregable Final ](../../02_Entregable_Final/Documento_SRS.md)
 
 ---
 
-## 🎯 Objetivo del bloque
+## Objetivo del bloque
 Demostrar con evidencia que los requisitos son **correctos y completos** (validación) y están **bien
 construidos** (verificación).
 
-## 📦 Artefactos a producir
+## Artefactos a producir
 - Walkthrough con checklist por requisito.
 - Prototipos/wireframes (Figma/Balsamiq).
 - Casos de **UAT** en Gherkin.
@@ -24,11 +24,11 @@ construidos** (verificación).
 ## 1. Walkthrough — checklist por requisito
 | Criterio | RF-01 | RF-17 | RF-28 | RNF-04 |
 |---|:--:|:--:|:--:|:--:|
-| ¿Claro y sin ambigüedad? | ☐ | ☐ | ☐ | ☐ |
-| ¿Completo? | ☐ | ☐ | ☐ | ☐ |
-| ¿Verificable/medible? | ☐ | ☐ | ☐ | ☐ |
-| ¿Consistente? | ☐ | ☐ | ☐ | ☐ |
-| ¿Factible? | ☐ | ☐ | ☐ | ☐ |
+| ¿Claro y sin ambigüedad? | Pendiente | Pendiente | Pendiente | Pendiente |
+| ¿Completo? | Pendiente | Pendiente | Pendiente | Pendiente |
+| ¿Verificable/medible? | Pendiente | Pendiente | Pendiente | Pendiente |
+| ¿Consistente? | Pendiente | Pendiente | Pendiente | Pendiente |
+| ¿Factible? | Pendiente | Pendiente | Pendiente | Pendiente |
 
 ## 2. UAT en Gherkin (ejemplos)
 ```gherkin
@@ -63,17 +63,17 @@ Insertar en `04_Recursos/imagenes/` — pantallas: sidebar, nueva cotización, c
 
 ---
 
-## ❓ Preguntas de validación
+## Preguntas de validación
 1. ¿El requisito es claro, completo, verificable, consistente y factible?
 2. ¿El prototipo refleja lo que el Gerente esperaba?
 3. ¿Los criterios de aceptación son medibles y se cumplen?
 4. ¿Qué pasa en escenarios extremos?
 
-## ✅ Checklist de cierre
+## Checklist de cierre
 - [ ] Walkthrough completo
 - [ ] Prototipos validados con el Gerente
 - [ ] UAT en Gherkin por cada Must
 - [ ] Informe de hallazgos y correcciones
 
-## 🔗 Referencias
+## Referencias
 Guía General de IR §18, §19 (historias de usuario, Gherkin, MVP).

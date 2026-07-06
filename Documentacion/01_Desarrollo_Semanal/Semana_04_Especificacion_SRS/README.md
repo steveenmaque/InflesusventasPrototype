@@ -3,16 +3,16 @@
 
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
 > **Aporta al entregable:** Cap. 7 (SRS, casos de uso detallados) · **Rúbrica:** 2
-> **Estado:** 🟡 Pendiente de completar
-> **Navegación:** [◀ Semana 3](../Semana_03_Analisis_y_Modelado/README.md) · [Índice](../../README.md) · [Semana 5 ▶](../Semana_05_Gestion_de_Requisitos/README.md)
+> **Estado:**  Pendiente de completar
+> **Navegación:** [ Semana 3](../Semana_03_Analisis_y_Modelado/README.md) · [Índice](../../README.md) · [Semana 5 ](../Semana_05_Gestion_de_Requisitos/README.md)
 
 ---
 
-## 🎯 Objetivo del bloque
+## Objetivo del bloque
 Documentar los requisitos de forma clara, completa y con estándar **IEEE 830 / ISO-29148**, y
 detallar los casos de uso principales.
 
-## 📦 Artefactos a producir
+## Artefactos a producir
 - Casos de uso **detallados** (actor, precondición, flujo principal, alternativos, postcondición).
 - Estructura SRS enlazada con el modelo visual de la Semana 3.
 
@@ -60,26 +60,26 @@ Requisitos asociados: RF-01..RF-05, RF-08..RF-25
 ## 3. Relación modelo ↔ especificación
 | Caso de uso (S3) | Especificación detallada (S4) | RF asociados |
 |---|---|---|
-| CU-01 Registrar/validar cliente | ☐ | RF-01..RF-06 |
-| CU-02 Crear cotización estándar | ✔️ ejemplo | RF-08..RF-25 |
-| CU-05/06 Exportar y enviar | ☐ | RF-26..RF-29 |
-| CU-08 Cotización rápida | ☐ | RF-39..RF-43 |
+| CU-01 Registrar/validar cliente | Pendiente | RF-01..RF-06 |
+| CU-02 Crear cotización estándar | Desarrollado (ejemplo) | RF-08..RF-25 |
+| CU-05/06 Exportar y enviar | Pendiente | RF-26..RF-29 |
+| CU-08 Cotización rápida | Pendiente | RF-39..RF-43 |
 
 ---
 
-## ❓ Preguntas para especificar
+## Preguntas para especificar
 1. ¿Precondición y postcondición de cada CU?
 2. ¿Qué validaciones ocurren en cada paso?
 3. ¿Qué pasa en el flujo alternativo (RUC inválido, sin datos, cancelación)?
 4. ¿Cada requisito tiene criterio de aceptación demostrable?
 
-## 🛠️ Herramientas
+## Herramientas
 Plantilla SRS en Markdown, PlantUML.
 
-## ✅ Checklist de cierre
+## Checklist de cierre
 - [ ] CU principales detallados
 - [ ] Flujos alternativos cubiertos
 - [ ] Trazabilidad CU ↔ RF establecida
 
-## 🔗 Referencias
+## Referencias
 Guía General de IR §9 · Plantilla maestra: [`02_Entregable_Final/Documento_SRS.md`](../../02_Entregable_Final/Documento_SRS.md).

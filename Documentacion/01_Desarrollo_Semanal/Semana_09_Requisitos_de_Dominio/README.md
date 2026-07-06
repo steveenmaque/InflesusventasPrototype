@@ -3,12 +3,12 @@
 
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
 > **Aporta al entregable:** Cap. 5.3 (RD, reglas de negocio, modelo de datos) · **Rúbrica:** 1
-> **Estado:** 🟢 Con contenido base (derivado del brief del negocio)
-> **Navegación:** [◀ Semana 7](../Semana_07_Requisitos_No_Funcionales/README.md) · [Índice](../../README.md) · [Semana 10 ▶](../Semana_10_Requisitos_de_Desarrollo/README.md)
+> **Estado:**  Con contenido base (derivado del brief del negocio)
+> **Navegación:** [ Semana 7](../Semana_07_Requisitos_No_Funcionales/README.md) · [Índice](../../README.md) · [Semana 10 ](../Semana_10_Requisitos_de_Desarrollo/README.md)
 
 ---
 
-## 🎯 Objetivo del bloque
+## Objetivo del bloque
 Capturar las **reglas del negocio** de InfleSusVentas (independientes de la tecnología) y el modelo
 de datos del dominio.
 
@@ -53,17 +53,17 @@ de datos del dominio.
 
 ---
 
-## ❓ Preguntas para plasmar RD
+## Preguntas para plasmar RD
 1. ¿Qué reglas del negocio son obligatorias e inviolables?
 2. ¿Qué cálculos propios del negocio existen (IGV, tarifas, proporción del globo)?
 3. ¿Qué estados puede tener una cotización y qué transiciones son válidas?
 4. ¿Qué eventos disparan procesos (emisión, envío)?
 
-## ✅ Checklist de cierre
+## Checklist de cierre
 - [ ] Reglas RD-01..RD-07 validadas con el Gerente
 - [ ] Factor de proporción del globo definido (RD-06)
 - [ ] Diagrama ER / clases del dominio adjunto
 - [ ] Glosario del dominio alimentado (Anexo D)
 
-## 🔗 Referencias
+## Referencias
 Guía General de IR §13. Glosario final: [`03_Anexos/Glosario.md`](../../03_Anexos/Glosario.md).

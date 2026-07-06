@@ -1,12 +1,12 @@
 <!--
   PLANTILLA DEL ENTREGABLE FINAL (SRS) — Ingeniería de Requisitos
   Reemplaza los [MARCADORES] y completa las tablas.
-  Los bloques marcados con "> 💡 Ejemplo ilustrativo" son SOLO guía: bórralos o
+  Los bloques marcados con ">  Ejemplo ilustrativo" son SOLO guía: bórralos o
   sustitúyelos por el contenido real de tu empresa.
   La sección de ELICITACIÓN sigue EXACTAMENTE el formato de los casos del Prof. Ciro.
 -->
 
-# 📄 Especificación de Requisitos de Software (SRS)
+# Especificación de Requisitos de Software (SRS)
 ## Proyecto: `[NOMBRE DEL SISTEMA]`
 
 > **Universidad Nacional Mayor de San Marcos** — Facultad de Ingeniería de Sistemas e Informática
@@ -102,7 +102,7 @@ Impedimentos: [ ]
 Próxima reunión: [ ]
 ```
 
-> 🔗 *Fundamento: Guía [§6](../Guia_General_IR/README.md#6-el-proceso-de-ir-rup-ciclos-de-vida-y-ceremonia) (RUP, ceremonia). Estructura semanal fiel en
+>  *Fundamento: Guía [§6](../Guia_General_IR/README.md#6-el-proceso-de-ir-rup-ciclos-de-vida-y-ceremonia) (RUP, ceremonia). Estructura semanal fiel en
 > [`Estructura_Proyecto_Por_Semanas.md`](Estructura_Proyecto_Por_Semanas.md).*
 
 ---
@@ -115,7 +115,7 @@ Próxima reunión: [ ]
 - **2.4 Objetivo del sistema (meta, no requisito):** `[…]`
 - **2.5 Objetivos específicos:** `[…]`
 
-> 💡 *Ejemplo ilustrativo (bórralo):* «El propósito es especificar los requisitos del sistema
+>  *Ejemplo ilustrativo (bórralo):* «El propósito es especificar los requisitos del sistema
 > **[SISTEMA]** que automatizará el proceso de **[proceso]** de la empresa **[EMPRESA]**, hoy
 > realizado de forma manual, reduciendo errores y tiempos de atención.»
 
@@ -148,7 +148,7 @@ Próxima reunión: [ ]
 |-------------|----------------------|
 | `[…]` | `[…]` |
 
-> 💡 *Ejemplo (hospital, referencia del profesor):* Médicos → rapidez; Pacientes → privacidad;
+>  *Ejemplo (hospital, referencia del profesor):* Médicos → rapidez; Pacientes → privacidad;
 > Administradores → disponibilidad.
 
 ---
@@ -192,7 +192,7 @@ Próxima reunión: [ ]
 #### Entrevista N.º 2 — `[Cargo / Actor]`
 *(misma ficha)*
 
-> 💡 **Ejemplo ilustrativo de una entrevista (formato SIGOE) — bórralo:**
+>  **Ejemplo ilustrativo de una entrevista (formato SIGOE) — bórralo:**
 >
 > **Entrevista N.º 1 — Estudiante**
 > - Proyecto: Sistema de Gestión de Trámites SIGOE
@@ -218,7 +218,7 @@ Se aplicó un cuestionario a **`[N]`** `[tipo de usuarios]`. Resultados relevant
 
 **Conclusión:** existe una clara necesidad de `[…]`.
 
-> 💡 *Ejemplo (SIGOE):* 78% tuvo problemas al inscribirse; 65% no entiende la diferencia entre
+>  *Ejemplo (SIGOE):* 78% tuvo problemas al inscribirse; 65% no entiende la diferencia entre
 > matrícula e inscripción; 72% prefiere certificados por correo; 60% reporta fallas de impresión.
 > → Necesidad de: mejorar usabilidad, integrar procesos, ofrecer alternativas digitales.
 
@@ -248,7 +248,7 @@ profesor):
 |-----------------|------------------------------|------------------------|----------------------|
 | `[…]` | `[…]` | El sistema debe `[…]` | `[CU-xx]` |
 
-> 💡 *Ejemplo:* Estudiante — «Ver mis notas sin ir a la Facultad» → «El sistema debe permitir al
+>  *Ejemplo:* Estudiante — «Ver mis notas sin ir a la Facultad» → «El sistema debe permitir al
 > estudiante consultar notas por Internet» → **CU-05 Consultar notas**.
 
 ---
@@ -271,7 +271,7 @@ profesor):
 | RNF-01 | Rendimiento | El sistema deberá responder en **< [x] s** para el **[y]%** con **[z] usuarios** concurrentes | Prueba de carga | Alta |
 | RNF-02 | Seguridad | `[…]` | `[…]` | Alta |
 
-> ⚠️ **Prohibido** "rápido/seguro/amigable" sin número. Regla del profesor: métrica + valor + condición.
+>  **Prohibido** "rápido/seguro/amigable" sin número. Regla del profesor: métrica + valor + condición.
 
 ### 6.3 Requisitos de Dominio (RD)
 
@@ -294,16 +294,45 @@ profesor):
 | Verificación | `[…]` | Revisiones, pruebas |
 | Gestión de cambios | `[…]` | `[…]` |
 
-### 6.6 Priorización MoSCoW y MVP
+### 6.6 Priorización combinada y MVP
 
-| Nivel | Requisitos | 
+La priorización combina **tres técnicas** (Sesión 3): **MoSCoW** (criticidad), **Kano** (satisfacción)
+y **Valor vs Costo** (inversión). Su análisis integrado define el **MVP** y su roadmap.
+
+**MoSCoW (criticidad)**
+
+| Nivel | Requisitos |
 |-------|-----------|
-| **Must (MVP)** | `[RF-.., RF-..]` |
+| **Must (núcleo del MVP)** | `[RF-.., RF-..]` |
 | Should | `[…]` |
 | Could | `[…]` |
 | Won't (por ahora) | `[…]` |
 
-**MVP definido:** `[describir el incremento mínimo que entrega valor]`.
+**Análisis Kano (satisfacción)**
+
+| Requisito | Tipo (Básico / Desempeño / Encantamiento) | Explicación |
+|-----------|--------------------------------------------|-------------|
+| `[…]` | `[…]` | `[…]` |
+
+**Valor vs Costo (inversión)**
+
+| Requisito | Valor | Costo | Decisión (Prioridad 1/2/3) |
+|-----------|:-----:|:-----:|:--------------------------:|
+| `[…]` | `[…]` | `[…]` | `[…]` |
+
+**Análisis integrado (define el roadmap)**
+
+| Funcionalidad / RF | MoSCoW | Kano | Valor | Costo | Prioridad (MVP 1/2/3) |
+|--------------------|:------:|:----:|:-----:|:-----:|:---------------------:|
+| `[…]` | `[…]` | `[…]` | `[…]` | `[…]` | `[…]` |
+
+**Roadmap de MVP**
+- **MVP 1** (núcleo entregable): `[describir el incremento mínimo que entrega valor]`.
+- **MVP 2** (mejoras de agilidad/control): `[…]`.
+- **MVP 3** (comodidad / avanzado): `[…]`.
+
+> Detalle aplicado a InfleSusVentas en
+> [Semana 5](../01_Desarrollo_Semanal/Semana_05_Gestion_de_Requisitos/README.md).
 
 ---
 
@@ -331,7 +360,7 @@ profesor):
 | **Medio (recomendado)** | 4–6 | **8–15** |
 | Complejo | 7+ | 15–25 |
 
-> 💡 **Ejemplo real del profesor (caso Hospital, S4):** 7 actores (Paciente, Recepcionista, Médico,
+>  **Ejemplo real del profesor (caso Hospital, S4):** 7 actores (Paciente, Recepcionista, Médico,
 > Personal de laboratorio, Cajero, Administrador, Sistema de notificaciones) → **~10-11 casos de
 > uso**: *Registrar paciente, Actualizar datos, Programar cita, Consultar disponibilidad, Atender
 > consulta, Registrar diagnóstico, Solicitar exámenes, Registrar resultados, Procesar pago, Enviar
@@ -361,7 +390,7 @@ Postcondición:      [ ]
 Requisitos asociados: [RF-..]
 ```
 
-> 💡 *Ejemplo (Programar cita médica):* Actor: Paciente/Recepcionista · Precondición: paciente
+>  *Ejemplo (Programar cita médica):* Actor: Paciente/Recepcionista · Precondición: paciente
 > registrado · Flujo: 1) seleccionar especialidad, 2) sistema muestra disponibilidad, 3) elegir
 > horario, 4) registrar cita y notificar · Alternativo 2a) sin disponibilidad → sugerir otra fecha.
 
@@ -375,14 +404,14 @@ Insertar los diagramas propios en [`imagenes/`](imagenes/) y referenciarlos. Ent
 
 | Diagrama | Estado | Archivo |
 |----------|:------:|---------|
-| Casos de uso (general) | ☐ | `imagenes/[…]` |
-| Actividad (con particiones) | ☐ | `imagenes/[…]` |
-| Secuencia (flujos críticos) | ☐ | `imagenes/[…]` |
-| Clases (dominio) | ☐ | `imagenes/[…]` |
-| Estados (entidad con ciclo de vida) | ☐ | `imagenes/[…]` |
-| Entidad-Relación | ☐ | `imagenes/[…]` |
-| Componentes / Despliegue | ☐ | `imagenes/[…]` |
-| BPMN (proceso to-be) | ☐ | `imagenes/[…]` |
+| Casos de uso (general) | Pendiente | `imagenes/[…]` |
+| Actividad (con particiones) | Pendiente | `imagenes/[…]` |
+| Secuencia (flujos críticos) | Pendiente | `imagenes/[…]` |
+| Clases (dominio) | Pendiente | `imagenes/[…]` |
+| Estados (entidad con ciclo de vida) | Pendiente | `imagenes/[…]` |
+| Entidad-Relación | Pendiente | `imagenes/[…]` |
+| Componentes / Despliegue | Pendiente | `imagenes/[…]` |
+| BPMN (proceso to-be) | Pendiente | `imagenes/[…]` |
 
 ---
 
@@ -431,8 +460,8 @@ Ficha por cada requisito de calidad (plantilla de modelamiento del profesor):
 
 | Req ID | Necesidad/Fuente | Caso de uso | Diseño | Módulo/Código | Caso de prueba | Estado | ¿Cumple? |
 |--------|------------------|-------------|--------|---------------|----------------|--------|:--------:|
-| RF-01 | `[…]` | CU-01 | `[…]` | `[…]` | `[…]` | `[…]` | ☐ |
-| RNF-01 | `[…]` | — | `[…]` | `[…]` | `[…]` | `[…]` | ☐ |
+| RF-01 | `[…]` | CU-01 | `[…]` | `[…]` | `[…]` | `[…]` | Pendiente |
+| RNF-01 | `[…]` | — | `[…]` | `[…]` | `[…]` | `[…]` | Pendiente |
 
 **Análisis de cobertura:** ¿algún requisito sin prueba? ¿algún componente sin requisito (sobrediseño)?
 
@@ -444,11 +473,11 @@ Ficha por cada requisito de calidad (plantilla de modelamiento del profesor):
 
 | Criterio | RF-01 | RF-02 | RNF-01 |
 |----------|:-----:|:-----:|:------:|
-| ¿Claro y sin ambigüedades? | ☐ | ☐ | ☐ |
-| ¿Completo? | ☐ | ☐ | ☐ |
-| ¿Verificable/medible? | ☐ | ☐ | ☐ |
-| ¿Consistente? | ☐ | ☐ | ☐ |
-| ¿Factible? | ☐ | ☐ | ☐ |
+| ¿Claro y sin ambigüedades? | Pendiente | Pendiente | Pendiente |
+| ¿Completo? | Pendiente | Pendiente | Pendiente |
+| ¿Verificable/medible? | Pendiente | Pendiente | Pendiente |
+| ¿Consistente? | Pendiente | Pendiente | Pendiente |
+| ¿Factible? | Pendiente | Pendiente | Pendiente |
 
 - **12.2 Prototipos (wireframes):** `[Figma/Balsamiq — insertar en imagenes/]`
 - **12.3 UAT (criterios de aceptación en Gherkin):**
@@ -495,7 +524,7 @@ Escenario: [nombre]
 
 ---
 
-> ✅ **Antes de entregar:** completa el
+>  **Antes de entregar:** completa el
 > [checklist "Excelente"](Estructura_Proyecto_Final.md#-checklist-para-nivel-excelente-90-100) y pega
 > al inicio la [matriz rúbrica ↔ secciones](Estructura_Proyecto_Final.md#-matriz-de-trazabilidad-rúbrica--secciones-del-documento).
 >

@@ -3,15 +3,15 @@
 
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
 > **Aporta al entregable:** Cap. 7 (fichas ISO 25010, métricas) · **Rúbrica:** 2
-> **Estado:** 🟡 Pendiente de completar
-> **Navegación:** [◀ Semana 10](../Semana_10_Requisitos_de_Desarrollo/README.md) · [Índice](../../README.md) · [Semana 12 ▶](../Semana_12_Gestion_de_Cambios/README.md)
+> **Estado:**  Pendiente de completar
+> **Navegación:** [ Semana 10](../Semana_10_Requisitos_de_Desarrollo/README.md) · [Índice](../../README.md) · [Semana 12 ](../Semana_12_Gestion_de_Cambios/README.md)
 
 ---
 
-## 🎯 Objetivo del bloque
+## Objetivo del bloque
 Formalizar los RNF como **requisitos de calidad medibles** alineados a **ISO/IEC 25010**.
 
-## 📦 Artefactos a producir
+## Artefactos a producir
 Ficha de calidad por requisito + tabla de métricas por característica.
 
 ---
@@ -53,15 +53,15 @@ Ficha de calidad por requisito + tabla de métricas por característica.
 
 ---
 
-## ❓ Preguntas para plasmar calidad
+## Preguntas para plasmar calidad
 1. ¿A qué característica ISO 25010 corresponde cada necesidad?
 2. ¿Qué métrica la mide objetivamente y cuál es el valor objetivo?
 3. ¿Cómo se verifica y cuál es el criterio de aceptación?
 
-## ✅ Checklist de cierre
+## Checklist de cierre
 - [ ] Ficha ISO 25010 por cada RNF relevante
 - [ ] Métricas y valores objetivo confirmados
 - [ ] Método de verificación definido
 
-## 🔗 Referencias
+## Referencias
 Guía General de IR §15. Origen de los RNF: [Semana 7](../Semana_07_Requisitos_No_Funcionales/README.md).

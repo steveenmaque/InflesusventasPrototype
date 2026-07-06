@@ -1,4 +1,4 @@
-# 🗓️ Estructura del Proyecto Final — Semana a Semana (Ingeniería de Requisitos)
+# Estructura del Proyecto Final — Semana a Semana (Ingeniería de Requisitos)
 
 > **Universidad:** UNMSM — Facultad de Ingeniería de Sistemas e Informática · E.P. Ingeniería de Software
 > **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · Ciclo 5, 2026-I
@@ -10,14 +10,14 @@
 > Es **complementaria** a [`Estructura_Proyecto_Final.md`](Estructura_Proyecto_Final.md) (vista por
 > criterios de la rúbrica). Se apoya en la [Guía General de IR](../Guia_General_IR/README.md).
 
-> ⚠️ **Nota:** el problema/empresa aún no está definido. Por eso, cada semana incluye **preguntas
+>  **Nota:** el problema/empresa aún no está definido. Por eso, cada semana incluye **preguntas
 > genéricas y plantillas** `[proceso]`, `[entidad]`, `[actor]`, `[dato]` que sirven para **cualquier
 > dominio**: al responderlas, obtienes directamente los requisitos. Cuando definan la empresa, solo
 > reemplazan los marcadores.
 
 ---
 
-## 📑 Índice
+## Índice
 
 - [Roles del equipo (4 integrantes)](#-roles-del-equipo-4-integrantes)
 - [Cómo trabajar cada semana](#-cómo-trabajar-cada-semana)
@@ -35,12 +35,12 @@
 - [Semana 12 — Gestión de Cambios](#semana-12--gestión-de-cambios)
 - [Semana 13 — Trazabilidad](#semana-13--trazabilidad)
 - [Semana 14 — Validación y Verificación](#semana-14--validación-y-verificación)
-- [🎯 Banco maestro de preguntas para plasmar requisitos](#-banco-maestro-de-preguntas-para-plasmar-requisitos)
+- [ Banco maestro de preguntas para plasmar requisitos](#-banco-maestro-de-preguntas-para-plasmar-requisitos)
 - [Estructura final del documento entregable](#-estructura-final-del-documento-entregable)
 
 ---
 
-## 👥 Roles del equipo (4 integrantes)
+## Roles del equipo (4 integrantes)
 
 Se recomiendan **4 roles complementarios** (todos participan en todo, pero cada uno **lidera** un frente):
 
@@ -66,19 +66,19 @@ Se recomiendan **4 roles complementarios** (todos participan en todo, pero cada 
 
 ---
 
-## 🔁 Cómo trabajar cada semana
+## Cómo trabajar cada semana
 
 Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 
-1. **🎯 Objetivo en el proyecto** — qué logra esta semana en el entregable.
-2. **📦 Artefactos a producir** — entregables concretos (tablas, diagramas, matrices).
-3. **❓ Preguntas de elicitación** — para plasmar requisitos del tema de esa semana.
-4. **🛠️ Herramientas** sugeridas.
-5. **✅ Criterio de rúbrica** que cubre + **🔗 sección de la Guía**.
+1. ** Objetivo en el proyecto** — qué logra esta semana en el entregable.
+2. ** Artefactos a producir** — entregables concretos (tablas, diagramas, matrices).
+3. ** Preguntas de elicitación** — para plasmar requisitos del tema de esa semana.
+4. ** Herramientas** sugeridas.
+5. ** Criterio de rúbrica** que cubre + ** sección de la Guía**.
 
 ---
 
-## 🗺️ Mapa semana → entregable → rúbrica
+## Mapa semana → entregable → rúbrica
 
 | Semana | Tema del profesor | Aporta al entregable | Criterio rúbrica |
 |:------:|-------------------|----------------------|:----------------:|
@@ -101,16 +101,16 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 
 # Semana 1 — Conceptos fundamentales: encuadre del problema
 
-**🎯 Objetivo en el proyecto:** definir el **problema**, el **objetivo** (meta, no requisito), el
+** Objetivo en el proyecto:** definir el **problema**, el **objetivo** (meta, no requisito), el
 **alcance** y el tipo de sistema; distinguir *espacio del problema* vs *espacio de la solución*.
 
-**📦 Artefactos a producir:**
+** Artefactos a producir:**
 - Ficha del proyecto (empresa, problema, objetivo, alcance in/out).
 - Enunciado del problema (situación actual "as-is" y dolores).
 - Justificación de la **metodología/ceremonia** (RUP/ágil según criticidad del dominio).
 - Clasificación preliminar de requisitos esperados (RF / RNF / Restricciones).
 
-**❓ Preguntas de elicitación (encuadre):**
+** Preguntas de elicitación (encuadre):**
 1. ¿Cuál es el **proceso de negocio** que hoy causa más problemas y por qué?
 2. ¿Cuál es el **objetivo** del sistema en una frase? (¿es medible o es solo una meta?)
 3. ¿Qué queda **dentro** y qué queda **fuera** del alcance?
@@ -119,23 +119,23 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 6. ¿Qué pasaría si el proyecto **no** se hace? (justificación / costo de no actuar)
 7. ¿Existe un **sistema actual**? ¿Se reemplaza, integra o parte de cero?
 
-**🛠️ Herramientas:** documento de visión, diagrama de contexto (draw.io / PlantUML).
-**✅ Rúbrica:** 1 · **🔗 Guía [§1](../Guia_General_IR/README.md#1-marco-conceptual-qué-es-la-ingeniería-de-requisitos), [§6](../Guia_General_IR/README.md#6-el-proceso-de-ir-rup-ciclos-de-vida-y-ceremonia).**
+** Herramientas:** documento de visión, diagrama de contexto (draw.io / PlantUML).
+** Rúbrica:** 1 · ** Guía [§1](../Guia_General_IR/README.md#1-marco-conceptual-qué-es-la-ingeniería-de-requisitos), [§6](../Guia_General_IR/README.md#6-el-proceso-de-ir-rup-ciclos-de-vida-y-ceremonia).**
 
 ---
 
 # Semana 2 — Elicitación de requisitos
 
-**🎯 Objetivo:** recoger necesidades reales con ≥ 3 técnicas y traducirlas a requisitos.
+** Objetivo:** recoger necesidades reales con ≥ 3 técnicas y traducirlas a requisitos.
 
-**📦 Artefactos:**
+** Artefactos:**
 - Plan de elicitación (técnica por stakeholder).
 - **Guion de entrevista** (tabla `Pregunta | Objetivo | Tipo`).
 - **Cuestionario** (≥ 5 preguntas) + tabulación de resultados.
 - Registro de necesidades (voz del usuario, sin traducir).
 - Tabla **necesidad → requisito** (estilo S6).
 
-**❓ Preguntas de elicitación (estructura mixta cerrada/abierta):**
+** Preguntas de elicitación (estructura mixta cerrada/abierta):**
 
 | Pregunta (plantilla) | Objetivo | Tipo |
 |----------------------|----------|------|
@@ -150,22 +150,22 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 | Si pudiera agregar **una** función mágica, ¿cuál sería? | Expectativa prioritaria | **Abierta** |
 | Cuénteme paso a paso cómo hace hoy `[proceso]` de inicio a fin. | Flujo real | **Abierta** |
 
-**🛠️ Herramientas:** Google Forms (cuestionario), Docs (transcripción), grabadora (con permiso).
-**✅ Rúbrica:** 1 · **🔗 Guía [§7](../Guia_General_IR/README.md#7-semana-2--elicitación-de-requisitos).**
+** Herramientas:** Google Forms (cuestionario), Docs (transcripción), grabadora (con permiso).
+** Rúbrica:** 1 · ** Guía [§7](../Guia_General_IR/README.md#7-semana-2--elicitación-de-requisitos).**
 
 ---
 
 # Semana 3 — Análisis y modelado
 
-**🎯 Objetivo:** representar los requisitos con modelos UML que faciliten comprensión y detección de errores.
+** Objetivo:** representar los requisitos con modelos UML que faciliten comprensión y detección de errores.
 
-**📦 Artefactos:**
+** Artefactos:**
 - Diagrama de **casos de uso** (actores + casos, con «include»/«extend»).
 - Diagrama de **actividades** (con particiones/swimlanes).
 - Diagrama de **secuencia** de los flujos críticos.
 - (Opcional) diagrama de **clases** del dominio.
 
-**❓ Preguntas para modelar:**
+** Preguntas para modelar:**
 1. ¿Qué **actores** interactúan con el sistema y qué objetivo persigue cada uno?
 2. ¿Cuáles son los **casos de uso** principales (verbos de negocio)?
 3. ¿Qué casos de uso **incluyen** a otros o son **extensiones** (excepciones)?
@@ -173,21 +173,21 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 5. En `[proceso]`, ¿quién hace cada paso? (define las particiones del diagrama de actividad)
 6. ¿Qué **objetos/servicios** intervienen en el flujo y en qué orden se llaman?
 
-**🛠️ Herramientas:** PlantUML (notación del profesor), Lucidchart, StarUML, draw.io.
-**✅ Rúbrica:** 1, 2 · **🔗 Guía [§8](../Guia_General_IR/README.md#8-semana-3--análisis-y-modelado-uml-mermaid--plantuml), [§20](../Guia_General_IR/README.md#20-catálogo-de-diagramas-mermaid--plantuml).**
+** Herramientas:** PlantUML (notación del profesor), Lucidchart, StarUML, draw.io.
+** Rúbrica:** 1, 2 · ** Guía [§8](../Guia_General_IR/README.md#8-semana-3--análisis-y-modelado-uml-mermaid--plantuml), [§20](../Guia_General_IR/README.md#20-catálogo-de-diagramas-mermaid--plantuml).**
 
 ---
 
 # Semana 4 — Especificación de requisitos (SRS)
 
-**🎯 Objetivo:** documentar los requisitos de forma clara, completa y con estándar.
+** Objetivo:** documentar los requisitos de forma clara, completa y con estándar.
 
-**📦 Artefactos:**
+** Artefactos:**
 - **Casos de uso detallados** (plantilla: actor, precondición, flujo principal, alternativos, postcondición).
 - Documento **SRS** (estructura IEEE 830 / ISO 29148).
 - Relación explícita **modelo visual ↔ especificación textual**.
 
-**❓ Preguntas para especificar:**
+** Preguntas para especificar:**
 1. Para `[caso de uso]`: ¿cuál es la **precondición** y la **postcondición**?
 2. ¿Qué **validaciones** ocurren en cada paso?
 3. ¿Qué pasa en el **flujo alternativo** (error, cancelación, sin datos)?
@@ -195,41 +195,41 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 5. ¿El requisito está redactado sin **ambigüedad** («El sistema deberá…»)?
 6. ¿Cada requisito tiene un **criterio de aceptación** demostrable?
 
-**🛠️ Herramientas:** plantilla SRS en Markdown/Docs, PlantUML.
-**✅ Rúbrica:** 2 · **🔗 Guía [§9](../Guia_General_IR/README.md#9-semana-4--especificación-de-requisitos-srs).**
+** Herramientas:** plantilla SRS en Markdown/Docs, PlantUML.
+** Rúbrica:** 2 · ** Guía [§9](../Guia_General_IR/README.md#9-semana-4--especificación-de-requisitos-srs).**
 
 ---
 
 # Semana 5 — Gestión de requisitos
 
-**🎯 Objetivo:** administrar los requisitos (atributos, versiones, línea base, herramientas).
+** Objetivo:** administrar los requisitos (atributos, versiones, línea base, herramientas).
 
-**📦 Artefactos:**
+** Artefactos:**
 - Tabla de **atributos** por requisito (ID, fuente, tipo, prioridad, estado, versión).
 - Definición de **línea base** y política de versionado.
 - Backlog/priorización (MoSCoW) en la herramienta elegida.
 
-**❓ Preguntas de gestión:**
+** Preguntas de gestión:**
 1. ¿Qué **prioridad** (MoSCoW) tiene cada requisito y por qué?
 2. ¿Cuál es la **fuente** (stakeholder) de cada requisito? (para trazabilidad inversa)
 3. ¿Qué requisitos son **dependientes** entre sí?
 4. ¿Cuándo se congela la **línea base**? ¿Quién la aprueba?
 5. ¿Qué **estado** tiene hoy cada requisito (propuesto/aprobado/implementado/verificado)?
 
-**🛠️ Herramientas:** JIRA / Azure DevOps / Trello + hoja de cálculo.
-**✅ Rúbrica:** 4, 6 · **🔗 Guía [§10](../Guia_General_IR/README.md#10-semana-5--gestión-de-requisitos).**
+** Herramientas:** JIRA / Azure DevOps / Trello + hoja de cálculo.
+** Rúbrica:** 4, 6 · ** Guía [§10](../Guia_General_IR/README.md#10-semana-5--gestión-de-requisitos).**
 
 ---
 
 # Semana 6 — Requisitos Funcionales (RF)
 
-**🎯 Objetivo:** derivar el **catálogo de RF** a partir de las necesidades (necesidad → requisito).
+** Objetivo:** derivar el **catálogo de RF** a partir de las necesidades (necesidad → requisito).
 
-**📦 Artefactos:**
+** Artefactos:**
 - Tabla **necesidad → requisito** por stakeholder.
 - **Catálogo de RF** con ficha completa por requisito.
 
-**❓ Preguntas para plasmar RF** (responderlas genera RF directamente):
+** Preguntas para plasmar RF** (responderlas genera RF directamente):
 1. ¿Qué debe **permitir hacer** el sistema a `[actor]`? (registrar, consultar, generar, aprobar…)
 2. ¿Qué **información** debe registrar/almacenar sobre `[entidad]`?
 3. ¿Qué **cálculos** o transformaciones debe realizar? (totales, descuentos, penalidades)
@@ -242,18 +242,18 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 > **Formato de salida (por cada respuesta):** «El sistema debe **[verbo]** … [con qué datos] …
 > [bajo qué regla]». Añade actor, criterio de aceptación y prioridad MoSCoW.
 
-**🛠️ Herramientas:** tabla de RF, backlog en JIRA.
-**✅ Rúbrica:** 1 · **🔗 Guía [§11](../Guia_General_IR/README.md#11-semana-6--requisitos-funcionales), [§3](../Guia_General_IR/README.md#3-necesidad-vs-requisito--requisito-vs-característica-vs-objetivo).**
+** Herramientas:** tabla de RF, backlog en JIRA.
+** Rúbrica:** 1 · ** Guía [§11](../Guia_General_IR/README.md#11-semana-6--requisitos-funcionales), [§3](../Guia_General_IR/README.md#3-necesidad-vs-requisito--requisito-vs-característica-vs-objetivo).**
 
 ---
 
 # Semana 7 — Requisitos No Funcionales (RNF)
 
-**🎯 Objetivo:** definir RNF **medibles** por categoría.
+** Objetivo:** definir RNF **medibles** por categoría.
 
-**📦 Artefactos:** catálogo de RNF con métrica, valor objetivo y método de verificación.
+** Artefactos:** catálogo de RNF con métrica, valor objetivo y método de verificación.
 
-**❓ Preguntas para plasmar RNF (por categoría):**
+** Preguntas para plasmar RNF (por categoría):**
 
 | Categoría | Preguntas para el stakeholder |
 |-----------|-------------------------------|
@@ -267,18 +267,18 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 > **Regla del profesor:** nada de «rápido/seguro/amigable». Siempre **métrica + valor + condición**:
 > «Responder en **< 2 s** para el **95 %** de las consultas con **500 usuarios** concurrentes».
 
-**🛠️ Herramientas:** JMeter/k6 (rendimiento), checklist OWASP (seguridad).
-**✅ Rúbrica:** 1, 2 · **🔗 Guía [§12](../Guia_General_IR/README.md#12-semana-7--requisitos-no-funcionales).**
+** Herramientas:** JMeter/k6 (rendimiento), checklist OWASP (seguridad).
+** Rúbrica:** 1, 2 · ** Guía [§12](../Guia_General_IR/README.md#12-semana-7--requisitos-no-funcionales).**
 
 ---
 
 # Semana 9 — Requisitos de Dominio (RD)
 
-**🎯 Objetivo:** capturar las **reglas del negocio** del *espacio del problema*, independientes de la tecnología.
+** Objetivo:** capturar las **reglas del negocio** del *espacio del problema*, independientes de la tecnología.
 
-**📦 Artefactos:** tabla RF/RNF/**RD**; catálogo de reglas de negocio; glosario del dominio.
+** Artefactos:** tabla RF/RNF/**RD**; catálogo de reglas de negocio; glosario del dominio.
 
-**❓ Preguntas para plasmar RD:**
+** Preguntas para plasmar RD:**
 1. ¿Qué **reglas del negocio** son **obligatorias** en `[dominio]`? (p. ej. "no matricular sin prerrequisito")
 2. ¿Qué **entidades del negocio** existen y cómo se relacionan? (clientes, productos, cuentas…)
 3. ¿Qué **restricciones legales/normativas** aplican al dominio?
@@ -289,19 +289,19 @@ Cada bloque de semana tiene el mismo formato para que sea fácil de ejecutar:
 
 > Pista del profesor: el **dominio es lo más estable**; ancla el análisis aquí antes que en la UI.
 
-**🛠️ Herramientas:** glosario, diagrama de clases/ER del dominio (PlantUML).
-**✅ Rúbrica:** 1 · **🔗 Guía [§13](../Guia_General_IR/README.md#13-semana-9--requisitos-de-dominio).**
+** Herramientas:** glosario, diagrama de clases/ER del dominio (PlantUML).
+** Rúbrica:** 1 · ** Guía [§13](../Guia_General_IR/README.md#13-semana-9--requisitos-de-dominio).**
 
 ---
 
 # Semana 10 — Requisitos de Desarrollo
 
-**🎯 Objetivo:** definir **cómo** se construirá el sistema (entorno, proceso, herramientas, estándares).
+** Objetivo:** definir **cómo** se construirá el sistema (entorno, proceso, herramientas, estándares).
 
-**📦 Artefactos:** tabla de requisitos de desarrollo por fase (identificación → especificación →
+** Artefactos:** tabla de requisitos de desarrollo por fase (identificación → especificación →
 verificación → gestión de cambios).
 
-**❓ Preguntas para plasmar requisitos de desarrollo:**
+** Preguntas para plasmar requisitos de desarrollo:**
 1. ¿Qué **lenguaje/framework/BD** se usará y por qué?
 2. ¿En qué **entornos** debe correr (SO, servidor, nube)?
 3. ¿Qué **metodología** de trabajo (Scrum, duración de sprints, ceremonias)?
@@ -310,21 +310,21 @@ verificación → gestión de cambios).
 6. ¿Qué nivel de **cobertura de pruebas** se exige?
 7. ¿Qué requisitos de **formación/seguridad** del equipo (p. ej. OWASP)?
 
-**🛠️ Herramientas:** Git/GitHub, VS Code, pipeline CI, linters.
-**✅ Rúbrica:** 2, 6 · **🔗 Guía [§14](../Guia_General_IR/README.md#14-semana-10--requisitos-de-desarrollo).**
+** Herramientas:** Git/GitHub, VS Code, pipeline CI, linters.
+** Rúbrica:** 2, 6 · ** Guía [§14](../Guia_General_IR/README.md#14-semana-10--requisitos-de-desarrollo).**
 
 ---
 
 # Semana 11 — Requisitos de Calidad (ISO 25010)
 
-**🎯 Objetivo:** especificar los RNF como **requisitos de calidad medibles** alineados a ISO/IEC 25010.
+** Objetivo:** especificar los RNF como **requisitos de calidad medibles** alineados a ISO/IEC 25010.
 
-**📦 Artefactos:**
+** Artefactos:**
 - Ficha de calidad por requisito (plantilla de modelamiento: problema, necesidad, stakeholder,
   característica ISO 25010, requisito, métrica, valor objetivo, verificación, criterio, prioridad).
 - Tabla de **métricas** por característica.
 
-**❓ Preguntas para plasmar requisitos de calidad:**
+** Preguntas para plasmar requisitos de calidad:**
 1. ¿A qué **característica ISO 25010** corresponde esta necesidad? (eficiencia, seguridad, usabilidad…)
 2. ¿Qué **métrica** la mide objetivamente? (tiempo de respuesta, MTBF, % de éxito…)
 3. ¿Cuál es el **valor objetivo** aceptable?
@@ -335,19 +335,19 @@ verificación → gestión de cambios).
 > **Plantilla general:** «El sistema deberá **[acción]** bajo **[condición]**, cumpliendo
 > **[valor medible]**, para satisfacer **[necesidad del stakeholder]**.»
 
-**🛠️ Herramientas:** matriz de calidad en Sheets, ISO 25010 como checklist.
-**✅ Rúbrica:** 2 · **🔗 Guía [§15](../Guia_General_IR/README.md#15-semana-11--requisitos-de-calidad-isoiec-25010).**
+** Herramientas:** matriz de calidad en Sheets, ISO 25010 como checklist.
+** Rúbrica:** 2 · ** Guía [§15](../Guia_General_IR/README.md#15-semana-11--requisitos-de-calidad-isoiec-25010).**
 
 ---
 
 # Semana 12 — Gestión de Cambios
 
-**🎯 Objetivo:** definir el **proceso de control de cambios** y analizar impacto.
+** Objetivo:** definir el **proceso de control de cambios** y analizar impacto.
 
-**📦 Artefactos:** flujo RFC → análisis de impacto → **CCB** → línea base; formato de solicitud de
+** Artefactos:** flujo RFC → análisis de impacto → **CCB** → línea base; formato de solicitud de
 cambio; ejemplo de **1 cambio** gestionado.
 
-**❓ Preguntas para gestionar cambios:**
+** Preguntas para gestionar cambios:**
 1. ¿Cómo se **solicita** un cambio? ¿Quién lo puede pedir?
 2. ¿Quién **evalúa el impacto** (alcance, costo, cronograma, riesgo)?
 3. ¿Quién **aprueba/rechaza** (comité CCB)?
@@ -355,19 +355,19 @@ cambio; ejemplo de **1 cambio** gestionado.
 5. ¿Cómo se **versiona** y se comunica el cambio al equipo?
 6. ¿Cómo se **negocian conflictos** entre stakeholders con intereses opuestos?
 
-**🛠️ Herramientas:** issues/workflow en JIRA, control de versiones.
-**✅ Rúbrica:** 4 · **🔗 Guía [§16](../Guia_General_IR/README.md#16-semana-12--gestión-de-cambios).**
+** Herramientas:** issues/workflow en JIRA, control de versiones.
+** Rúbrica:** 4 · ** Guía [§16](../Guia_General_IR/README.md#16-semana-12--gestión-de-cambios).**
 
 ---
 
 # Semana 13 — Trazabilidad
 
-**🎯 Objetivo:** construir la **matriz de trazabilidad bidireccional** requisito ↔ diseño ↔ código ↔ prueba.
+** Objetivo:** construir la **matriz de trazabilidad bidireccional** requisito ↔ diseño ↔ código ↔ prueba.
 
-**📦 Artefactos:** matriz de trazabilidad (directa e inversa) + diagrama de trazabilidad + análisis
+** Artefactos:** matriz de trazabilidad (directa e inversa) + diagrama de trazabilidad + análisis
 de **cobertura** y **sobrediseño**.
 
-**❓ Preguntas de trazabilidad:**
+** Preguntas de trazabilidad:**
 1. ¿Cada RF/RNF está vinculado a un **caso de uso**, un **diseño**, un **componente** y una **prueba**?
 2. **Directa:** para `[requisito]`, ¿dónde se implementa y cómo se prueba?
 3. **Inversa:** para `[componente/prueba]`, ¿qué requisito lo justifica?
@@ -375,23 +375,23 @@ de **cobertura** y **sobrediseño**.
 5. ¿Hay algún componente **sin requisito**? (sobrediseño)
 6. Si cambia `[requisito]`, ¿qué otros artefactos hay que actualizar?
 
-**🛠️ Herramientas:** matriz en Excel/Sheets, JIRA (links), HP ALM.
-**✅ Rúbrica:** 4, 6 · **🔗 Guía [§17](../Guia_General_IR/README.md#17-semana-13--trazabilidad-de-requisitos).**
+** Herramientas:** matriz en Excel/Sheets, JIRA (links), HP ALM.
+** Rúbrica:** 4, 6 · ** Guía [§17](../Guia_General_IR/README.md#17-semana-13--trazabilidad-de-requisitos).**
 
 ---
 
 # Semana 14 — Validación y Verificación
 
-**🎯 Objetivo:** demostrar con evidencia que los requisitos son **correctos y completos**.
+** Objetivo:** demostrar con evidencia que los requisitos son **correctos y completos**.
 
-**📦 Artefactos:**
+** Artefactos:**
 - **Walkthrough** con checklist por requisito.
 - **Prototipos/wireframes** (Figma/Balsamiq).
 - Casos de **UAT** en Gherkin (Dado/Cuando/Entonces).
 - **Análisis de escenarios** (incluye excepciones/DILO).
 - Informe de hallazgos y correcciones.
 
-**❓ Preguntas de validación:**
+** Preguntas de validación:**
 1. ¿El requisito es **claro, completo, verificable, consistente y factible**? (checklist walkthrough)
 2. ¿El **prototipo** refleja lo que el usuario esperaba? ¿Qué cambiaría?
 3. ¿Los **criterios de aceptación** son medibles y los cumple la solución?
@@ -399,12 +399,12 @@ de **cobertura** y **sobrediseño**.
 5. ¿Estamos construyendo el **producto correcto** (validación) y **correctamente** (verificación)?
 6. ¿Qué hallazgos surgieron y cómo se **corrigieron**?
 
-**🛠️ Herramientas:** Figma/Balsamiq (prototipos), Google Forms (UAT), checklist.
-**✅ Rúbrica:** 3 · **🔗 Guía [§18](../Guia_General_IR/README.md#18-semana-14--validación-y-verificación), [§19](../Guia_General_IR/README.md#19-historias-de-usuario-criterios-de-aceptación-gherkin-y-mvp).**
+** Herramientas:** Figma/Balsamiq (prototipos), Google Forms (UAT), checklist.
+** Rúbrica:** 3 · ** Guía [§18](../Guia_General_IR/README.md#18-semana-14--validación-y-verificación), [§19](../Guia_General_IR/README.md#19-historias-de-usuario-criterios-de-aceptación-gherkin-y-mvp).**
 
 ---
 
-# 🎯 Banco maestro de preguntas para plasmar requisitos
+# Banco maestro de preguntas para plasmar requisitos
 
 > Úsenlo en las entrevistas/cuestionarios cuando definan el problema. Está organizado **por tipo de
 > requisito**, de modo que **cada respuesta se convierte directamente en un requisito**. Son
@@ -458,7 +458,7 @@ de **cobertura** y **sobrediseño**.
 
 ---
 
-# 📄 Estructura final del documento entregable
+# Estructura final del documento entregable
 
 Cuando completen las 14 semanas, el **documento SRS final** (`Documento_SRS_[SISTEMA].md`) se arma
 con los artefactos producidos, en este orden:
