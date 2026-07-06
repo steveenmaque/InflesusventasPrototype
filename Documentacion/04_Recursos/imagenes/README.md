@@ -18,5 +18,4 @@ Nombrar los archivos en minúsculas y sin espacios.
 | `entidad_relacion.png` | Semana 9 — Modelo de datos | Pendiente |
 | `wireframes_*.png` | Semana 14 — Prototipos | Pendiente |
 
-> El Gantt tiene su fuente en Mermaid dentro de la Semana 1 (GitHub lo renderiza); aquí va la
-> versión exportada para la presentación.
+> Los BPMN se exportan desde los archivos fuente en [`../diagramas/`](../diagramas/).

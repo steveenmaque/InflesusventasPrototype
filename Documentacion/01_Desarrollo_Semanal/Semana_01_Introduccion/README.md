@@ -109,43 +109,11 @@ Modelo del proceso **manual** actual.
 
 ![BPMN AS-IS - Cotización manual de InfleSusVentas](../../04_Recursos/imagenes/bpmn_asis.png)
 
-Archivo BPMN 2.0 **editable** (importable en **Bizagi Modeler** / Camunda / bpmn.io):
+Archivo BPMN 2.0 **editable** en **Bizagi Modeler**:
 [`../../04_Recursos/diagramas/bpmn_asis.bpmn`](../../04_Recursos/diagramas/bpmn_asis.bpmn).
-Vista alternativa en Mermaid (GitHub la renderiza):
 
-```mermaid
-flowchart TD
-    subgraph Cliente
-        A((Inicio)) --> B[Envia solicitud por WhatsApp / Yahoo Mail / formulario web]
-        L[Recibe la cotizacion en PDF]
-        M{Responde?}
-        M2{Acepta?}
-        N((Venta cerrada))
-        X((Venta perdida))
-    end
-    subgraph Gerente
-        C[Revisa la solicitud manualmente]
-        D[Cotiza usando una plantilla]
-        E[Calcula precio e IGV a mano]
-        F[Genera el PDF]
-        G[Envia el PDF por correo o WhatsApp]
-        H[Espera respuesta]
-        S[Da seguimiento manual: reitera por WhatsApp e insiste]
-        K[Negocia: ofrece descuento max 10% o ajusta condiciones]
-    end
-    B --> C --> D --> E --> F --> G --> L
-    L --> M
-    M -- No --> H --> S --> M
-    M -- Si --> M2
-    M2 -- Si --> N
-    M2 -- No --> K
-    K -- reenvia propuesta --> L
-    K -- sin acuerdo --> X
-    S -. sin respuesta tras varios intentos .-> X
-```
-
-**Puntos de dolor sobre el flujo:** los pasos D, E, F y G son **manuales** (dolores D1, D2, D6) y no
-hay numeración, fecha ni historial automáticos (D3, D4). Además, el **seguimiento** (H, S, K) es
+**Puntos de dolor sobre el flujo:** cotizar, calcular el IGV y generar y enviar el PDF son pasos **manuales** (dolores D1, D2, D6) y no
+hay numeración, fecha ni historial automáticos (D3, D4). Además, el **seguimiento** es
 **manual, ad-hoc y sin recordatorios**: cuando el cliente no responde, la insistencia depende de la
 memoria del Gerente, por lo que **muchas cotizaciones se enfrían y se pierden ventas** (dolor D7).
 
@@ -156,55 +124,9 @@ descuento (máx 10%)**.
 
 ![BPMN TO-BE - Cotización con el sistema InfleSusVentas](../../04_Recursos/imagenes/bpmn_tobe.png)
 
-Archivo BPMN 2.0 **editable** (importable en **Bizagi Modeler** / Camunda / bpmn.io):
+Archivo BPMN 2.0 **editable** en **Bizagi Modeler**:
 [`../../04_Recursos/diagramas/bpmn_tobe.bpmn`](../../04_Recursos/diagramas/bpmn_tobe.bpmn).
 Se refinará en el modelado de la [Semana 3](../Semana_03_Analisis_y_Modelado/README.md).
-Vista alternativa en Mermaid:
-
-```mermaid
-flowchart TD
-    subgraph Cliente
-        A((Inicio)) --> B[Envia solicitud]
-        P[Recibe la cotizacion por correo]
-        Q{Responde?}
-        Q2{Acepta?}
-        R((Venta cerrada))
-        X((Venta perdida))
-    end
-    subgraph Gerente
-        L0[Inicia sesion: usuario autorizado]
-        C[Crea Nueva Cotizacion en el sistema]
-        D[Ingresa el RUC del cliente]
-        E[Agrega items: tipo + medidas]
-        E2[Aplica descuento max 10% segun cantidad]
-        H[Exporta y envia por correo desde la plataforma]
-        S[Atiende el recordatorio y da seguimiento]
-        K[Negocia: descuento max 10% o ajusta condiciones]
-    end
-    subgraph Sistema
-        F[Valida RUC y autocompleta razon social]
-        G[Calcula precio, descuento, IGV, numero y fecha]
-        J[Guarda en historial y marca estado Enviada]
-        T[Genera recordatorio y registra el seguimiento]
-    end
-    subgraph Servicios_externos[Servicios externos]
-        SR[(Servicio de RUC)]
-        SC[(Servicio de Correo)]
-    end
-    B --> L0 --> C --> D --> F
-    F <--> SR
-    F --> E --> E2 --> G --> H
-    H <--> SC
-    H --> J --> P --> Q
-    J --> T --> S
-    S -- recuerda o reenvia --> H
-    Q -- No --> T
-    Q -- Si --> Q2
-    Q2 -- Si --> R
-    Q2 -- No --> K
-    K -- reenvia propuesta --> H
-    K -- sin acuerdo --> X
-```
 
 **Mejora esperada:** el sistema automatiza la validación de RUC, el cálculo de precio/IGV, la
 numeración, la fecha, la exportación, el envío y el historial (dolores D1–D6). Sobre el **seguimiento**
@@ -364,39 +286,7 @@ priorizados en la Semana 5. Cada mes cierra con un **hito** verificable.
 
 ![Cronograma de implementación - InfleSusVentas (4 meses)](../../04_Recursos/imagenes/cronograma_gantt.png)
 
-> Imagen generada desde la fuente **Mermaid** de abajo (GitHub también la renderiza en vivo). Las
-> fechas son **referenciales** (inicio ajustable por el equipo).
-
-```mermaid
-gantt
-    title Cronograma de Implementación - InfleSusVentas (4 meses)
-    dateFormat  YYYY-MM-DD
-    axisFormat  %d-%b
-
-    section Mes 1 - Inicio y Elaboracion (RUP)
-    Elicitacion y analisis            :e1, 2026-08-03, 2w
-    Modelado UML y arquitectura       :e2, after e1, 1w
-    Especificacion SRS y linea base   :e3, after e2, 1w
-    Linea base SRS aprobada           :milestone, m0, after e3, 0d
-
-    section Mes 2 - Construccion: Iteracion 1 (MVP 1)
-    Cliente + validacion de RUC       :c1, after e3, 1w
-    Catalogo + logica de medidas      :c2, after c1, 1w
-    Precio + IGV + numeracion          :c3, after c2, 1w
-    Exportar PDF/Word + envio + historial :c4, after c3, 1w
-    MVP 1 - cotizacion estandar       :milestone, m1, after c4, 0d
-
-    section Mes 3 - Construccion: Iteracion 2 (MVP 2)
-    Cotizacion rapida                 :d1, after c4, 2w
-    Filtros, estado de envio, IGV configurable :d2, after d1, 2w
-    MVP 2 - agilidad y control        :milestone, m2, after d2, 0d
-
-    section Mes 4 - Construccion/Transicion: Iteracion 3 (MVP 3)
-    Duplicar/convertir + bitacora     :f1, after d2, 1w
-    Pruebas y validacion (UAT)        :f2, after f1, 2w
-    Despliegue y capacitacion         :f3, after f2, 1w
-    MVP 3 / Go-live                   :milestone, m3, after f3, 0d
-```
+> Fechas **referenciales**: el inicio es ajustable por el equipo.
 
 ---
 
