@@ -95,6 +95,7 @@ para un inflable con ciertas medidas, y la conversión de esa solicitud en una v
 | D4 | Información dispersa (WhatsApp, Yahoo, formulario) | No hay historial único de clientes ni de cotizaciones. |
 | D5 | Sin validación de identidad del cliente (RUC) | Datos de razón social ingresados a mano, propensos a error. |
 | D6 | Envío manual del PDF | Depende del canal y del momento; sin registro de envío. |
+| D7 | Sin **seguimiento** sistemático de las cotizaciones enviadas | Las que no reciben respuesta se enfrían; **se pierden ventas** por no insistir a tiempo. |
 
 ### 3.4 Costo de no actuar
 
@@ -112,9 +113,11 @@ notación BPMN de diseño (Bizagi / draw.io / Camunda) se exportará a
 flowchart TD
     subgraph Cliente
         A((Inicio)) --> B[Envia solicitud por WhatsApp / Yahoo Mail / formulario web]
-        L[Recibe cotizacion en PDF]
-        M{Acepta la cotizacion?}
-        N((Fin))
+        L[Recibe la cotizacion en PDF]
+        M{Responde?}
+        M2{Acepta?}
+        N((Venta cerrada))
+        X((Venta perdida))
     end
     subgraph Gerente
         C[Revisa la solicitud manualmente]
@@ -122,16 +125,25 @@ flowchart TD
         E[Calcula precio e IGV a mano]
         F[Genera el PDF]
         G[Envia el PDF por correo o WhatsApp]
-        H[Espera la confirmacion]
+        H[Espera respuesta]
+        S[Da seguimiento manual: reitera por WhatsApp e insiste]
+        K[Negocia: ofrece descuento o ajusta condiciones]
     end
     B --> C --> D --> E --> F --> G --> L
     L --> M
-    M -- Si --> H --> N
-    M -- No --> N
+    M -- No --> H --> S --> M
+    M -- Si --> M2
+    M2 -- Si --> N
+    M2 -- No --> K
+    K -- reenvia propuesta --> L
+    K -- sin acuerdo --> X
+    S -. sin respuesta tras varios intentos .-> X
 ```
 
 **Puntos de dolor sobre el flujo:** los pasos D, E, F y G son **manuales** (dolores D1, D2, D6) y no
-hay numeración, fecha ni historial automáticos (D3, D4).
+hay numeración, fecha ni historial automáticos (D3, D4). Además, el **seguimiento** (H, S, K) es
+**manual, ad-hoc y sin recordatorios**: cuando el cliente no responde, la insistencia depende de la
+memoria del Gerente, por lo que **muchas cotizaciones se enfrían y se pierden ventas** (dolor D7).
 
 ### 3.6 Flujo de negocio propuesto en BPMN (TO-BE)
 
@@ -144,20 +156,24 @@ flowchart TD
     subgraph Cliente
         A((Inicio)) --> B[Envia solicitud]
         P[Recibe la cotizacion por correo]
-        Q{Acepta la cotizacion?}
-        R((Fin))
+        Q{Responde?}
+        Q2{Acepta?}
+        R((Venta cerrada))
+        X((Venta perdida))
     end
     subgraph Gerente
         C[Crea Nueva Cotizacion en el sistema]
         D[Ingresa el RUC del cliente]
         E[Agrega items: tipo + medidas]
-        H[Exporta a PDF / Word]
-        I[Envia por correo desde la plataforma]
+        H[Exporta y envia por correo desde la plataforma]
+        S[Atiende el recordatorio y da seguimiento]
+        K[Aplica descuento o ajusta condiciones]
     end
     subgraph Sistema
         F[Valida RUC y autocompleta razon social]
-        G[Genera descripcion, calcula precio + IGV, numero y fecha]
-        J[Registra en historial y estado de envio]
+        G[Calcula precio + IGV, numero y fecha]
+        J[Guarda en historial y marca estado Enviada]
+        T[Genera recordatorio y registra el seguimiento]
     end
     subgraph Servicios_externos[Servicios externos]
         SR[(Servicio de RUC)]
@@ -165,15 +181,28 @@ flowchart TD
     end
     B --> C --> D --> F
     F <--> SR
-    F --> E --> G --> H --> I
-    I <--> SC
-    I --> J --> P --> Q
-    Q -- Si --> R
-    Q -- No --> R
+    F --> E --> G --> H
+    H <--> SC
+    H --> J --> P --> Q
+    J --> T --> S
+    S -- recuerda o reenvia --> H
+    Q -- No --> T
+    Q -- Si --> Q2
+    Q2 -- Si --> R
+    Q2 -- No --> K
+    K -- reenvia propuesta --> H
+    K -- sin acuerdo --> X
 ```
 
 **Mejora esperada:** el sistema automatiza la validación de RUC, el cálculo de precio/IGV, la
-numeración, la fecha, la exportación, el envío y el historial, eliminando los dolores D1–D6.
+numeración, la fecha, la exportación, el envío y el historial (dolores D1–D6). Sobre el **seguimiento**
+(dolor D7), el sistema **marca el estado** de cada cotización (Enviada / En seguimiento / Aceptada /
+Rechazada), **genera recordatorios** cuando no hay respuesta y **registra las interacciones y
+negociaciones** (descuentos, reenvíos), de modo que el Gerente actúe a tiempo para **cerrar la venta**.
+
+> Este seguimiento surge como una **nueva capacidad** del sistema; se formaliza como necesidad de
+> negocio **RN-08** (sección 4) y se catalogará como requisitos funcionales de **seguimiento** en la
+> [Semana 6](../Semana_06_Requisitos_Funcionales/README.md).
 
 ---
 
@@ -192,6 +221,7 @@ numeración, la fecha, la exportación, el envío y el historial, eliminando los
 | RN-05 | **Validar el RUC** del cliente y autocompletar su razón social. | D5 |
 | RN-06 | **Exportar (PDF/Word) y enviar** la cotización desde la plataforma. | D6 |
 | RN-07 | Ofrecer un flujo de **cotización rápida** para casos ágiles. | D1 |
+| RN-08 | Dar **seguimiento** a las cotizaciones (estados, recordatorios y registro de negociación) para **cerrar más ventas**. | D7 |
 
 ---
 
