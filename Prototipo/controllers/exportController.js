@@ -43,7 +43,10 @@ exports.enviar = async (req, res) => {
       return res.redirect(`/cotizaciones/${cot.numero}?enviada=error`); // correo inválido / fallo SMTP
     }
     Cotizacion.registrarEnvio(cot.numero, correo);                      // estado 'Enviada'
-    res.redirect(`/cotizaciones/${cot.numero}?enviada=${r.simulado ? 'sim' : 'ok'}`);
+    // modo: real → ok · test (Ethereal) → test + URL de vista previa · simulado → sim
+    const estado = r.modo === 'real' ? 'ok' : (r.modo === 'test' ? 'test' : 'sim');
+    if (r.preview) req.session.previewCorreo = r.preview;
+    res.redirect(`/cotizaciones/${cot.numero}?enviada=${estado}`);
   } catch (e) {
     console.error('[enviar] ', e.message);
     res.redirect(`/cotizaciones/${cot.numero}?enviada=error`);

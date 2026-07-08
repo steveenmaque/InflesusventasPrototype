@@ -7,19 +7,21 @@
       <% if (clientes.length === 0) { %>
         <p class="muted">Aún no hay clientes. Se registran al crear cotizaciones.</p>
       <% } else { %>
-      <table>
-        <thead><tr><th>RUC</th><th>Razón social</th><th>Correo</th><th>Teléfono</th></tr></thead>
-        <tbody>
-          <% clientes.forEach(c => { %>
-          <tr>
-            <td><%= c.ruc || '—' %></td>
-            <td><%= c.razon_social %></td>
-            <td><%= c.correo || '—' %></td>
-            <td><%= c.telefono || '—' %></td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <div class="tabla">
+        <table>
+          <thead><tr><th>RUC</th><th>Razón social</th><th>Correo</th><th>Teléfono</th></tr></thead>
+          <tbody>
+            <% clientes.forEach(c => { %>
+            <tr>
+              <td><%= c.ruc || '—' %></td>
+              <td><%= c.razon_social %></td>
+              <td><%= c.correo || '—' %></td>
+              <td><%= c.telefono || '—' %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
       <% } %>
     </div>
   </div>

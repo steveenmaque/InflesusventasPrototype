@@ -119,5 +119,7 @@ exports.crear = (req, res) => {
 exports.detalle = (req, res) => {
   const cot = Cotizacion.porNumero(parseInt(req.params.numero, 10));
   if (!cot) return res.status(404).render('error', { titulo: 'No encontrada', mensaje: 'La cotización no existe.', usuario: req.session.usuario });
-  res.render('cotizacion_detalle', { usuario: req.session.usuario, cot, creada: req.query.creada === '1', enviada: req.query.enviada });
+  const preview = req.session.previewCorreo || null;   // URL de vista previa (modo prueba), de un solo uso
+  delete req.session.previewCorreo;
+  res.render('cotizacion_detalle', { usuario: req.session.usuario, cot, creada: req.query.creada === '1', enviada: req.query.enviada, preview });
 };

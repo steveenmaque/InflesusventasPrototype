@@ -2,18 +2,16 @@
 /**
  * Adaptador del servicio de correo — CU-07 (RF-28).
  *
- * Envío REAL por SMTP con nodemailer cuando hay credenciales configuradas
- * (variables SMTP_* del entorno / .env). Adjunta el PDF de la cotización.
- * Si no hay credenciales, cae a un modo "simulado" que registra el envío en
- * consola, para que el prototipo siga funcionando en demos (RNF-06).
+ * Envía la cotización con el PDF adjunto en tres modos, en este orden:
+ *   1) REAL  — si hay credenciales SMTP_* (entrega a buzones reales).
+ *   2) TEST  — si no hay SMTP: crea una cuenta de prueba Ethereal al vuelo,
+ *              hace un envío SMTP real y devuelve una URL de vista previa del
+ *              correo (con su adjunto). No entrega a buzones reales: es un
+ *              sandbox seguro para demostrar/verificar el envío sin credenciales.
+ *   3) SIMULADO — si no hay internet para Ethereal: registra el envío en consola.
  *
  * Variables de entorno (ver .env.example):
- *   SMTP_HOST    host SMTP (p. ej. smtp.gmail.com)
- *   SMTP_PORT    puerto (465 con SSL, 587 con STARTTLS)
- *   SMTP_SECURE  'true' para SSL directo (puerto 465)
- *   SMTP_USER    usuario/cuenta
- *   SMTP_PASS    contraseña o "App Password"
- *   SMTP_FROM    remitente mostrado (p. ej. "InfleSusVentas <ventas@...>")
+ *   SMTP_HOST · SMTP_PORT · SMTP_SECURE · SMTP_USER · SMTP_PASS · SMTP_FROM
  */
 const nodemailer = require('nodemailer');
 const { EMPRESA } = require('./plantilla');
@@ -22,24 +20,43 @@ function correoValido(correo) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(correo || '').trim());
 }
 
-/** ¿Hay credenciales SMTP suficientes para enviar de verdad? */
+/** ¿Hay credenciales SMTP suficientes para entrega real? */
 function smtpConfigurado() {
   return !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
 }
 
 let _transporte = null;
-function transporte() {
-  if (!_transporte) {
+let _modo = null; // 'real' | 'test'
+
+/** Prepara (y cachea) el transporte: SMTP real o cuenta de prueba Ethereal. */
+async function obtenerTransporte() {
+  if (_transporte) return { transporte: _transporte, modo: _modo };
+
+  if (smtpConfigurado()) {
     _transporte = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT, 10) || 587,
       secure: String(process.env.SMTP_SECURE).toLowerCase() === 'true',
       auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-      connectionTimeout: 10000,   // no colgar la petición si el SMTP no responde
+      connectionTimeout: 10000,
       greetingTimeout: 10000,
     });
+    _modo = 'real';
+  } else {
+    // Cuenta de prueba automática (Ethereal): envío SMTP real capturado con vista previa.
+    const cuenta = await nodemailer.createTestAccount();
+    _transporte = nodemailer.createTransport({
+      host: cuenta.smtp.host,
+      port: cuenta.smtp.port,
+      secure: cuenta.smtp.secure,
+      auth: { user: cuenta.user, pass: cuenta.pass },
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+    });
+    _modo = 'test';
+    console.log(`[correo] Cuenta de prueba Ethereal lista: ${cuenta.user} (los envíos se ven por su URL de vista previa).`);
   }
-  return _transporte;
+  return { transporte: _transporte, modo: _modo };
 }
 
 /** Cuerpo HTML de marca para el correo de la cotización. */
@@ -71,7 +88,7 @@ function cuerpoHtml(cot) {
  * @param {string} correo    destinatario
  * @param {object} cot       cotización (para asunto y cuerpo)
  * @param {Buffer} pdfBuffer adjunto PDF (opcional)
- * @returns {Promise<{ ok:boolean, error?:string, simulado?:boolean }>}
+ * @returns {Promise<{ ok:boolean, error?:string, modo?:string, preview?:string }>}
  */
 async function enviarCotizacion(correo, cot, pdfBuffer) {
   if (!correoValido(correo)) {
@@ -79,14 +96,18 @@ async function enviarCotizacion(correo, cot, pdfBuffer) {
   }
   const nombreAdjunto = `Cotizacion_${cot.numero}.pdf`;
 
-  if (!smtpConfigurado()) {
-    console.log(`[correo:SIMULADO] Cotización #${cot.numero} → ${correo} (adjunto: ${nombreAdjunto}). Configure SMTP_* en .env para envío real.`);
-    return { ok: true, simulado: true };
+  let transporte, modo;
+  try {
+    ({ transporte, modo } = await obtenerTransporte());
+  } catch (e) {
+    // Sin transporte (p. ej. sin internet para crear la cuenta de prueba): modo simulado.
+    console.log(`[correo:SIMULADO] Cotización #${cot.numero} → ${correo} (adjunto: ${nombreAdjunto}). ${e.message}`);
+    return { ok: true, modo: 'simulado' };
   }
 
   try {
-    await transporte().sendMail({
-      from: process.env.SMTP_FROM || `${EMPRESA.nombre} <${process.env.SMTP_USER}>`,
+    const info = await transporte.sendMail({
+      from: process.env.SMTP_FROM || `${EMPRESA.nombre} <${process.env.SMTP_USER || 'ventas@inflesusventas.com'}>`,
       to: correo,
       subject: `${EMPRESA.asunto} — Cotización N° ${cot.numero}`,
       html: cuerpoHtml(cot),
@@ -94,8 +115,13 @@ async function enviarCotizacion(correo, cot, pdfBuffer) {
         ? [{ filename: nombreAdjunto, content: pdfBuffer, contentType: 'application/pdf' }]
         : [],
     });
-    console.log(`[correo] Cotización #${cot.numero} enviada a ${correo}.`);
-    return { ok: true };
+    const preview = modo === 'test' ? nodemailer.getTestMessageUrl(info) : null;
+    if (modo === 'test') {
+      console.log(`[correo:TEST] Cotización #${cot.numero} → ${correo} · vista previa: ${preview}`);
+    } else {
+      console.log(`[correo] Cotización #${cot.numero} enviada a ${correo}.`);
+    }
+    return { ok: true, modo, preview };
   } catch (e) {
     console.error(`[correo] Error al enviar #${cot.numero} a ${correo}:`, e.message);
     return { ok: false, error: 'No se pudo enviar el correo: ' + e.message };

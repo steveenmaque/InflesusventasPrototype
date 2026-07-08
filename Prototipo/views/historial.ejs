@@ -14,21 +14,23 @@
       <% if (cotizaciones.length === 0) { %>
         <p class="muted">Sin resultados.</p>
       <% } else { %>
-      <table>
-        <thead><tr><th>N°</th><th>Cliente</th><th>Fecha</th><th>Total</th><th>Estado</th><th></th></tr></thead>
-        <tbody>
-          <% cotizaciones.forEach(c => { %>
-          <tr>
-            <td><b><%= c.numero %></b></td>
-            <td><%= c.razon_social || '—' %></td>
-            <td><%= c.fecha %></td>
-            <td>S/ <%= c.total.toFixed(2) %></td>
-            <td><span class="badge <%= c.estado.replace(' ','') %>"><%= c.estado %></span></td>
-            <td><a class="btn ghost sm" href="/cotizaciones/<%= c.numero %>">Ver</a></td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <div class="tabla">
+        <table>
+          <thead><tr><th class="center">N°</th><th>Cliente</th><th>Fecha</th><th class="num">Total</th><th class="center">Estado</th><th class="center">Acción</th></tr></thead>
+          <tbody>
+            <% cotizaciones.forEach(c => { %>
+            <tr>
+              <td class="center"><b><%= c.numero %></b></td>
+              <td><%= c.razon_social || '—' %></td>
+              <td><%= c.fecha %></td>
+              <td class="num">S/ <%= c.total.toFixed(2) %></td>
+              <td class="center"><span class="badge <%= c.estado.replace(' ','') %>"><%= c.estado %></span></td>
+              <td class="center"><a class="btn ghost sm" href="/cotizaciones/<%= c.numero %>">Ver</a></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
       <% } %>
     </div>
   </div>

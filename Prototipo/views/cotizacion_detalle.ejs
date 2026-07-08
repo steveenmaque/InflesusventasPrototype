@@ -7,7 +7,8 @@
   <div class="main">
     <% if (creada) { %><div class="alert ok">✓ Cotización creada con número único <b><%= cot.numero %></b> y fecha <%= cot.fecha %>.</div><% } %>
     <% if (enviada === 'ok') { %><div class="alert ok">✓ Cotización enviada al cliente por correo (PDF adjunto); estado actualizado a “Enviada”.</div><% } %>
-    <% if (enviada === 'sim') { %><div class="alert info">✓ Cotización marcada como “Enviada” en <b>modo simulado</b>. Configure las variables <code>SMTP_*</code> en <code>.env</code> para el envío real con adjunto.</div><% } %>
+    <% if (enviada === 'test') { %><div class="alert info">✓ Cotización enviada en <b>modo prueba</b> (cuenta Ethereal) con el PDF adjunto; estado actualizado a “Enviada”.<% if (preview) { %> <a href="<%= preview %>" target="_blank" rel="noopener"><b>Ver el correo enviado ↗</b></a><% } %><br><span class="muted">Para entregar a buzones reales, configure <code>SMTP_*</code> en <code>.env</code>.</span></div><% } %>
+    <% if (enviada === 'sim') { %><div class="alert info">✓ Cotización marcada como “Enviada” en <b>modo simulado</b> (sin conexión para la cuenta de prueba). Configure <code>SMTP_*</code> en <code>.env</code> para el envío real.</div><% } %>
     <% if (enviada === 'error') { %><div class="alert err">No se pudo enviar la cotización. Verifique el correo del cliente o la configuración de envío (SMTP).</div><% } %>
 
     <div class="card">
@@ -26,21 +27,23 @@
 
     <div class="card">
       <h2>Ítems</h2>
-      <table>
-        <thead><tr><th>Categoría</th><th>Descripción</th><th>Rango</th><th>Cant.</th><th>P. Unit.</th><th>Importe</th></tr></thead>
-        <tbody>
-          <% cot.items.forEach(it => { %>
-          <tr>
-            <td><%= it.categoria %></td>
-            <td><%= it.descripcion || '—' %></td>
-            <td><%= it.rango %></td>
-            <td><%= it.cantidad %></td>
-            <td>S/ <%= it.precio_unit.toFixed(2) %></td>
-            <td>S/ <%= it.precio_base.toFixed(2) %></td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <div class="tabla">
+        <table>
+          <thead><tr><th>Categoría</th><th>Descripción</th><th class="center">Rango</th><th class="center">Cant.</th><th class="num">P. Unit.</th><th class="num">Importe</th></tr></thead>
+          <tbody>
+            <% cot.items.forEach(it => { %>
+            <tr>
+              <td><%= it.categoria %></td>
+              <td><%= it.descripcion || '—' %></td>
+              <td class="center"><%= it.rango %></td>
+              <td class="center"><%= it.cantidad %></td>
+              <td class="num">S/ <%= it.precio_unit.toFixed(2) %></td>
+              <td class="num">S/ <%= it.precio_base.toFixed(2) %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
       <div class="desglose" style="margin-top:18px">
         <div class="k">Precio base</div><div class="v">S/ <%= cot.base.toFixed(2) %></div>
         <div class="k">Descuento (<%= cot.descuento_pct %>%)</div><div class="v">- S/ <%= cot.descuento_monto.toFixed(2) %></div>
