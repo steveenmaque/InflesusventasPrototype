@@ -10,26 +10,82 @@ amarillo dorado `#FFCC00` / `#FFDB49`, carbón `#2E343C` / `#3E3E3E` y naranja d
 
 ---
 
-## Cómo ejecutar
+## Requisitos previos
 
-Requiere **Node.js ≥ 22** (usa el módulo integrado `node:sqlite`, sin dependencias nativas).
+- **Node.js ≥ 22** (versión LTS) — [Descargar aquí](https://nodejs.org/)
+- **npm** (incluido con Node.js)
+
+> El proyecto usa el módulo integrado `node:sqlite` de Node.js ≥ 22, por lo que **no requiere
+> instalar SQLite ni ninguna dependencia nativa**.
+
+---
+
+## 🚀 Instalación rápida (un solo clic)
+
+### Windows
+
+Haz doble clic en el archivo **`instalar.bat`** dentro de la carpeta `Prototipo/`.
+
+O desde la terminal:
+```cmd
+cd Prototipo
+instalar.bat
+```
+
+### Linux / macOS
 
 ```bash
 cd Prototipo
-npm install
-npm start
-# Abrir http://localhost:3000
+chmod +x instalar.sh
+./instalar.sh
 ```
 
-**Usuarios de demostración**
+El instalador automáticamente:
+1. ✅ Verifica que tengas Node.js ≥ 22 instalado
+2. ✅ Instala todas las dependencias (`npm install`)
+3. ✅ Crea el archivo `.env` desde `.env.example` (si no existe)
+4. ✅ Inicia el servidor en `http://localhost:3000`
+
+---
+
+## 📋 Instalación manual (paso a paso)
+
+Si prefieres hacerlo manualmente:
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/steveenmaque/InflesusventasPrototype.git
+cd InflesusventasPrototype/Prototipo
+
+# 2. Instalar dependencias
+npm install
+
+# 3. (Opcional) Configurar variables de entorno
+#    Copiar el ejemplo y editar con tus datos de SMTP/RUC
+cp .env.example .env
+
+# 4. Iniciar el servidor
+npm start
+
+# 5. Abrir en el navegador
+#    http://localhost:3000
+```
+
+> Para desarrollo con reinicio automático al guardar cambios: `npm run dev`
+
+---
+
+## 👤 Usuarios de demostración
 
 | Usuario      | Contraseña      | Rol        | Acceso a Tarifas/Parámetros (CU-11) |
 |--------------|-----------------|------------|-------------------------------------|
-| `gerente`    | `gerente123`    | gerente    | Sí                                  |
-| `trabajador` | `trabajador123` | trabajador | No                                  |
+| `gerente`    | `gerente123`    | gerente    | ✅ Sí                                |
+| `trabajador` | `trabajador123` | trabajador | ❌ No                                |
 
 > La base de datos SQLite se crea y puebla automáticamente en `data/inflesusventas.db`
 > en el primer arranque (esquema + tarifas semilla + usuarios demo).
+> Si deseas reiniciar los datos, simplemente elimina el archivo `data/inflesusventas.db`
+> y reinicia el servidor.
 
 ---
 

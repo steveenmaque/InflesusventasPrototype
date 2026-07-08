@@ -9,6 +9,51 @@ numeración automática, exportación a **PDF/Word**, envío por correo y un flu
 
 ---
 
+## 🚀 Instalación rápida
+
+### Requisitos
+- **[Node.js ≥ 22](https://nodejs.org/)** (versión LTS)
+- **Git** para clonar el repositorio
+
+### Windows (un solo clic)
+
+```cmd
+git clone https://github.com/steveenmaque/InflesusventasPrototype.git
+cd InflesusventasPrototype\Prototipo
+instalar.bat
+```
+
+O simplemente **haz doble clic** en `Prototipo\instalar.bat` después de clonar.
+
+### Linux / macOS
+
+```bash
+git clone https://github.com/steveenmaque/InflesusventasPrototype.git
+cd InflesusventasPrototype/Prototipo
+chmod +x instalar.sh
+./instalar.sh
+```
+
+### Manual (cualquier OS)
+
+```bash
+git clone https://github.com/steveenmaque/InflesusventasPrototype.git
+cd InflesusventasPrototype/Prototipo
+npm install
+npm start
+# Abrir http://localhost:3000
+```
+
+**Usuarios de demostración:**
+| Usuario      | Contraseña      | Rol        |
+|--------------|-----------------|------------|
+| `gerente`    | `gerente123`    | gerente    |
+| `trabajador` | `trabajador123` | trabajador |
+
+> 📌 No se necesita instalar SQLite ni bases de datos externas. Todo se genera automáticamente.
+
+---
+
 ## Problema
 La gestión de cotizaciones es **100 % manual** (WhatsApp / Yahoo Mail / formulario web → plantilla →
 PDF), lo que genera lentitud, errores de cálculo de precio/IGV, falta de numeración y **sin historial
@@ -26,16 +71,28 @@ validación), bajo los estándares **IEEE 830 / ISO-IEC-IEEE 29148**.
 ```
 InflesusventasPrototype/
 ├── README.md
+├── Prototipo/                → Código fuente del prototipo funcional (MVC)
+│   ├── instalar.bat          → Instalador automático para Windows
+│   ├── instalar.sh           → Instalador automático para Linux/macOS
+│   ├── server.js             → Punto de entrada del servidor
+│   ├── package.json          → Dependencias y scripts
+│   ├── .env.example          → Variables de entorno (SMTP, RUC)
+│   ├── config/               → Inicialización de BD
+│   ├── controllers/          → Controladores MVC
+│   ├── models/               → Modelos de datos
+│   ├── services/             → Lógica de negocio
+│   ├── views/                → Plantillas EJS
+│   ├── public/               → CSS y JS del cliente
+│   └── routes/               → Definición de rutas
 └── Documentacion/
-    ├── README.md                 → índice maestro de la documentación
-    ├── 00_Planificacion/         → plan de trabajo, roles, metodología, guía semanal
-    ├── 01_Desarrollo_Semanal/    → un bloque por semana (S1–S7, S9–S14)
-    ├── 02_Entregable_Final/      → Documento_SRS (ensamblaje final)
-    ├── 03_Anexos/                → glosario y anexos
-    └── 04_Recursos/imagenes/     → diagramas y capturas
+    ├── 00_Planificacion/     → Plan de trabajo, roles, metodología
+    ├── 01_Desarrollo_Semanal/→ Bloques semanales (S1–S7, S9–S14)
+    ├── 02_Entregable_Final/  → Documento SRS final
+    ├── 03_Anexos/            → Glosario y anexos
+    └── 04_Recursos/imagenes/ → Diagramas y capturas
 ```
 
- **Punto de entrada:** [`Documentacion/README.md`](Documentacion/README.md)
+**Punto de entrada de la documentación:** [`Documentacion/README.md`](Documentacion/README.md)
 
 ---
 
@@ -49,3 +106,4 @@ QA/Trazabilidad). Ver [Plan de Trabajo](Documentacion/00_Planificacion/Plan_de_T
 
 ## Estándares y método
 IEEE 830 / ISO-29148 · Priorización **MoSCoW** · ISO/IEC 25010 (calidad) · RUP + Scrum ligero.
+
