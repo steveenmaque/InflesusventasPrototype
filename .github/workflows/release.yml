@@ -1,0 +1,82 @@
+name: 📦 Crear Instalador Descargable
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # También se puede ejecutar manualmente desde GitHub
+
+permissions:
+  contents: write      # Necesario para crear Releases
+
+jobs:
+  empaquetar:
+    name: Empaquetar y publicar instalador
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: 📦 Crear ZIP del instalador
+        run: |
+          # Crear carpeta temporal con el contenido limpio
+          mkdir -p _release/InfleSusVentas
+
+          # Copiar todo el Prototipo excepto node_modules y bases de datos
+          rsync -av --progress Prototipo/ _release/InfleSusVentas/ \
+            --exclude 'node_modules' \
+            --exclude '*.db' \
+            --exclude '*.db-journal' \
+            --exclude 'npm-debug.log*'
+
+          # Copiar el README raíz como referencia
+          cp README.md _release/InfleSusVentas/LEEME_PROYECTO.md
+
+          # Crear el ZIP
+          cd _release
+          zip -r ../InfleSusVentas-Instalador.zip InfleSusVentas/
+          cd ..
+
+          # Mostrar contenido del ZIP
+          echo "📦 Contenido del ZIP:"
+          unzip -l InfleSusVentas-Instalador.zip | head -40
+          echo ""
+          echo "📏 Tamaño: $(du -h InfleSusVentas-Instalador.zip | cut -f1)"
+
+      - name: 🏷️ Obtener fecha para el tag
+        id: fecha
+        run: echo "tag=v$(date +'%Y.%m.%d-%H%M')" >> $GITHUB_OUTPUT
+
+      - name: 🚀 Publicar Release en GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.fecha.outputs.tag }}
+          name: "🚀 InfleSusVentas — Instalador (${{ steps.fecha.outputs.tag }})"
+          body: |
+            ## 📥 Descargar e instalar
+
+            ### Pasos:
+            1. **Descargar** el archivo `InfleSusVentas-Instalador.zip` de abajo
+            2. **Extraer** el ZIP en cualquier carpeta
+            3. **Doble clic** en `instalar.bat` (Windows) o ejecutar `./instalar.sh` (Linux/macOS)
+            4. **Abrir** http://localhost:3000 en el navegador
+
+            ### Requisitos:
+            - **Node.js 22 o superior** — [Descargar aquí](https://nodejs.org/)
+            - El instalador verifica automáticamente la versión
+
+            ### Usuarios de demostración:
+            | Usuario | Contraseña | Rol |
+            |---------|-----------|-----|
+            | `gerente` | `gerente123` | Acceso completo |
+            | `trabajador` | `trabajador123` | Acceso limitado |
+
+            ### ¿Qué incluye?
+            - ✅ Sistema de cotizaciones completo
+            - ✅ Correo real con Gmail (configurado)
+            - ✅ Validación de RUC con SUNAT (en vivo)
+            - ✅ Exportación a PDF y Word
+            - ✅ Base de datos SQLite (se crea automáticamente)
+          files: InfleSusVentas-Instalador.zip
+          draft: false
+          prerelease: false

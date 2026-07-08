@@ -1,5 +1,7 @@
 # InfleSusVentas — Sistema de Gestión de Cotizaciones
 
+[![Descargar Instalador](https://img.shields.io/github/v/release/steveenmaque/InflesusventasPrototype?label=📥%20Descargar%20Instalador&style=for-the-badge&color=FFCC00)](https://github.com/steveenmaque/InflesusventasPrototype/releases/latest)
+
 Proyecto del curso **Ingeniería de Requisitos** (UNMSM · E.P. Ingeniería de Software · Ciclo 5, 2026-I)
 para la empresa **InfleSusVentas**, dedicada a inflables publicitarios.
 
@@ -7,7 +9,12 @@ El objetivo es especificar (y prototipar) un **sistema web de gestión de cotiza
 el proceso manual actual, incorporando cálculo automático de precios e **IGV**, validación de **RUC**,
 numeración automática, exportación a **PDF/Word**, envío por correo y un flujo de **cotización rápida**.
 
+> ### 📥 [Descargar el instalador (ZIP)](https://github.com/steveenmaque/InflesusventasPrototype/releases/latest)
+> Descarga el ZIP, extrae, haz doble clic en `instalar.bat` y listo.
+> Solo necesitas **[Node.js ≥ 22](https://nodejs.org/)**.
+
 ---
+
 
 ## 🚀 Instalación rápida
 
