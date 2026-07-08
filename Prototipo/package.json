@@ -5,8 +5,8 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "start": "node --experimental-sqlite server.js",
-    "dev": "node --experimental-sqlite --watch server.js"
+    "start": "node --experimental-sqlite --env-file-if-exists=.env server.js",
+    "dev": "node --experimental-sqlite --env-file-if-exists=.env --watch server.js"
   },
   "engines": {
     "node": ">=22"
@@ -15,6 +15,7 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
+    "nodemailer": "^9.0.3",
     "pdfkit": "^0.15.1"
   },
   "author": "Grupo 6 — E.P. Ingeniería de Software, UNMSM (2026)",

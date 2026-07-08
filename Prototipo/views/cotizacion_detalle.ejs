@@ -6,8 +6,9 @@
   </div>
   <div class="main">
     <% if (creada) { %><div class="alert ok">✓ Cotización creada con número único <b><%= cot.numero %></b> y fecha <%= cot.fecha %>.</div><% } %>
-    <% if (enviada === 'ok') { %><div class="alert ok">✓ Cotización enviada al cliente; estado actualizado a “Enviada”.</div><% } %>
-    <% if (enviada === 'error') { %><div class="alert err">No se pudo enviar: el correo tiene un formato inválido.</div><% } %>
+    <% if (enviada === 'ok') { %><div class="alert ok">✓ Cotización enviada al cliente por correo (PDF adjunto); estado actualizado a “Enviada”.</div><% } %>
+    <% if (enviada === 'sim') { %><div class="alert info">✓ Cotización marcada como “Enviada” en <b>modo simulado</b>. Configure las variables <code>SMTP_*</code> en <code>.env</code> para el envío real con adjunto.</div><% } %>
+    <% if (enviada === 'error') { %><div class="alert err">No se pudo enviar la cotización. Verifique el correo del cliente o la configuración de envío (SMTP).</div><% } %>
 
     <div class="card">
       <div class="fila">
@@ -59,7 +60,7 @@
         <label for="correo">Enviar por correo al cliente</label>
         <div style="display:flex;gap:8px;max-width:480px">
           <input type="email" id="correo" name="correo" value="<%= cot.correo_envio || cot.cliente_correo || '' %>" placeholder="cliente@correo.com" required>
-          <button class="btn naranja" type="submit" style="white-space:nowrap">Enviar</button>
+          <button class="btn acento" type="submit" style="white-space:nowrap">Enviar</button>
         </div>
       </form>
     </div>

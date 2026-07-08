@@ -32,14 +32,20 @@ exports.word = (req, res) => {
   res.send(generarWord(cot));
 };
 
-/** POST /cotizaciones/:numero/enviar — CU-07 (RF-28). */
-exports.enviar = (req, res) => {
+/** POST /cotizaciones/:numero/enviar — CU-07 (RF-28): envía el PDF por correo. */
+exports.enviar = async (req, res) => {
   const cot = cargar(req, res); if (!cot) return;
   const correo = (req.body.correo || '').trim();
-  const r = enviarCotizacion(correo, cot.numero, `Cotizacion_${cot.numero}.pdf`);
-  if (!r.ok) {
-    return res.redirect(`/cotizaciones/${cot.numero}?enviada=error`);   // correo inválido / fallo
+  try {
+    const pdf = await generarPDF(cot);                                  // adjunto real
+    const r = await enviarCotizacion(correo, cot, pdf);
+    if (!r.ok) {
+      return res.redirect(`/cotizaciones/${cot.numero}?enviada=error`); // correo inválido / fallo SMTP
+    }
+    Cotizacion.registrarEnvio(cot.numero, correo);                      // estado 'Enviada'
+    res.redirect(`/cotizaciones/${cot.numero}?enviada=${r.simulado ? 'sim' : 'ok'}`);
+  } catch (e) {
+    console.error('[enviar] ', e.message);
+    res.redirect(`/cotizaciones/${cot.numero}?enviada=error`);
   }
-  Cotizacion.registrarEnvio(cot.numero, correo);                        // estado 'Enviada'
-  res.redirect(`/cotizaciones/${cot.numero}?enviada=ok`);
 };

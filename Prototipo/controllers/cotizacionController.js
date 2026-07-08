@@ -24,8 +24,8 @@ exports.mostrarFormulario = (req, res) => {
 };
 
 /** POST /api/ruc — CU-02: valida el RUC y autocompleta la razón social (AJAX). */
-exports.apiValidarRuc = (req, res) => {
-  const r = validarRuc(req.body.ruc);
+exports.apiValidarRuc = async (req, res) => {
+  const r = await validarRuc(req.body.ruc);
   if (!r.formato) return res.json({ ok: false, motivo: 'formato', mensaje: 'RUC con formato incorrecto (11 dígitos, inicia en 10/15/17/20).' });
   if (!r.disponible) return res.json({ ok: false, motivo: 'servicio', mensaje: 'Servicio de RUC no disponible: ingrese la razón social manualmente (RNF-06).' });
   if (!r.valido) return res.json({ ok: false, motivo: 'no_encontrado', mensaje: 'RUC válido pero sin coincidencia: ingrese la razón social manualmente.' });
