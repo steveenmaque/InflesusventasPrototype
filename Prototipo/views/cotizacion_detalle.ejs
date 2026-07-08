@@ -1,0 +1,64 @@
+<%- include('partials/head', { titulo: 'Cotización ' + cot.numero }) %>
+<%- include('partials/sidebar') %>
+  <div class="topbar">
+    <h1>Cotización N° <%= cot.numero %></h1>
+    <span class="badge <%= cot.estado.replace(' ','') %>"><%= cot.estado %></span>
+  </div>
+  <div class="main">
+    <% if (creada) { %><div class="alert ok">✓ Cotización creada con número único <b><%= cot.numero %></b> y fecha <%= cot.fecha %>.</div><% } %>
+    <% if (enviada === 'ok') { %><div class="alert ok">✓ Cotización enviada al cliente; estado actualizado a “Enviada”.</div><% } %>
+    <% if (enviada === 'error') { %><div class="alert err">No se pudo enviar: el correo tiene un formato inválido.</div><% } %>
+
+    <div class="card">
+      <div class="fila">
+        <div><label>Cliente</label><div><%= cot.razon_social || '—' %></div></div>
+        <div><label>RUC</label><div><%= cot.ruc || '—' %></div></div>
+        <div><label>Fecha</label><div><%= cot.fecha %></div></div>
+        <div><label>Emitida por</label><div><%= cot.usuario_nombre || '—' %></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Ítems</h2>
+      <table>
+        <thead><tr><th>Categoría</th><th>Descripción</th><th>Rango</th><th>Cant.</th><th>P. Unit.</th><th>Importe</th></tr></thead>
+        <tbody>
+          <% cot.items.forEach(it => { %>
+          <tr>
+            <td><%= it.categoria %></td>
+            <td><%= it.descripcion || '—' %></td>
+            <td><%= it.rango %></td>
+            <td><%= it.cantidad %></td>
+            <td>S/ <%= it.precio_unit.toFixed(2) %></td>
+            <td>S/ <%= it.precio_base.toFixed(2) %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <div class="desglose" style="margin-top:18px">
+        <div class="k">Precio base</div><div class="v">S/ <%= cot.base.toFixed(2) %></div>
+        <div class="k">Descuento (<%= cot.descuento_pct %>%)</div><div class="v">- S/ <%= cot.descuento_monto.toFixed(2) %></div>
+        <div class="k">Subtotal</div><div class="v">S/ <%= cot.subtotal.toFixed(2) %></div>
+        <div class="k">IGV (<%= cot.igv_pct %>%)</div><div class="v">S/ <%= cot.igv.toFixed(2) %></div>
+        <div class="k total">TOTAL</div><div class="v total">S/ <%= cot.total.toFixed(2) %></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Exportar y enviar</h2>
+      <div class="acciones" style="margin-bottom:16px">
+        <a class="btn" href="/cotizaciones/<%= cot.numero %>/pdf">⬇ Descargar PDF</a>
+        <a class="btn ghost" href="/cotizaciones/<%= cot.numero %>/word">⬇ Descargar Word</a>
+      </div>
+      <form action="/cotizaciones/<%= cot.numero %>/enviar" method="post">
+        <label for="correo">Enviar por correo al cliente</label>
+        <div style="display:flex;gap:8px;max-width:480px">
+          <input type="email" id="correo" name="correo" value="<%= cot.correo_envio || cot.cliente_correo || '' %>" placeholder="cliente@correo.com" required>
+          <button class="btn naranja" type="submit" style="white-space:nowrap">Enviar</button>
+        </div>
+      </form>
+    </div>
+
+    <a class="btn ghost" href="/historial">← Volver al historial</a>
+  </div>
+<%- include('partials/foot') %>

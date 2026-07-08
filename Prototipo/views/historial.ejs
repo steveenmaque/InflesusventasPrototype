@@ -1,0 +1,35 @@
+<%- include('partials/head', { titulo: 'Historial' }) %>
+<%- include('partials/sidebar') %>
+  <div class="topbar">
+    <h1>Historial de cotizaciones</h1>
+    <a class="btn" href="/cotizaciones/nueva">＋ Nueva Cotización</a>
+  </div>
+  <div class="main">
+    <div class="card">
+      <form method="get" action="/historial" style="display:flex;gap:8px;max-width:520px;margin-bottom:16px">
+        <input type="text" name="q" value="<%= filtro %>" placeholder="Buscar por número, cliente o fecha…">
+        <button class="btn oscuro" type="submit">Buscar</button>
+        <% if (filtro) { %><a class="btn ghost" href="/historial">Limpiar</a><% } %>
+      </form>
+      <% if (cotizaciones.length === 0) { %>
+        <p class="muted">Sin resultados.</p>
+      <% } else { %>
+      <table>
+        <thead><tr><th>N°</th><th>Cliente</th><th>Fecha</th><th>Total</th><th>Estado</th><th></th></tr></thead>
+        <tbody>
+          <% cotizaciones.forEach(c => { %>
+          <tr>
+            <td><b><%= c.numero %></b></td>
+            <td><%= c.razon_social || '—' %></td>
+            <td><%= c.fecha %></td>
+            <td>S/ <%= c.total.toFixed(2) %></td>
+            <td><span class="badge <%= c.estado.replace(' ','') %>"><%= c.estado %></span></td>
+            <td><a class="btn ghost sm" href="/cotizaciones/<%= c.numero %>">Ver</a></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+  </div>
+<%- include('partials/foot') %>

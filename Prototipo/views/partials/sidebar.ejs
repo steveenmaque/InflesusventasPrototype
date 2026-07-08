@@ -1,0 +1,25 @@
+<div class="app">
+  <aside class="sidebar">
+    <div class="marca">
+      <b>InfleSusVentas</b>
+      <span>Gestión de Cotizaciones</span>
+    </div>
+    <nav>
+      <% const r = typeof rutaActual !== 'undefined' ? rutaActual : ''; %>
+      <a href="/" class="<%= r === '/' ? 'activo' : '' %>"><span class="ic">▚</span><span>Inicio</span></a>
+      <a href="/cotizaciones/nueva" class="<%= r.startsWith('/cotizaciones/nueva') ? 'activo' : '' %>"><span class="ic">＋</span><span>Nueva Cotización</span></a>
+      <a href="/historial" class="<%= r === '/historial' ? 'activo' : '' %>"><span class="ic">▤</span><span>Historial</span></a>
+      <a href="/clientes" class="<%= r === '/clientes' ? 'activo' : '' %>"><span class="ic">☺</span><span>Clientes</span></a>
+      <% if (usuario && usuario.rol === 'gerente') { %>
+      <a href="/configuracion" class="<%= r === '/configuracion' ? 'activo' : '' %>"><span class="ic">⚙</span><span>Tarifas y Parámetros</span></a>
+      <% } %>
+    </nav>
+    <div class="pie">
+      <div class="u"><%= usuario ? usuario.nombre : '' %></div>
+      <div class="muted" style="color:#9aa2ab"><%= usuario ? usuario.rol : '' %></div>
+      <form action="/logout" method="post">
+        <button class="btn ghost sm" style="width:100%;justify-content:center;margin-top:8px">Cerrar sesión</button>
+      </form>
+    </div>
+  </aside>
+  <div class="contenido">

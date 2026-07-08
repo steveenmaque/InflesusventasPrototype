@@ -1,0 +1,10 @@
+<%- include('partials/head', { titulo: titulo }) %>
+<%- include('partials/sidebar') %>
+  <div class="topbar"><h1><%= titulo %></h1></div>
+  <div class="main">
+    <div class="card">
+      <div class="alert err"><%= mensaje %></div>
+      <a class="btn ghost" href="/">Volver al inicio</a>
+    </div>
+  </div>
+<%- include('partials/foot') %>

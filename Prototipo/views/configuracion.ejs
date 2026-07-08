@@ -1,0 +1,42 @@
+<%- include('partials/head', { titulo: 'Tarifas y Parámetros' }) %>
+<%- include('partials/sidebar') %>
+  <div class="topbar"><h1>Tarifas y Parámetros (CU-11)</h1></div>
+  <div class="main">
+    <% if (guardado) { %><div class="alert ok">✓ Cambios guardados. Se aplican al siguiente cálculo sin recompilar (RNF-11).</div><% } %>
+    <% if (error) { %><div class="alert err"><%= error %></div><% } %>
+
+    <div class="card">
+      <h2>Parámetros del sistema</h2>
+      <form action="/configuracion/parametros" method="post">
+        <div class="fila">
+          <div><label>% IGV</label><input type="number" name="igv_pct" value="<%= config.igv_pct %>" min="0" max="100" step="0.1"></div>
+          <div><label>Tope de descuento (%)</label><input type="number" name="tope_descuento" value="<%= config.tope_descuento %>" min="0" max="100" step="0.5"></div>
+          <div><label>Correlativo inicial</label><input type="number" name="correlativo_inicial" value="<%= config.correlativo_inicial %>" min="1" step="1"></div>
+          <div><label>Plazo recordatorio (días)</label><input type="number" name="plazo_recordatorio" value="<%= config.plazo_recordatorio %>" min="0" step="1"></div>
+          <div><label>Factor de proporción del globo</label><input type="number" name="factor_globo" value="<%= config.factor_globo %>" min="0" step="0.05"></div>
+        </div>
+        <button class="btn" type="submit">Guardar parámetros</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Tarifas por categoría y tamaño (RD-07)</h2>
+      <p class="hint">Precio unitario en S/. Rango de tamaño: Pequeño (≤3 m), Mediano (≤6 m), Grande (&gt;6 m).</p>
+      <form action="/configuracion/tarifas" method="post">
+        <table>
+          <thead><tr><th>Categoría</th><th>Rango</th><th>Precio unitario (S/)</th></tr></thead>
+          <tbody>
+            <% tarifas.forEach(t => { %>
+            <tr>
+              <td><%= (categorias[t.categoria] && categorias[t.categoria].etiqueta) || t.categoria %></td>
+              <td><%= t.rango %></td>
+              <td><input type="number" name="tarifa_<%= t.id %>" value="<%= t.precio_unit %>" min="0" step="10" style="max-width:160px"></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <button class="btn" type="submit" style="margin-top:16px">Guardar tarifas</button>
+      </form>
+    </div>
+  </div>
+<%- include('partials/foot') %>

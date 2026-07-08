@@ -1,0 +1,26 @@
+<%- include('partials/head', { titulo: 'Clientes' }) %>
+<%- include('partials/sidebar') %>
+  <div class="topbar"><h1>Clientes</h1></div>
+  <div class="main">
+    <div class="card">
+      <h2>Clientes registrados</h2>
+      <% if (clientes.length === 0) { %>
+        <p class="muted">Aún no hay clientes. Se registran al crear cotizaciones.</p>
+      <% } else { %>
+      <table>
+        <thead><tr><th>RUC</th><th>Razón social</th><th>Correo</th><th>Teléfono</th></tr></thead>
+        <tbody>
+          <% clientes.forEach(c => { %>
+          <tr>
+            <td><%= c.ruc || '—' %></td>
+            <td><%= c.razon_social %></td>
+            <td><%= c.correo || '—' %></td>
+            <td><%= c.telefono || '—' %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+  </div>
+<%- include('partials/foot') %>

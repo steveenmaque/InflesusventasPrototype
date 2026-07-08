@@ -1,0 +1,22 @@
+{
+  "name": "inflesusventas-cotizaciones",
+  "version": "1.0.0",
+  "description": "Prototipo MVP (requisitos Must) del Sistema de Gestión de Cotizaciones de InfleSusVentas — Ingeniería de Requisitos UNMSM.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --experimental-sqlite server.js",
+    "dev": "node --experimental-sqlite --watch server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "pdfkit": "^0.15.1"
+  },
+  "author": "Grupo 6 — E.P. Ingeniería de Software, UNMSM (2026)",
+  "license": "MIT"
+}
