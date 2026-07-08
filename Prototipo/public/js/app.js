@@ -120,10 +120,10 @@ document.getElementById('btnRuc').addEventListener('click', async () => {
       document.getElementById('razon_social').value = data.razonSocial;
       msg.textContent = '✓ Razón social autocompletada (editable).'; msg.style.color = 'var(--ok)';
     } else {
-      msg.textContent = data.mensaje; msg.style.color = 'var(--naranja)';
+      msg.textContent = data.mensaje; msg.style.color = 'var(--error)';
     }
   } catch (e) {
-    msg.textContent = 'Servicio no disponible: ingrese la razón social manualmente (RNF-06).'; msg.style.color = 'var(--naranja)';
+    msg.textContent = 'Servicio no disponible: ingrese la razón social manualmente (RNF-06).'; msg.style.color = 'var(--error)';
   }
 });
 

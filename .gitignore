@@ -16,9 +16,6 @@ $RECYCLE.BIN/
 .\#*
 \#*\#
 
-# === Herramientas del entorno ===
-.claude/
-
 # === Archivos temporales de ofimática ===
 ~$*.docx
 ~$*.xlsx
