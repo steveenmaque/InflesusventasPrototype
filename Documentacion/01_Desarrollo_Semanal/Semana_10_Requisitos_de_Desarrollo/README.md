@@ -1,56 +1,116 @@
-# Semana 10 — Requisitos de Desarrollo
-## Sistema de Gestión de Cotizaciones — "InfleSusVentas"
+# 9. REQUISITOS DE DESARROLLO Y ARQUITECTURA
 
-> **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
-> **Aporta al entregable:** Cap. 5.5 (entorno, proceso, restricciones) · **Rúbrica:** 2, 6
-> **Estado:**  Pendiente de completar
-> **Navegación:** [ Semana 9](../Semana_09_Requisitos_de_Dominio/README.md) · [Índice](../../README.md) · [Semana 11 ](../Semana_11_Requisitos_de_Calidad/README.md)
+> **Semana 10** · Sistema de Gestión de Cotizaciones para InfleSusVentas
+> Contenido extraído del documento del proyecto (fuente definitiva).
 
 ---
 
-## Objetivo del bloque
-Definir **cómo** se construirá el sistema: entorno, proceso, herramientas y estándares.
+9.1 Objetivo de la semana
 
-## Artefactos a producir
-Tabla de requisitos de desarrollo por fase (identificación → especificación → verificación → gestión de cambios).
+Definir como se construirá el sistema (entorno, proceso, estándares) y la arquitectura en
 
----
+diagramas PlantUML de paquetes, componentes y despliegue.
 
-## 1. Requisitos de desarrollo (propuesta a confirmar)
-| Fase | Requisito | Detalle |
-|---|---|---|
-| Identificación y análisis | Control de versiones | **Git + GitHub** (repo `InflesusventasPrototype`) |
-| Especificación | Stack tecnológico | `[definir: p.ej. web app — frontend + backend + BD]` |
-| Especificación | Entorno de ejecución | Navegador web; despliegue `[local/nube]` |
-| Especificación | Metodología | Híbrido **RUP + Scrum ligero**, sprint = 1 semana (ver Planificación) |
-| Verificación | Cobertura de pruebas | `[objetivo, p.ej. ≥ 70 % en lógica de cálculo IGV/medidas]` |
-| Gestión de cambios | Proceso RFC/CCB | Ver [Semana 12](../Semana_12_Gestion_de_Cambios/README.md) |
+9.2 Acta de reunion
 
-## 2. Restricciones de desarrollo
-| ID | Restricción |
-|---|---|
-| RES-01 | IGV 18 % **configurable** (RES fiscal, ver S1). |
-| RES-02 | Tarifas por definir → arquitectura **parametrizable**. |
-| RES-03 | Dependencia de servicios externos (RUC, correo). |
-| RES-05 | Fines académicos: alcance = especificación + prototipo. |
+Acta de reunión — Semana 10
 
----
+Fecha / Hora          06/06/2026, 7:00 p.m.
+Modalidad             Virtual
+Asistentes            R1, R2, R3, R4
+Objetivo del sprint   Definir requisitos de desarrollo y arquitectura.
+Acuerdos y tareas     R3 define stack y arquitectura.
+R1 define metodología y control de versiones.
+R4 fija cobertura de pruebas.
+Impedimentos          Ninguno.
+Proxima reunion       13/06/2026
 
-## Preguntas para plasmar requisitos de desarrollo
-1. ¿Qué lenguaje/framework/BD se usará y por qué?
-2. ¿En qué entornos debe correr (SO, servidor, nube)?
-3. ¿Qué metodología y ritmo de trabajo (Scrum, sprints)?
-4. ¿Qué estándares de código y guías de estilo?
-5. ¿Qué nivel de cobertura de pruebas se exige?
+9.3 Requisitos de desarrollo
 
-## Herramientas
-Git/GitHub, VS Code, pipeline CI (opcional), linters.
+Fase                   Requisito               Detalle
+Identificacion         Control de versiones    Git + GitHub
+Especificacion         Stack tecnologico       Aplicacion web (frontend + backend + BD
+relacional)
+Especificacion         Entorno                 Navegador web; despliegue local o en nube
+Especificacion         Metodologia             Incremental    RUP    + Scrum ligero (sprint
+semanal)
+Verificacion           Cobertura de pruebas >=   70%     en la logica             de    calculo
+(IGV/descuento/medidas)
+Gestion de cambios     Proceso RFC/CCB         Ver Semana 12
 
-## Checklist de cierre
-- [ ] Stack tecnológico decidido y justificado
-- [ ] Entorno y despliegue definidos
-- [ ] Estándares de código acordados
-- [ ] Nivel de cobertura de pruebas fijado
+9.4 Diagrama de paquetes
 
-## Referencias
-Guía General de IR §14.
+```plantuml
+@startuml
+             package "Presentacion" {
+               [Sidebar]
+               [Formulario Cotizacion]
+               [Historial]
+             }
+             package "Logica de negocio" {
+               [Autenticacion]
+               [Gestion de Clientes]
+               [Gestion de Cotizaciones]
+               [Calculo Precio/Descuento/IGV]
+               [Seguimiento]
+             }
+             package "Integracion" {
+               [Adaptador RUC]
+               [Adaptador Correo]
+             }
+             package "Datos" {
+               [Repositorio]
+             }
+             [Formulario Cotizacion] --> [Gestion de Cotizaciones]
+             [Gestion de Cotizaciones] --> [Calculo Precio/Descuento/IGV]
+             [Gestion de Clientes] --> [Adaptador RUC]
+             [Gestion de Cotizaciones] --> [Adaptador Correo]
+             [Gestion de Cotizaciones] --> [Repositorio]
+@enduml
+```
+
+9.5 Diagrama de componentes
+
+```plantuml
+@startuml
+          component "UI Web" as UI
+          component "API de Cotizaciones" as API
+          component "Servicio de Calculo" as CALC
+          component "Adaptador RUC" as RUCAD
+          component "Adaptador Correo" as MAILAD
+          database "BD Cotizaciones" as DB
+          UI --> API
+          API --> CALC
+          API --> RUCAD
+          API --> MAILAD
+          API --> DB
+          RUCAD --> [API externa RUC]
+          MAILAD --> [SMTP/API Correo]
+@enduml
+```
+
+9.6 Diagrama de despliegue
+
+```plantuml
+@startuml
+               node "PC del Gerente" {
+                 artifact "Navegador Web"
+               }
+               node "Servidor de Aplicacion" {
+                 artifact "App Web / API"
+               }
+               node "Servidor de BD" {
+                 database "BD Cotizaciones"
+               }
+               cloud "Servicio RUC" as RUC
+               cloud "Servicio Correo" as MAIL
+               "Navegador Web" --> "App Web / API" : HTTPS
+               "App Web / API" --> "BD Cotizaciones" : SQL
+               "App Web / API" --> RUC : REST
+               "App Web / API" --> MAIL : SMTP/REST
+@enduml
+```
+
+Validación de la semana: El equipo aprobó la arquitectura y los estándares de
+
+desarrollo.

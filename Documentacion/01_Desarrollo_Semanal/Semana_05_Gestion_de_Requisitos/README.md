@@ -1,168 +1,130 @@
-# Semana 5 — Gestión de Requisitos
-## Sistema de Gestión de Cotizaciones — "InfleSusVentas"
+# 5. GESTIÓN DE REQUISITOS Y PRIORIZACIÓN
 
-> **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
-> **Aporta al entregable:** Cap. 8 (atributos, línea base, priorización) · **Rúbrica:** 4
-> **Estado:** Con contenido base (derivado del brief del negocio)
-> **Navegación:** [Semana 4](../Semana_04_Especificacion_SRS/README.md) · [Índice](../../README.md) · [Semana 6](../Semana_06_Requisitos_Funcionales/README.md)
+> **Semana 5** · Sistema de Gestión de Cotizaciones para InfleSusVentas
+> Contenido extraído del documento del proyecto (fuente definitiva).
 
 ---
 
-## Objetivo del bloque
-Administrar los requisitos: atributos, versiones, línea base y **priorización combinada**
-(MoSCoW + Kano + Valor/Costo) que sustenta la definición del **MVP** y su roadmap.
+5.1 Objetivo de la semana
 
-## Artefactos a producir
-- Tabla de **atributos** por requisito (ID, fuente, tipo, prioridad, estado, versión).
-- **Priorización combinada** (tres técnicas) + **análisis integrado**.
-- **Roadmap de MVP** (MVP 1 / MVP 2 / MVP 3).
-- Definición de **línea base** y política de versionado.
+Administrar los requisitos (atributos, linea base) y priorizarlos con MoSCoW, Kano y
 
----
+Valor/Costo para definir el MVP. El entregable de desarrollo del proyecto son los requisitos
 
-## 1. Atributos de gestión por requisito (plantilla)
-| ID | Fuente | Tipo | Prioridad | Estado | Versión |
-|---|---|---|:--:|---|:--:|
-| RF-01 | Entrevista Gerente | Funcional | Must | Aprobado | 1.0 |
-| RF-39 | Entrevista Gerente | Funcional | Should | Propuesto | 0.1 |
-| RNF-01 | Análisis técnico | No funcional | Must | Aprobado | 1.0 |
+Must.
 
-> Estados: Propuesto -> Aprobado -> Implementado -> Verificado.
+5.2 Acta de reunion
 
----
+Acta de reunión — Semana 5
 
-## 2. Priorización de requisitos (enfoque combinado)
+Fecha / Hora                01/05/2026, 7:00 p.m.
+Modalidad                   Virtual
+Asistentes                  R1, R2, R3, R4
+Objetivo del sprint         Priorizar los requisitos y definir el MVP.
+Acuerdos y tareas           R1 define atributos y línea base.
+R2 aplica MoSCoW y Kano.
+R4 calcula Valor/Costo.
+El equipo consolida el análisis integrado y el roadmap de MVP.
+Impedimentos                Ninguno.
+Proxima reunion             08/05/2026
 
-Siguiendo el enfoque del curso (Sesión 3), la priorización **no se limita a MoSCoW**: se combinan
-**tres técnicas complementarias**, cada una evalúa una dimensión distinta, y su **análisis integrado**
-define el MVP:
+5.3 Atributos de gestion
 
-| Técnica | Qué mide | Categorías |
-|---|---|---|
-| **MoSCoW** | Criticidad | Must / Should / Could / Won't |
-| **Análisis Kano** | Satisfacción del cliente | Básico / Desempeño / Encantamiento |
-| **Valor vs Costo** | Optimización de la inversión | Valor (Alto/Medio/Bajo) vs Costo (Alto/Medio/Bajo) -> Prioridad 1/2/3 |
+ID                 Fuente                       Tipo          Prioridad    Estado        Version
+RF-01      Entrevista 2 / Escenario 1          Funcional          Must      Aprobado         1.0
+RF-44      Entrevista 1 / Escenario 2          Funcional          Must      Aprobado         1.0
+RF-48      Escenario 2                         Funcional         Should     Propuesto        0.1
+RNF-04 Analisis tecnico                       No funcional         Must      Aprobado         1.0
+RD-08      Entrevista 1                         Dominio           Must      Aprobado         1.0
 
-### 2.1 MoSCoW (criticidad)
+Línea base: se congela la línea base 1.0 al aprobar los RF y RNF; los cambios posteriores
 
-| Nivel | Funcionalidades (RF) | Justificación |
-|---|---|---|
-| **Must** | **Autenticación del gerente (RF-46,47)**; validar RUC + autocompletar (RF-01..06); catálogo con lógica de medidas (RF-08..16); **descuento máx 10 % (RF-44,45)**; precio + IGV automático (RF-17..21); numeración y fecha (RF-23..25); exportar PDF/Word (RF-26,27); enviar por correo (RF-28); sidebar + historial (RF-30..33, 35, 36) | Núcleo del negocio: sin esto no hay cotización ni acceso seguro |
-| **Should** | Cotización Rápida (RF-39..42); **seguimiento: estados, recordatorios y registro (RF-48..50)**; IGV configurable (RF-22); estado de envío (RF-29); filtros de historial (RF-34); reutilizar cliente (RF-07); reabrir cotización (RF-37) | Aportan agilidad, control y cierre de ventas, no bloquean el core |
-| **Could** | Duplicar cotización (RF-38); convertir rápida->estándar (RF-43); bitácora (RNF-10) | Mejoras deseables |
-| **Won't** | Captura automática WhatsApp/Yahoo/web; facturación; inventario; pagos; multi-rol | Fuera del alcance de esta versión |
+se gestionan mediante RFC/CCB (Semana 12).
 
-### 2.2 Análisis Kano (satisfacción del cliente)
+5.4 MoSCoW
 
-| Funcionalidad | Tipo Kano | Explicación |
-|---|---|---|
-| Validar RUC y autocompletar razón social | Básico | Se espera; su ausencia genera insatisfacción |
-| Cálculo automático de precio e IGV | Básico | Fundamental para cotizar |
-| Guardar cotización en historial | Básico | Esperado |
-| Numeración y fecha automáticas | Básico | Esperado |
-| Exportar a PDF/Word | Desempeño | A más formatos/rapidez, más satisfacción |
-| Enviar por correo desde la plataforma | Desempeño | Mejora la experiencia frente al envío manual |
-| Buscar/filtrar historial | Desempeño | Cuanto mejor, más útil |
-| Inicio de sesión del gerente | Básico | Esperado: sin acceso seguro no se opera |
-| Descuento (máx 10 % por cantidad) | Desempeño | Ayuda a cerrar ventas; a mejor manejo, más conversión |
-| Seguimiento (estados y recordatorios) | Encantamiento | Recupera ventas que se enfriarían; supera lo esperado |
-| Cotización Rápida | Encantamiento | Extra que agiliza casos ágiles, sorprende positivamente |
-| Duplicar / convertir cotización | Encantamiento | Comodidad no esperada |
+Nivel   Funcionalidades
+Must    Autenticacion (RF-46,47); RUC (RF-01-06); catalogo+medidas (RF-08-16);
+descuento (RF-44,45); precio+IGV (RF-17-21); numeracion+fecha (RF-23-25);
+exportar (RF-26,27); enviar (RF-28); sidebar+historial (RF-30-33,35,36)
+Should Cotizacion rapida (RF-39-42); seguimiento (RF-48-50); IGV configurable (RF-22);
+estado de envio (RF-29); filtros (RF-34); reutilizar (RF-07); reabrir (RF-37)
+Could    Duplicar (RF-38); convertir rapida->estandar (RF-43); bitácora (RNF-10)
+Won't    Captura automática de canales; facturacion; inventario; pagos; multi-rol
 
-### 2.3 Valor vs Costo (inversión)
+El entregable de desarrollo (MVP 1) corresponde a todos los requisitos Must,
 
-| Funcionalidad | Valor | Costo | Decisión |
-|---|:--:|:--:|:--:|
-| Cálculo de precio + IGV | Alto | Medio | Prioridad 1 |
-| Validación de RUC + autocompletar | Alto | Medio | Prioridad 1 |
-| Catálogo con lógica de medidas | Alto | Medio | Prioridad 1 |
-| Numeración + fecha automáticas | Alto | Bajo | Prioridad 1 |
-| Exportar PDF/Word + enviar correo | Alto | Medio | Prioridad 1 |
-| Sidebar + historial + clientes | Alto | Bajo | Prioridad 1 |
-| Autenticación del gerente | Alto | Bajo | Prioridad 1 |
-| Descuento (máx 10 % por cantidad) | Alto | Bajo | Prioridad 1 |
-| Cotización Rápida | Medio-Alto | Medio | Prioridad 2 |
-| Seguimiento (estados, recordatorios, registro) | Alto | Medio | Prioridad 2 |
-| Filtros / estado de envío / reutilizar cliente | Medio | Bajo | Prioridad 2 |
-| Duplicar / convertir cotización | Medio | Medio | Prioridad 3 |
-| Bitácora | Bajo | Medio | Prioridad 3 |
+cubiertos por los casos de uso CU-01 a CU-08.
 
-### 2.4 Análisis integrado y priorización final
+5.5 Analisis Kano
 
-Cruce de las tres técnicas para asignar cada funcionalidad a una entrega del roadmap:
+Funcionalidad                           Tipo Kano      Explicacion
+Autenticacion del gerente                 Básico       Esperado: sin acceso seguro no se opera
+Validar RUC y autocompletar               Básico       Se espera;       su   ausencia   genera
+insatisfacción
+Cálculo de precio e IGV                   Básico       Fundamental para cotizar
+Numeración y fecha automáticas            Básico       Esperado
+Guardar en historial                      Básico       Esperado
+Descuento (máx 10% por cantidad)        Desempeño      Ayuda a cerrar ventas; a mejor manejo,
+más conversion
+Exportar a PDF/Word                     Desempeño      A más formatos        y    rapidez, mas
+satisfaccion
+Enviar por correo                       Desempeño      Mejora la experiencia frente al envio
+manual
+Buscar/filtrar historial                Desempeño      Cuanto mejor, más útil
+Cotizacion rapida                     Encantamiento Extra que agiliza casos urgentes
 
-| Funcionalidad (RF) | MoSCoW | Kano | Valor | Costo | Prioridad sugerida |
-|---|:--:|:--:|:--:|:--:|:--:|
-| Autenticación del gerente (RF-46,47) | Must | Básico | Alto | Bajo | **MVP 1** |
-| Validar RUC + autocompletar (RF-01..05) | Must | Básico | Alto | Medio | **MVP 1** |
-| Descuento máx 10 % por cantidad (RF-44,45) | Must | Desempeño | Alto | Bajo | **MVP 1** |
-| Registrar/listar clientes (RF-06) | Must | Básico | Alto | Bajo | **MVP 1** |
-| Catálogo + lógica de medidas (RF-08..16) | Must | Básico | Alto | Medio | **MVP 1** |
-| Precio base + IGV automático (RF-17..21) | Must | Básico | Alto | Medio | **MVP 1** |
-| Numeración + fecha (RF-23..25) | Must | Básico | Alto | Bajo | **MVP 1** |
-| Exportar PDF/Word (RF-26, 27) | Must | Desempeño | Alto | Medio | **MVP 1** |
-| Enviar por correo (RF-28) | Must | Desempeño | Alto | Medio | **MVP 1** |
-| Sidebar + historial (RF-30..36) | Must | Básico | Alto | Bajo | **MVP 1** |
-| Cotización Rápida (RF-39..42) | Should | Encantamiento | Medio-Alto | Medio | **MVP 2** |
-| IGV configurable (RF-22) | Should | Básico | Medio | Bajo | **MVP 2** |
-| Estado de envío (RF-29) | Should | Desempeño | Medio | Bajo | **MVP 2** |
-| Filtrar historial (RF-34) | Should | Desempeño | Medio | Medio | **MVP 2** |
-| Reutilizar cliente (RF-07) | Should | Desempeño | Medio | Bajo | **MVP 2** |
-| Reabrir cotización (RF-37) | Should | Desempeño | Medio | Bajo | **MVP 2** |
-| Seguimiento: estados, recordatorios, registro (RF-48..50) | Should | Encantamiento | Alto | Medio | **MVP 2** |
-| Duplicar cotización (RF-38) | Could | Encantamiento | Medio | Medio | **MVP 3** |
-| Convertir rápida->estándar (RF-43) | Could | Encantamiento | Medio | Medio | **MVP 3** |
-| Bitácora de acciones (RNF-10) | Could | Encantamiento | Bajo | Medio | **MVP 3** |
-| Captura automática de canales / facturación | Won't | — | Alto | Alto | Fuera de alcance |
+Seguimiento              (estados      y Encantamiento Recupera ventas que se enfriaran
+recordatorios)
+Duplicar/convertir cotización            Encantamiento Comodidad no esperada
 
-> **Lectura:** MoSCoW aporta la **criticidad**, Kano la **satisfacción del usuario** y Valor/Costo la
-> **optimización de la inversión**. Su intersección define un MVP funcional y escalable.
+5.6 Valor vs Costo
 
----
+Funcionalidad                                      Valor              Costo           Prioridad
+Cálculo de precio + IGV                             Alto              Medio              1
+Validacion de RUC + autocompletar                   Alto              Medio              1
+Catalogo + logica de medidas                        Alto              Medio              1
+Numeracion + fecha                                  Alto              Bajo               1
+Exportar + enviar                                   Alto              Medio              1
+Sidebar + historial                                 Alto              Bajo               1
+Autenticacion                                       Alto              Bajo               1
+Descuento (<=10%)                                   Alto              Bajo               1
+Cotizacion rapida                                Medio-Alto           Medio              2
+Seguimiento                                         Alto              Medio              2
+Duplicar / convertir; bitácora                     Medio              Medio              3
 
-## 3. Roadmap de MVP
+5.7 Análisis integrado y roadmap de MVP
 
-### MVP 1 — Producto Mínimo Viable (núcleo entregable)
-> **Acceso autenticado del gerente** + **cotización estándar de extremo a extremo:** cliente con
-> **RUC validado**, ítems con **medidas y descripción automática**, **descuento (máx 10 % por
-> cantidad)**, **cálculo de precio e IGV**, **numeración y fecha automáticas**, **exportación a
-> PDF/Word**, **envío por correo** e **historial** consultable.
+Funcionalidad (RF)                   MoSCoW       Kano        Valor           Costo      MVP
+Autenticacion (RF-46,47)              Must       Básico       Alto            Bajo       MVP 1
+Validar RUC (RF-01-05)                Must       Básico       Alto            Medio      MVP 1
+Clientes (RF-06)                      Must       Básico       Alto            Bajo       MVP 1
+Catalogo         +        medidas     Must       Básico       Alto            Medio      MVP 1
+(RF-08-16)
+Descuento (RF-44,45)                  Must     Desempeño      Alto            Bajo       MVP 1
+Precio + IGV (RF-17-21)               Must       Básico       Alto            Medio      MVP 1
+Numeracion           +       fecha    Must       Básico       Alto            Bajo       MVP 1
+(RF-23-25)
+Exportar (RF-26,27)                   Must     Desempeño      Alto            Medio      MVP 1
 
-Entrega el valor esencial: reemplaza el proceso manual de cotización con acceso seguro de usuario único.
+Enviar (RF-28)                     Must      Desempeño     Alto       Medio       MVP 1
+Sidebar    +           historial   Must        Básico      Alto       Bajo        MVP 1
+(RF-30-36)
+Cotizacion               rapida    Should    Encantamie Medio-Alto    Medio       MVP 2
+(RF-39-42)                                      nto
+Seguimiento (RF-48-50)             Should    Encantamie    Alto       Medio       MVP 2
+nto
+Duplicar/convertir                 Could     Encantamie   Medio       Medio       MVP 3
+(RF-38,43); bitacora                            nto
 
-### MVP 2 — Agilidad, control y cierre de ventas
-Cotización Rápida, **seguimiento (estados, recordatorios y registro de negociación para cerrar
-ventas)**, IGV configurable, estado de envío, filtros de historial, reutilización de cliente y
-reapertura de cotizaciones.
+- MVP 1 (entregable): acceso autenticado y cotizacion estándar de extremo a extremo (CU-01
 
-### MVP 3 — Comodidad y trazabilidad avanzada
-Duplicar y convertir cotizaciones, bitácora de acciones sensibles.
+a CU-08).
 
----
+- MVP 2: cotización rápida y seguimiento.
 
-## 4. Línea base
-- Se congela la **línea base 1.0** al cerrar la Semana 7 (RF + RNF aprobados).
-- Aprobación: rol **R1 (Líder de Proyecto)** con visto del equipo.
-- Cambios posteriores se gestionan vía RFC (ver [Semana 12](../Semana_12_Gestion_de_Cambios/README.md)).
+- MVP 3: duplicar/convertir y bitácora.
 
----
+Validación de la semana: El equipo y el Gerente aprobaron el MVP 1 (requisitos Must)
 
-## Preguntas de gestión
-1. ¿Qué prioridad tiene cada requisito según **cada una** de las tres técnicas?
-2. ¿Coinciden MoSCoW, Kano y Valor/Costo? Si no, ¿cómo se resuelve el conflicto?
-3. ¿Qué entra en el MVP 1 y por qué?
-4. ¿Cuál es la fuente (stakeholder) de cada requisito?
-5. ¿Cuándo se congela la línea base y quién la aprueba?
-
-## Herramientas
-Trello/JIRA + hoja de cálculo de atributos; matriz de priorización combinada.
-
-## Checklist de cierre
-- [ ] Tabla de atributos completa
-- [ ] MoSCoW, Kano y Valor/Costo aplicados
-- [ ] Análisis integrado y roadmap de MVP (1/2/3) definidos
-- [ ] Política de línea base acordada
-
-## Referencias
-Guía General de IR §10 · Técnicas de priorización: Sesión 3 (MoSCoW, Kano, Valor/Costo) y Sesión 5
-(tabla integrada y roadmap de MVP) del Prof. Ciro Rodriguez.
+como entregable de desarrollo.

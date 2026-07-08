@@ -78,7 +78,10 @@ function crearEsquema() {
       total         REAL NOT NULL DEFAULT 0,
       igv_pct       REAL NOT NULL DEFAULT 18,
       estado        TEXT NOT NULL DEFAULT 'Emitida',
-      correo_envio  TEXT
+      correo_envio  TEXT,
+      atencion        TEXT,
+      condicion_pago  TEXT,
+      tiempo_entrega  TEXT
     );
 
     CREATE TABLE IF NOT EXISTS item (

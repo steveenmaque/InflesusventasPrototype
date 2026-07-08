@@ -1,131 +1,122 @@
-# Semana 6 — Requisitos Funcionales (RF)
-## Sistema de Gestión de Cotizaciones — "InfleSusVentas"
+# 6. REQUISITOS FUNCIONALES
 
-> **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
-> **Aporta al entregable:** Cap. 5.1 (catálogo RF, necesidad→requisito) · **Rúbrica:** 1
-> **Estado:**  Con contenido base (derivado del brief del negocio)
-> **Navegación:** [ Semana 5](../Semana_05_Gestion_de_Requisitos/README.md) · [Índice](../../README.md) · [Semana 7 ](../Semana_07_Requisitos_No_Funcionales/README.md)
+> **Semana 6** · Sistema de Gestión de Cotizaciones para InfleSusVentas
+> Contenido extraído del documento del proyecto (fuente definitiva).
 
 ---
 
-## Objetivo del bloque
-Derivar el **catálogo de Requisitos Funcionales** del sistema de cotizaciones a partir de las
-necesidades del Gerente (necesidad → requisito).
+6.1 Objetivo de la semana
 
-> **Prioridad MoSCoW:** M = Must · S = Should · C = Could · W = Won't (por ahora)
+Consolidar el catálogo completo de requisitos funcionales derivados de la elicitación, con
 
----
+su prioridad MoSCoW (M=Must, S=Should, C=Could).
 
-## 6.1 Gestión de Clientes y Validación de RUC
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-01 | M | El sistema debe permitir ingresar el **RUC** del cliente al crear una cotización estándar. |
-| RF-02 | M | Al ingresar el RUC, el sistema debe **validarlo** contra el servicio externo. |
-| RF-03 | M | Si el RUC es **válido**, debe **extraer y autocompletar la Razón Social** automáticamente. |
-| RF-04 | M | Si el RUC **no es válido**, el campo Razón Social **no se autocompleta**. |
-| RF-05 | M | El campo **Razón Social debe ser siempre editable** por el usuario. |
-| RF-06 | M | El sistema debe **registrar y listar los clientes** cotizados. |
-| RF-07 | S | El sistema debe reutilizar datos de un cliente existente en una nueva cotización. |
+6.2 Acta de reunion
 
-## 6.2 Creación de Cotizaciones (Ítems y Medidas)
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-08 | M | Crear una **Nueva Cotización** con uno o varios ítems. |
-| RF-09 | M | Ofrecer las categorías: **globos, arcos, carpas, tótems, skydancers y otros**. |
-| RF-10 | M | **Globos:** solicitar solo **altura**; calcular diámetro por proporción. |
-| RF-11 | M | **Arcos:** solicitar **largo** y **alto**. |
-| RF-12 | M | **Carpas:** elegir **cuadrangular** (alto, largo, ancho) o **circular** (diámetro, altura). |
-| RF-13 | M | **Tótems y skydancers:** solicitar solo **altura**. |
-| RF-14 | M | **Otros:** solicitar los **3 factores** (alto, ancho, largo). |
-| RF-15 | M | **Generar automáticamente la descripción** de todos los ítems estándar. |
-| RF-16 | M | Para **otros**, la descripción queda **en blanco y editable** por el Gerente. |
+Acta de reunión — Semana 6
 
-## 6.3 Cálculo de Precios e IGV
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-17 | M | Calcular el **precio base** de cada ítem según **tipo y tamaño**. |
-| RF-18 | M | Arquitectura de precios **parametrizable** (tarifas configurables). |
-| RF-44 | M | Ofrecer un **botón/acción de descuento** sobre el precio base de la cotización. |
-| RF-45 | M | Validar que el **descuento no supere el 10 %**, **según la cantidad** (a mayor cantidad, mayor descuento permitido, hasta el tope del 10 %). |
-| RF-19 | M | **Sumar los precios base** de todos los ítems y **aplicar el descuento** para obtener el **subtotal**. |
-| RF-20 | M | **Aplicar el IGV automáticamente** sobre el **subtotal ya con descuento**. |
-| RF-21 | M | **Desglosar** en la cotización: Precio base, **Descuento**, Subtotal, IGV y **Total**. |
-| RF-22 | S | El porcentaje de IGV debe ser **configurable**. |
+Fecha / Hora              08/05/2026, 7:00 p.m.
+Modalidad                 Virtual
+Asistentes                R1, R2, R3, R4
+Objetivo del sprint       Redactar el catálogo de requisitos funcionales.
+Acuerdos y tareas         R2 redacta los RF por modulo.
+R4 asigna prioridad y criterio de aceptación.
+R1 verifica la trazabilidad con las necesidades.
+Impedimentos              Ninguno.
+Proxima reunion           15/05/2026
 
-## 6.4 Numeración, Fechas y Generación
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-23 | M | **Auto-numerar** cada cotización de forma incremental (ej. inicia en **1001**). |
-| RF-24 | M | El número de cotización debe ser **único y no reutilizable**. |
-| RF-25 | M | La **fecha de emisión** se coloca **automáticamente**. |
+6.3 Acceso y seguridad
 
-## 6.5 Exportación y Envío
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-26 | M | **Descargar** la cotización en **PDF**. |
-| RF-27 | M | **Descargar** la cotización en **Word**. |
-| RF-28 | M | **Ingresar el correo** del cliente y **enviar la cotización** desde la plataforma. |
-| RF-29 | S | Registrar el **estado de envío** (enviado / no enviado). |
+ID        Prio. Requisito
+RF-46        M    El sistema debe requerir el inicio de sesión (usuario y contraseña) del
+gerente/trabajador.
+RF-47        M    El sistema debe permitir el uso exclusivo del usuario autorizado, validando la
+sesión y permitiendo cerrarla.
 
-## 6.6 Interfaz y Navegación (Sidebar)
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-30 | M | Incluir una **barra lateral (sidebar)** de navegación. |
-| RF-31 | M | Acceso a **Historial general por cotización**. |
-| RF-32 | M | **Lista de clientes** cotizados. |
-| RF-33 | M | Botón/sección **"Nueva Cotización"**. |
-| RF-34 | S | Buscar/filtrar historial por número, cliente o fecha. |
+6.4 Gestión de clientes y validación de RUC
 
-## 6.7 Trazabilidad e Historial
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-35 | M | **Guardar cada cotización** con todos sus datos (cliente, ítems, montos, fecha, número). |
-| RF-36 | M | Mostrar el **historial general** de cotizaciones. |
-| RF-37 | S | **Reabrir/consultar** una cotización histórica. |
-| RF-38 | C | **Duplicar** una cotización previa como base para otra. |
+ID        Prio. Requisito
+RF-01        M    El sistema debe permitir ingresar el RUC del cliente al crear una cotización
+estándar.
+RF-02        M    El sistema debe validar el RUC contra el servicio externo.
 
-## 6.8 Cotización Rápida (flujo alterno)
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-39 | S | Ofrecer un flujo alterno de **"Cotización Rápida"**. |
-| RF-40 | S | En Cotización Rápida **NO** hay validación de RUC. |
-| RF-41 | S | La fecha registra **solo el mes** (no el día exacto). |
-| RF-42 | S | Las cotizaciones rápidas se **almacenan por separado** (apartado distinto). |
-| RF-43 | C | Permitir **convertir** una Cotización Rápida en estándar. |
+RF-03      M    El sistema debe autocompletar la razón social cuando el RUC sea válido.
+RF-04      M    El sistema no debe autocompletar la razón social cuando el RUC no sea
+válido.
+RF-05      M    El sistema debe permitir que la razón social sea siempre editable por el
+usuario.
+RF-06      M    El sistema debe registrar y listar los clientes cotizados.
+RF-07      S    El sistema debería permitir reutilizar los datos de un cliente existente.
 
-## 6.9 Seguridad y acceso (usuario único)
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-46 | M | El sistema debe requerir **inicio de sesión** (usuario y contraseña) del **gerente/trabajador encargado**. |
-| RF-47 | M | El sistema es de **uso exclusivo** del usuario autorizado: toda operación exige **sesión validada** y debe permitir **cerrar sesión**. |
+6.5 Creación de cotizaciones y catálogo
 
-## 6.10 Seguimiento de cotizaciones
-| ID | Prio. | Requisito |
-|---|:--:|---|
-| RF-48 | S | Registrar y actualizar el **estado** de cada cotización: **Enviada / En seguimiento / Aceptada / Rechazada**. |
-| RF-49 | S | Generar un **recordatorio de seguimiento** cuando una cotización enviada **no recibe respuesta** en un plazo configurable. |
-| RF-50 | S | Registrar las **interacciones y negociaciones** (descuento aplicado, reenvíos, notas) asociadas a la cotización. |
+ID     Prio. Requisito
+RF-08      M    El sistema debe permitir crear una cotización con uno o varios ítems.
+RF-09      M    El sistema debe ofrecer las categorías globos, arcos, carpas, tótems,
+skydancers y otros.
+RF-10      M    El sistema debe solicitar solo la altura para globos, derivando el diámetro por
+proporción.
+RF-11      M    El sistema debe solicitar el largo y el alto para arcos.
+RF-12      M    El sistema debe solicitar alto, largo y ancho (cuadrangular) o diámetro y
+altura (circular) para carpas.
+RF-13      M    El sistema debe solicitar solo la altura para tótems y skydancers.
+RF-14      M    El sistema debe solicitar alto, ancho y largo para la categoría "Otros".
+RF-15      M    El sistema debe generar automáticamente la descripción de los ítems
+estándar.
+RF-16      M    El sistema debe dejar en blanco y editable la descripción cuando el ítem sea
+"Otros".
 
----
+6.6 Precios, descuento e IGV
 
-## Necesidad → Requisito (trazabilidad de origen)
-| Necesidad del negocio (S1: RN) | RF asociados |
-|---|---|
-| RN-01 Agilizar generación | RF-08..RF-25 |
-| RN-02 Precio e IGV automáticos | RF-17..RF-22 |
-| RN-02b Descuento (máx 10 % por cantidad) | RF-44, RF-45 |
-| RN-03 Numerar y fechar | RF-23..RF-25 |
-| RN-04 Historial único | RF-06, RF-30..RF-37 |
-| RN-05 Validar RUC | RF-01..RF-05 |
-| RN-06 Exportar y enviar | RF-26..RF-29 |
-| RN-07 Cotización rápida | RF-39..RF-43 |
-| RN-08 Seguimiento para cerrar ventas | RF-48..RF-50 |
-| Uso exclusivo del gerente (RNF-08) | RF-46, RF-47 |
+ID     Prio. Requisito
+RF-17      M    El sistema debe calcular el precio base según el tipo y el tamaño del ítem.
+RF-18      M    El sistema debe permitir tarifas parametrizables.
+RF-44      M    El sistema debe permitir aplicar un descuento sobre el precio base.
+RF-45      M    El sistema debe validar que el descuento no supere el 10% según la cantidad.
 
-## Checklist de cierre
-- [ ] Cada RF con actor, regla y criterio de aceptación (ver plantilla del Documento_SRS §6.1)
-- [ ] Cada RF principal vinculado a un caso de uso (S3/S4)
-- [ ] Prioridad MoSCoW asignada
+RF-19      M    El sistema debe sumar los precios base y aplicar el descuento para obtener el
+subtotal.
+RF-20      M    El sistema debe aplicar el IGV sobre el subtotal ya con descuento.
+RF-21      M    El sistema debe desglosar el precio, el descuento, el subtotal, el IGV y el
+total.
+RF-22      S    El sistema debería permitir configurar el porcentaje de IGV.
 
-## Referencias
-Guía General de IR §11, §3 (necesidad vs requisito). Origen del brief: [Semana 1](../Semana_01_Introduccion/README.md).
+6.7 Numeración, exportación, envío e interfaz
+
+ID     Prio. Requisito
+RF-23     M    El sistema debe numerar automáticamente cada cotización de forma
+incremental (desde 1001).
+RF-24     M    El sistema debe garantizar que el número de cotización sea único e irrepetible.
+RF-25     M    El sistema debe registrar automáticamente la fecha de emisión.
+RF-26     M    El sistema debe permitir descargar la cotización en PDF.
+RF-27     M    El sistema debe permitir descargar la cotización en Word.
+RF-28     M    El sistema debe permitir ingresar el correo del cliente y enviar la cotización.
+RF-29      S   El sistema debería registrar el estado de envío.
+RF-30     M    El sistema debe mostrar una barra lateral (sidebar) de navegación.
+RF-31     M    El sistema debe permitir el acceso al historial por cotización.
+RF-32     M    El sistema debe mostrar la lista de clientes.
+RF-33     M    El sistema debe mostrar el botón "Nueva Cotización".
+RF-34      S   El sistema debería permitir buscar y filtrar el historial.
+RF-35     M    El sistema debe guardar cada cotización con todos sus datos.
+RF-36     M    El sistema debe mostrar el historial general.
+RF-37      S   El sistema debería permitir reabrir y consultar una cotización histórica.
+RF-38     C    El sistema podría permitir duplicar una cotización previa.
+
+6.8 Cotizacion rapida y seguimiento
+
+ID     Prio. Requisito
+RF-39     S    El sistema debería ofrecer un flujo alterno de cotización rápida.
+
+RF-40      S     El sistema debería omitir la validación de RUC en la cotización rápida.
+RF-41      S     El sistema debería registrar solo el mes en la fecha de la cotización rápida.
+RF-42      S     El sistema debería almacenar las cotizaciones rápidas de forma separada.
+RF-43      C     El sistema podría permitir convertir una cotización rápida en estándar.
+RF-48      S     El sistema debería registrar y           actualizar   el   estado   (Enviada/En
+seguimiento/Aceptada/Rechazada).
+RF-49      S     El sistema debería generar un recordatorio cuando no haya respuesta.
+RF-50      S     El sistema debería registrar las interacciones y negociaciones (descuento,
+reenvíos, notas).
+
+Validacion de la semana: El Gerente verifico que el catalogo refleja todas sus
+
+necesidades; se confirmaron las prioridades Must del entregable.

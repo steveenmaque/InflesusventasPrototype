@@ -1,79 +1,87 @@
-# Semana 14 — Validación y Verificación
-## Sistema de Gestión de Cotizaciones — "InfleSusVentas"
+# 13. VALIDACIÓN Y VERIFICACIÓN
 
-> **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
-> **Aporta al entregable:** Cap. 9 (walkthrough, UAT, prototipos) · **Rúbrica:** 3
-> **Estado:**  Pendiente de completar
-> **Navegación:** [ Semana 13](../Semana_13_Trazabilidad/README.md) · [Índice](../../README.md) · [Entregable Final ](../../02_Entregable_Final/Documento_SRS.md)
+> **Semana 14** · Sistema de Gestión de Cotizaciones para InfleSusVentas
+> Contenido extraído del documento del proyecto (fuente definitiva).
 
 ---
 
-## Objetivo del bloque
-Demostrar con evidencia que los requisitos son **correctos y completos** (validación) y están **bien
-construidos** (verificación).
+13.1 Objetivo de la semana
 
-## Artefactos a producir
-- Walkthrough con checklist por requisito.
-- Prototipos/wireframes (Figma/Balsamiq).
-- Casos de **UAT** en Gherkin.
-- Análisis de escenarios (incl. excepciones).
-- Informe de hallazgos y correcciones.
+Demostrar con evidencia que los requisitos son correctos y completos (validación) y
 
----
+están bien construidos (verificación), mediante walkthrough, prototipos y casos de aceptación.
 
-## 1. Walkthrough — checklist por requisito
-| Criterio | RF-01 | RF-17 | RF-28 | RNF-04 |
-|---|:--:|:--:|:--:|:--:|
-| ¿Claro y sin ambigüedad? | Pendiente | Pendiente | Pendiente | Pendiente |
-| ¿Completo? | Pendiente | Pendiente | Pendiente | Pendiente |
-| ¿Verificable/medible? | Pendiente | Pendiente | Pendiente | Pendiente |
-| ¿Consistente? | Pendiente | Pendiente | Pendiente | Pendiente |
-| ¿Factible? | Pendiente | Pendiente | Pendiente | Pendiente |
+13.2 Acta de reunion
 
-## 2. UAT en Gherkin (ejemplos)
-```gherkin
-Escenario: Validación de RUC válido
-  Dado que el gerente ingresa un RUC válido
-  Cuando el sistema consulta el servicio de RUC
-  Entonces se autocompleta la razón social y el campo queda editable
+Acta de reunión — Semana 14
 
-Escenario: Cálculo de IGV
-  Dado una cotización con subtotal S/ 1000
-  Cuando el sistema aplica el IGV del 18 %
-  Entonces el total mostrado es S/ 1180 con el IGV desglosado (S/ 180)
+Fecha / Hora              03/07/2026, 7:00 p.m.
+Modalidad                 Presencial en la empresa
+Asistentes                R1, R2, R3, R4; Gerente
+Objetivo del sprint       Validar los requisitos con el Gerente (walkthrough y prototipos).
+Acuerdos y tareas         R4 conduce el walkthrough.
+R3 presenta los prototipos.
+El Gerente ejecuta los casos de aceptación.
+Impedimentos              Ninguno.
+Proxima reunion           Cierre del proyecto
 
-Escenario: Cotización rápida sin RUC
-  Dado que el gerente elige "Cotización Rápida"
-  Cuando registra los ítems
-  Entonces la cotización se guarda por separado y la fecha registra solo mes y año
-```
+13.3 Walkthrough (checklist por requisito)
 
-## 3. Prototipos (wireframes)
-Insertar en `04_Recursos/imagenes/` — pantallas: sidebar, nueva cotización, catálogo por tipo, vista de historial.
+Criterio                       RF-01           RF-17      RF-28         RF-44       RNF-04
+Claro y sin ambigüedad            Si            Si           Si           Si           Si
+Completo                          Si            Si           Si           Si           Si
+Verificable/medible               Si            Si           Si           Si           Si
+Consistente                       Si            Si           Si           Si           Si
+Factible                          Si            Si           Si           Si           Si
 
-## 4. Análisis de escenarios de excepción
-- Servicio de RUC caído → continuar manualmente (RNF-06).
-- Correo de envío inválido → mensaje de error, no se marca como enviada.
-- Ítem "Otros" sin descripción → advertencia antes de emitir.
+13.4 Casos de aceptación (UAT en Gherkin)
 
-## 5. Informe de hallazgos
-| # | Hallazgo | Requisito | Corrección |
-|---|---|---|---|
-| 1 | `[…]` | `[…]` | `[…]` |
+Escenario: Validacion de RUC valido
+Dado que el usuario ingresa un RUC válido
+Cuando el sistema consulta el servicio de RUC
 
----
+Entonces se autocompleta la razon social y el campo queda editable
 
-## Preguntas de validación
-1. ¿El requisito es claro, completo, verificable, consistente y factible?
-2. ¿El prototipo refleja lo que el Gerente esperaba?
-3. ¿Los criterios de aceptación son medibles y se cumplen?
-4. ¿Qué pasa en escenarios extremos?
+Escenario: Calculo de IGV con descuento
+Dado una cotizacion con precio base S/ 1000 y 10% de descuento
+Cuando el sistema calcula el subtotal y el IGV del 18%
+Entonces el subtotal es S/ 900, el IGV es S/ 162 y el total es S/ 1062
 
-## Checklist de cierre
-- [ ] Walkthrough completo
-- [ ] Prototipos validados con el Gerente
-- [ ] UAT en Gherkin por cada Must
-- [ ] Informe de hallazgos y correcciones
+Escenario: Tope de descuento
+Dado que el usuario intenta aplicar un 15% de descuento
+Cuando el sistema valida el tope
+Entonces el descuento se limita al 10%
 
-## Referencias
-Guía General de IR §18, §19 (historias de usuario, Gherkin, MVP).
+Escenario: Seguimiento sin respuesta
+Dado una cotizacion enviada sin respuesta en el plazo
+Cuando vence el plazo de recordatorio
+Entonces el sistema la marca En seguimiento y genera un recordatorio
+
+Escenario: Cotizacion rapida sin RUC
+Dado que el usuario elige Cotizacion Rapida
+Cuando registra los items
+Entonces la cotizacion se guarda por separado y la fecha registra solo mes y
+año
+
+13.5 Analisis de escenarios de excepcion
+
+Escenario                                         Respuesta esperada
+Servicio de RUC caído                             Continuar manualmente sin bloquear (RNF-06)
+Correo de envio invalido                          Mensaje de error; no marcar como enviada
+Item 'Otros' sin descripcion                      Advertir antes de emitir
+Descuento mayor al 10%                            Limitar al 10% (RD-08)
+Numero correlativo duplicado                      Impedir duplicidad (RNF-07)
+
+13.6 Prototipos y validacion final
+
+Se validaron con el Gerente wireframes en blanco y negro de las pantallas principales:
+
+inicio de sesion, barra lateral, nueva cotizacion (categoria, medidas y descuento), desglose de
+
+precio e IGV, historial y panel de seguimiento. El Gerente ejecuto los casos de aceptación sobre
+
+el prototipo y confirmo que la solución responde a sus necesidades.
+
+Validación de la semana: El Gerente aprobo la especificación completa; los requisitos
+
+Must quedaron validados como entregable de desarrollo (MVP 1).

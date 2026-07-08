@@ -1,78 +1,361 @@
-# Semana 9 — Requisitos de Dominio (RD)
-## Sistema de Gestión de Cotizaciones — "InfleSusVentas"
+# 8. REQUISITOS DE DOMINIO
 
-> **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
-> **Aporta al entregable:** Cap. 5.3 (RD, reglas de negocio, modelo de datos) · **Rúbrica:** 1
-> **Estado:**  Con contenido base (derivado del brief del negocio)
-> **Navegación:** [ Semana 7](../Semana_07_Requisitos_No_Funcionales/README.md) · [Índice](../../README.md) · [Semana 10 ](../Semana_10_Requisitos_de_Desarrollo/README.md)
+> **Semana 9** · Sistema de Gestión de Cotizaciones para InfleSusVentas
+> Contenido extraído del documento del proyecto (fuente definitiva).
 
 ---
 
-## Objetivo del bloque
-Capturar las **reglas del negocio** de InfleSusVentas (independientes de la tecnología) y el modelo
-de datos del dominio.
+8.1 Objetivo de la semana
 
----
+Capturar las reglas de negocio, el modelo de datos y el ciclo de vida de la cotización,
 
-## 9.1 Reglas de negocio (RD)
-| ID | Regla de negocio | Entidad(es) |
-|---|---|---|
-| RD-01 | El número de cotización es **único, correlativo e irrepetible** (inicia en 1001). | Cotización |
-| RD-02 | El **IGV (18 %, configurable)** se calcula sobre el **subtotal ya con descuento** (precios base menos descuento). | Cotización |
-| RD-03 | Las **medidas obligatorias dependen de la categoría** del ítem (ver 9.3). | Ítem |
-| RD-04 | La descripción de los ítems estándar es **automática**; la de "Otros" queda **vacía** por defecto. | Ítem |
-| RD-05 | En una **Cotización Rápida** la fecha almacena **solo mes y año** y **no** se valida RUC. | Cotización Rápida |
-| RD-06 | En **globos**, el **diámetro se deriva de la altura** por un factor de proporción `[definir]`. | Ítem (globo) |
-| RD-07 | Las **tarifas** dependen de **tipo de inflable + tamaño** y son **parametrizables**. | Tarifa |
-| RD-08 | El **descuento no puede superar el 10 %** del precio base y **depende de la cantidad** (escalonado: a mayor cantidad, mayor descuento permitido, hasta 10 %). | Cotización / Descuento |
-| RD-09 | El sistema es de **uso exclusivo** del **gerente/trabajador autorizado**: toda operación requiere **usuario autenticado**. | Usuario |
-| RD-10 | Una cotización sin respuesta pasa a **En seguimiento** y genera **recordatorios** hasta ser Aceptada o Rechazada. | Cotización / Seguimiento |
+independientes de la tecnología.
 
-## 9.2 Modelo de datos del dominio (entidades)
-| Entidad | Atributos clave |
-|---|---|
-| **Usuario** | id, usuario, contraseña (hash), nombre, rol (gerente/trabajador), activo |
-| **Cliente** | id, RUC, razón social, correo, teléfono, fecha de registro |
-| **Cotización** | número (≥1001), fecha de emisión, cliente, tipo (estándar/rápida), precio base total, **descuento %**, subtotal, IGV, total, **estado** (Borrador/Emitida/Enviada/En seguimiento/Aceptada/Rechazada), estado de envío |
-| **Ítem de Cotización** | id, cotización, categoría, subtipo (carpa cuadrangular/circular), medidas (alto, ancho, largo, diámetro, altura), cantidad, descripción, precio base |
-| **Descuento** | id, cotización, cantidad, porcentaje aplicado (≤ 10 %), monto |
-| **Seguimiento / Interacción** | id, cotización, fecha, tipo (recordatorio/reenvío/negociación), nota, descuento propuesto |
-| **Tarifa** | categoría, rango de tamaño, precio unitario (parametrizable) |
-| **Cotización Rápida** | número, mes/año, cliente (sin validación RUC), ítems, montos — **almacenamiento separado** |
-| **Configuración** | % IGV, número inicial de correlativo, **tope de descuento (10 %)**, plazo de recordatorio, credenciales de servicios |
+8.2 Acta de reunion
 
-> Sugerido: diagrama Entidad-Relación y de clases en `04_Recursos/imagenes/`.
+Acta de reunión — Semana 9
 
-## 9.3 Lógica de medidas por categoría (regla central del dominio)
-| Producto | Medidas requeridas | Descripción automática |
-|---|---|:--:|
-| **Globo** | Solo **altura** (diámetro por proporción) | Sí |
-| **Arco** | **Largo** y **alto** | Sí |
-| **Carpa cuadrangular** | **Alto, largo, ancho** | Sí |
-| **Carpa circular** | **Diámetro y altura** | Sí |
-| **Tótem** | Solo **altura** | Sí |
-| **Skydancer** | Solo **altura** | Sí |
-| **Otros** | **Alto, ancho, largo** (3 factores) | **No** (campo en blanco) |
+Fecha / Hora             29/05/2026, 7:00 p.m.
+Modalidad                Virtual
+Asistentes               R1, R2, R3, R4
+Objetivo del sprint      Definir reglas de dominio, entidades y ER.
+Acuerdos y tareas        R2 redacta las reglas RD.
+R3 elabora el diagrama entidad-relación y de estados.
+Impedimentos             Definir el factor de proporción del globo.
+Proxima reunion          06/06/2026
 
-## 9.4 Estados de una cotización (ciclo de vida)
-`Borrador → Emitida (numerada + fechada) → Enviada → En seguimiento → [Aceptada / Rechazada]`
+8.3 Reglas de negocio (RD)
 
-- **En seguimiento:** se activa cuando no hay respuesta; el sistema genera recordatorios (RD-10) y el
-  gerente registra negociaciones (incluido el descuento máx 10 %, RD-08) para intentar **cerrar la venta**.
+ID       Regla de negocio                                      Entidad
+RD-01      Numero de cotizacion         unico,   correlativo   e Cotizacion
+irrepetible (desde 1001)
+RD-02      El IGV se calcula sobre el subtotal ya con descuento Cotizacion
+RD-03      Las medidas obligatorias dependen de la categoría Item
+del ítem
+RD-04      Descripción automática de ítems estándar; 'Otros' en Item
+blanco
+RD-05      En cotizacion rapida la fecha guarda solo mes/año y Cotizacion rapida
+no valida RUC
+RD-06      En globos el diámetro se deriva de la altura por un Item (globo)
+factor
 
----
+RD-07     Las tarifas dependen de tipo + tamaño y son Tarifa
+parametrizables
+RD-08     El descuento no supera el 10% y depende de la Cotización/Descuento
+cantidad
+RD-09     Uso exclusivo del usuario autorizado (autenticado)   Usuario
+RD-10     Cotización sin respuesta pasa a En seguimiento y Cotización/Seguimiento
+genera recordatorios
 
-## Preguntas para plasmar RD
-1. ¿Qué reglas del negocio son obligatorias e inviolables?
-2. ¿Qué cálculos propios del negocio existen (IGV, tarifas, proporción del globo)?
-3. ¿Qué estados puede tener una cotización y qué transiciones son válidas?
-4. ¿Qué eventos disparan procesos (emisión, envío)?
+8.3.1 Diagramas de reglas de negocio
 
-## Checklist de cierre
-- [ ] Reglas RD-01..RD-07 validadas con el Gerente
-- [ ] Factor de proporción del globo definido (RD-06)
-- [ ] Diagrama ER / clases del dominio adjunto
-- [ ] Glosario del dominio alimentado (Anexo D)
+Las reglas de negocio de la sección 9.3 se representan como diagramas de actividad y
 
-## Referencias
-Guía General de IR §13. Glosario final: [`03_Anexos/Glosario.md`](../../03_Anexos/Glosario.md).
+decisión.
+
+Figura 26. RD-01 Numero unico, correlativo e irrepetible (desde 1001)
+
+```plantuml
+@startuml
+            start
+            :Solicitar emitir cotizacion;
+            :Leer ultimo numero asignado;
+            if (Existe numeracion previa?) then (si)
+
+     :nuevo = ultimo + 1;
+   else (no)
+     :nuevo = 1001;
+   endif
+   if (nuevo ya existe?) then (si)
+     :Rechazar / reintentar (evitar duplicidad);
+     stop
+   else (no)
+     :Asignar numero y fecha;
+     :Registrar cotizacion;
+     stop
+   endif
+@enduml
+```
+
+Figura 27. RD-02 El IGV se calcula sobre el subtotal ya con descuento
+
+```plantuml
+@startuml
+   start
+   :Sumar precios base de los items;
+   :Obtener descuento (<= 10%);
+   :subtotal = base - descuento;
+   :IGV = subtotal * 18%;
+   :total = subtotal + IGV;
+   note right
+
+    El IGV NUNCA se calcula sobre
+    el precio base sin descuento
+   end note
+   :Desglosar base, descuento,
+   subtotal, IGV y total;
+   stop
+@enduml
+```
+
+Figura 28. RD-03 Las medidas obligatorias dependen de la categoria del item
+
+```plantuml
+@startuml
+   start
+   :Seleccionar categoria del item;
+   switch (Categoria?)
+   case (Globo/Totem/Skydancer)
+     :Exigir solo Altura;
+   case (Arco)
+     :Exigir Largo y Alto;
+   case (Carpa cuadrangular)
+     :Exigir Alto, Largo, Ancho;
+   case (Carpa circular)
+     :Exigir Diametro y Altura;
+   case (Otros)
+     :Exigir Alto, Ancho, Largo;
+   endswitch
+   if (Medidas obligatorias completas?) then (si)
+     :Aceptar el item;
+     stop
+
+         else (no)
+          :Bloquear: no permite continuar;
+          stop
+         endif
+@enduml
+```
+
+Figura 29. RD-04 Descripcion automatica de items estandar; 'Otros' en blanco
+
+```plantuml
+@startuml
+         start
+         :Agregar item a la cotizacion;
+         if (Categoria = 'Otros'?) then (si)
+           :Dejar descripcion en blanco;
+           :Habilitar edicion manual;
+         else (no)
+           :Generar descripcion automatica
+           (categoria + medidas);
+         endif
+         :Guardar item;
+         stop
+@enduml
+```
+
+Figura 30. RD-05 En cotizacion rapida la fecha guarda solo mes/ano y no valida
+
+RUC
+
+```plantuml
+@startuml
+   start
+   :Iniciar cotizacion rapida;
+   :Omitir validacion de RUC;
+   :Registrar items;
+   :Fecha = solo mes/ano;
+   :Guardar en almacenamiento SEPARADO
+   de las cotizaciones estandar;
+   stop
+@enduml
+```
+
+Figura 31. RD-06 En globos el diametro se deriva de la altura por un factor
+
+```plantuml
+@startuml
+   start
+   :Seleccionar categoria = Globo;
+   :Ingresar Altura (h);
+   :diametro = h * factorProporcion;
+   note right
+     El usuario NO ingresa el diametro;
+     se calcula automaticamente
+   end note
+   :Registrar medidas del globo;
+   stop
+@enduml
+```
+
+Figura 32. RD-07 Las tarifas dependen de tipo + tamano y son parametrizables
+
+```plantuml
+@startuml
+   start
+   :Determinar categoria y rango de tamano;
+   :Buscar tarifa parametrizada (categoria, rango);
+   if (Tarifa definida?) then (si)
+     :precioBase = precioUnitario * cantidad;
+     stop
+   else (no)
+     :Solicitar configurar la tarifa (CU-11);
+     note right: Editable sin recompilar (RNF-11)
+     stop
+   endif
+@enduml
+```
+
+Figura 33. RD-08 El descuento no supera el 10% y depende de la cantidad
+
+```plantuml
+@startuml
+   start
+   :Ingresar % de descuento segun cantidad;
+   if (descuento > 10%?) then (si)
+     :Limitar descuento = 10%;
+   else (no)
+     :Mantener descuento ingresado;
+   endif
+   :Aplicar descuento al subtotal;
+   stop
+@enduml
+```
+
+Figura 34. RD-09 Uso exclusivo del usuario autorizado (autenticado)
+
+```plantuml
+@startuml
+          start
+          :Solicitar operacion en el sistema;
+          if (Sesion autenticada valida?) then (si)
+            :Permitir la operacion;
+            stop
+          else (no)
+            :Denegar acceso;
+            :Redirigir a inicio de sesion;
+            stop
+          endif
+@enduml
+```
+
+Figura 35. RD-10 Cotizacion sin respuesta pasa a En seguimiento y genera
+
+recordatorios
+
+```plantuml
+@startuml
+           start
+           :Cotizacion en estado Enviada;
+           :Esperar respuesta del cliente;
+           if (Respondio dentro del plazo?) then (si)
+             :Mantener flujo normal
+             (Aceptada / Rechazada);
+             stop
+           else (no)
+             :Cambiar estado a 'En seguimiento';
+             :Generar recordatorio;
+             :Notificar al gerente para reenviar;
+             stop
+           endif
+@enduml
+```
+
+8.4 Logica de medidas por categoria
+
+Producto                  Medidas requeridas             Descripcion automatica
+Globo                    Solo altura (diametro por proporcion)             Si
+Arco                     Largo y alto                                      Si
+Carpa cuadrangular       Alto, largo, ancho                                Si
+
+Carpa circular        Diametro y altura                                         Si
+Totem                 Solo altura                                               Si
+Skydancer             Solo altura                                               Si
+Otros                 Alto, ancho, largo                                  No (en blanco)
+
+8.5 Entidades del dominio
+
+Entidad          Atributos clave
+Usuario          id, usuario, password (hash), nombre, rol, activo
+Cliente          id, RUC, razon social, correo, telefono
+Cotizacion       numero, fecha, tipo, descuento %, subtotal, IGV, total, estado
+Item             id, cotizacion, categoria, subtipo, medidas, cantidad, descripcion, precio base
+Descuento        id, cotizacion, cantidad, porcentaje (<=10%), monto
+Seguimiento      id, cotizacion, fecha, tipo, nota, descuento propuesto
+Tarifa           categoria, rango de tamano, precio unitario
+Configuracion    % IGV, correlativo inicial, tope de descuento, plazo de recordatorio
+
+8.6 Diagrama entidad-relacion
+
+```plantuml
+@startuml
+                            entity Usuario {
+                              * id
+                              --
+                              usuario
+                              password
+                              rol
+                            }
+                            entity Cliente {
+                              * id
+                              --
+
+ ruc
+ razon_social
+ correo
+}
+entity Cotizacion {
+  * numero
+  --
+  fecha
+  tipo
+  descuento_pct
+  subtotal
+  igv
+  total
+  estado
+}
+entity Item {
+  * id
+  --
+  cotizacion_num
+  categoria
+  medidas
+  cantidad
+  precio_base
+}
+entity Seguimiento {
+  * id
+  --
+  cotizacion_num
+  fecha
+  tipo
+  nota
+}
+entity Tarifa {
+  * id
+  --
+  categoria
+  rango
+  precio_unit
+}
+Usuario ||--o{ Cotizacion
+Cliente ||--o{ Cotizacion
+Cotizacion ||--|{ Item
+Cotizacion ||--o{ Seguimiento
+Item }o--|| Tarifa
+@enduml
+```
+
+8.7 Diagrama de estados (ciclo de vida de la cotización)
+
+```plantuml
+@startuml
+                       [*] --> Borrador
+                       Borrador --> Emitida : numerar + fechar
+                       Emitida --> Enviada : exportar + enviar
+                       Enviada --> EnSeguimiento : sin respuesta
+                       EnSeguimiento --> Enviada : reenviar
+                       EnSeguimiento --> Aceptada
+                       Enviada --> Aceptada
+                       EnSeguimiento --> Rechazada
+                       Enviada --> Rechazada
+                       Aceptada --> [*]
+                       Rechazada --> [*]
+@enduml
+```
+
+Validación de la semana: El Gerente confirmó las reglas de dominio; queda pendiente
+
+definir el factor de proporción del globo antes de la construcción.

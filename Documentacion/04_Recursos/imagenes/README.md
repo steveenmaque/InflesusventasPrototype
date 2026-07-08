@@ -7,7 +7,6 @@ Nombrar los archivos en minúsculas y sin espacios.
 
 | Archivo | Referenciado en | Estado |
 |---|---|---|
-| `cronograma_gantt.png` | Semana 1 — Cronograma de implementación (4 meses) | Generado |
 | `bpmn_asis.png` | Semana 1 — Flujo de trabajo actual (AS-IS) — export de `../diagramas/bpmn_asis.bpmn` | Generado |
 | `bpmn_tobe.png` | Semana 1 — Flujo de negocio propuesto (TO-BE) — export de `../diagramas/bpmn_tobe.bpmn` | Generado |
 | `diagrama_contexto.png` | Semana 1 — Contexto del negocio | Pendiente |

@@ -13,7 +13,12 @@
       <div class="fila">
         <div><label>Cliente</label><div><%= cot.razon_social || '—' %></div></div>
         <div><label>RUC</label><div><%= cot.ruc || '—' %></div></div>
+        <div><label>Atención</label><div><%= cot.atencion || '—' %></div></div>
         <div><label>Fecha</label><div><%= cot.fecha %></div></div>
+      </div>
+      <div class="fila">
+        <div><label>Condición de pago</label><div><%= cot.condicion_pago || '—' %></div></div>
+        <div><label>Tiempo de entrega</label><div><%= cot.tiempo_entrega || '—' %></div></div>
         <div><label>Emitida por</label><div><%= cot.usuario_nombre || '—' %></div></div>
       </div>
     </div>

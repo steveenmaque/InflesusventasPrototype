@@ -10,6 +10,7 @@ const Configuracion = require('../models/Configuracion');
 const { validarRuc } = require('../services/rucService');
 const { procesarMedidas, descripcionAutomatica, CATEGORIAS } = require('../services/medidas');
 const { calcularCotizacion } = require('../services/calculo');
+const { DEFAULTS } = require('../services/plantilla');
 
 /** GET /cotizaciones/nueva — formulario de nueva cotización (RF-33). */
 exports.mostrarFormulario = (req, res) => {
@@ -17,6 +18,7 @@ exports.mostrarFormulario = (req, res) => {
     usuario: req.session.usuario,
     categorias: CATEGORIAS,
     config: Configuracion.obtener(),
+    defaults: DEFAULTS,
     error: null,
   });
 };
@@ -95,6 +97,9 @@ exports.crear = (req, res) => {
         fecha: new Date().toISOString().slice(0, 10),          // RF-25: fecha de emisión
         tipo: 'estandar',
         correo_envio: cliente.correo,
+        atencion: (req.body.atencion || '').trim() || null,
+        condicion_pago: (req.body.condicion_pago || '').trim() || null,
+        tiempo_entrega: (req.body.tiempo_entrega || '').trim() || null,
       },
       items, montos,
     );
@@ -104,6 +109,7 @@ exports.crear = (req, res) => {
       usuario: req.session.usuario,
       categorias: CATEGORIAS,
       config: cfg,
+      defaults: DEFAULTS,
       error: e.message,
     });
   }

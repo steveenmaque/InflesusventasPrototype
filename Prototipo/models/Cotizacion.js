@@ -27,11 +27,12 @@ const Cotizacion = {
     try {
       const numero = this.siguienteNumero();
       db.prepare(`INSERT INTO cotizacion
-        (numero, cliente_id, usuario_id, fecha, tipo, descuento_pct, descuento_monto, base, subtotal, igv, total, igv_pct, estado, correo_envio)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`)
+        (numero, cliente_id, usuario_id, fecha, tipo, descuento_pct, descuento_monto, base, subtotal, igv, total, igv_pct, estado, correo_envio, atencion, condicion_pago, tiempo_entrega)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`)
         .run(numero, cab.cliente_id, cab.usuario_id, cab.fecha, cab.tipo || 'estandar',
              montos.descuentoPct, montos.descuentoMonto, montos.base, montos.subtotal,
-             montos.igv, montos.total, montos.igvPct, 'Emitida', cab.correo_envio || null);
+             montos.igv, montos.total, montos.igvPct, 'Emitida', cab.correo_envio || null,
+             cab.atencion || null, cab.condicion_pago || null, cab.tiempo_entrega || null);
 
       const insItem = db.prepare(`INSERT INTO item
         (cotizacion_num, categoria, medidas_json, rango, cantidad, descripcion, precio_unit, precio_base)

@@ -1,60 +1,46 @@
-# Semana 12 — Gestión de Cambios
-## Sistema de Gestión de Cotizaciones — "InfleSusVentas"
+# 11. GESTIÓN DE CAMBIOS
 
-> **Curso:** Ingeniería de Requisitos · **Docente:** Prof. Ciro Rodriguez · UNMSM · Ciclo 5, 2026-I
-> **Aporta al entregable:** Cap. 8 (RFC, impacto, CCB) · **Rúbrica:** 4
-> **Estado:**  Pendiente de completar
-> **Navegación:** [ Semana 11](../Semana_11_Requisitos_de_Calidad/README.md) · [Índice](../../README.md) · [Semana 13 ](../Semana_13_Trazabilidad/README.md)
+> **Semana 12** · Sistema de Gestión de Cotizaciones para InfleSusVentas
+> Contenido extraído del documento del proyecto (fuente definitiva).
 
 ---
 
-## Objetivo del bloque
-Definir el **proceso de control de cambios** y analizar el impacto de un cambio real.
+11.1 Objetivo de la semana
 
-## Artefactos a producir
-Flujo RFC → análisis de impacto → **CCB** → nueva línea base; formato de solicitud; **1 caso** gestionado.
+Definir el proceso de control de cambios (RFC -> impacto -> CCB -> línea base) y
 
----
+gestionar un cambio de ejemplo.
 
-## 1. Flujo de gestión de cambios
-```
-Solicitud (RFC) → Análisis de impacto (alcance/costo/cronograma/riesgo)
-   → Decisión CCB (Aprobar/Rechazar) → Actualizar línea base y comunicar
-```
-- **Quién puede solicitar:** Gerente o cualquier integrante del equipo.
-- **CCB (comité):** rol **R1 (Líder)** + rol **R4 (QA)**.
+11.2 Acta de reunion
 
-## 2. Formato de solicitud de cambio (RFC)
-| Campo | Contenido |
-|---|---|
-| ID de cambio | RFC-01 |
-| Solicitante | `[…]` |
-| Descripción | `[…]` |
-| Requisitos afectados | `[…]` |
-| Análisis de impacto | `[alcance / costo / cronograma / riesgo]` |
-| Decisión CCB | Aprobado / Rechazado |
+Acta de reunión — Semana 12
 
-## 3. Caso de ejemplo gestionado
-| Campo | Contenido |
-|---|---|
-| ID | RFC-01 |
-| Descripción | Añadir **descuento por volumen** al cálculo de precio |
-| Requisitos afectados | RF-17, RF-19, RD-02 |
-| Impacto | Alcance: medio · Cronograma: +1 sprint · Riesgo: recalcular IGV sobre subtotal con descuento |
-| Decisión CCB | `[Aprobado/Rechazado]` |
+Fecha / Hora            20/06/2026, 7:00 p.m.
+Modalidad               Virtual
+Asistentes              R1, R2, R3, R4; Gerente
+Objetivo del sprint     Definir el proceso de cambios y evaluar el RFC-01.
+Acuerdos y tareas       R1 define el flujo RFC/CCB.
+El comite (R1, R4) evalua el RFC-01.
+Impedimentos            Ninguno.
+Proxima reunion         27/06/2026
 
----
+11.3 Proceso y caso de cambio
 
-## Preguntas para gestionar cambios
-1. ¿Cómo se solicita un cambio y quién lo puede pedir?
-2. ¿Quién evalúa el impacto y quién aprueba/rechaza?
-3. ¿Qué requisitos/diseños/pruebas se ven afectados?
-4. ¿Cómo se versiona y comunica el cambio?
+Flujo: Solicitud (RFC) -> Análisis de impacto -> Decisión del comité (CCB) ->
 
-## Checklist de cierre
-- [ ] Flujo RFC/CCB documentado
-- [ ] Formato de RFC definido
-- [ ] ≥ 1 cambio gestionado de ejemplo
+Actualización de la línea base y comunicación. El comité lo integran el líder de proyecto y el
 
-## Referencias
-Guía General de IR §16. Línea base definida en [Semana 5](../Semana_05_Gestion_de_Requisitos/README.md).
+responsable de QA.
+
+ID de cambio                                    RFC-01
+Solicitante                                     Gerente
+Descripcion                                     Añadir descuento escalonado por rangos de
+cantidad
+Requisitos afectados                            RF-44, RF-45, RD-08, RF-19, RF-20
+Analisis de impacto                             Alcance medio; +1 sprint; riesgo de recalcular
+IGV sobre subtotal con descuento
+Decision CCB                                    Aprobado (incorporado a la linea base 1.1)
+
+Validacion de la semana: El Gerente y el comité aprobaron el RFC-01; se actualizo la
+
+línea base a 1.1.
